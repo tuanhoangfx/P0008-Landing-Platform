@@ -1,0 +1,30 @@
+{
+  "name": "p0008-landing-platform",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.15.9",
+  "type": "module",
+  "description": "Landing Platform — admin + public COD funnels at ldp.infi.io.vn.",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 3008",
+    "build": "node scripts/build.mjs",
+    "preview": "vite preview --host 127.0.0.1 --port 4008",
+    "typecheck": "tsc --noEmit",
+    "mirror:assets": "node scripts/mirror-landing-assets.mjs --slug 001"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.88.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.2.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.5"
+  }
+}

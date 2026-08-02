@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "code": "P0008",
+  "id": "landing-platform",
+  "aliases": [
+    "P0008",
+    "Landing Platform",
+    "LDP"
+  ],
+  "name": "Landing Platform",
+  "type": "Web",
+  "owner": "Tool",
+  "status": "Active",
+  "summary": "Multi-template landing host at ldp.infi.io.vn — admin on /, public pages at /001, /002, …",
+  "stack": [
+    "React",
+    "TypeScript",
+    "Vite",
+    "Tailwind CSS"
+  ],
+  "commands": {
+    "dev": "pnpm dev",
+    "build": "pnpm build",
+    "preview": "pnpm preview",
+    "mirror:assets": "node scripts/mirror-landing-assets.mjs --slug 001"
+  },
+  "deployTarget": "vercel",
+  "dependsOn": [],
+  "siteProfiles": {
+    "ldp": {
+      "defaultPath": "/",
+      "domain": "ldp.infi.io.vn",
+      "screens": [
+        {
+          "native": "admin",
+          "path": "/"
+        },
+        {
+          "native": "pages",
+          "path": "/pages"
+        },
+        {
+          "native": "templates",
+          "path": "/templates"
+        },
+        {
+          "native": "landing",
+          "path": "/001",
+          "pathCode": "001",
+          "template": "mie-hair-cod-v1"
+        }
+      ]
+    }
+  },
+  "github": {
+    "repo": "tuanhoangfx/P0008-Landing-Platform",
+    "branch": "main",
+    "manifestPath": "tool.manifest.json"
+  },
+  "urls": {
+    "local": "http://127.0.0.1:3008",
+    "admin": "https://ldp.infi.io.vn/",
+    "landing001": "https://ldp.infi.io.vn/001"
+  },
+  "vercel": {
+    "project": "p0008-landing-platform",
+    "productionUrl": "https://ldp.infi.io.vn",
+    "customDomains": [
+      "ldp.infi.io.vn"
+    ],
+    "dnsRequired": "A ldp.infi.io.vn 76.76.21.21",
+    "productionBranch": "main",
+    "team": "tuanhoangfxs-projects",
+    "notes": "Landing Platform SPA — admin + numeric public paths. Order API: api/landing-order.mjs"
+  },
+  "vercelEnvValidation": {
+    "requiredKeys": [
+      "LDP_SUPABASE_URL",
+      "LDP_SUPABASE_SERVICE_ROLE"
+    ],
+    "optionalKeys": [
+      "TOC_SUPABASE_URL",
+      "TOC_SUPABASE_SERVICE_ROLE",
+      "TOC_CRM_USER_ID"
+    ]
+  },
+  "docs": {
+    "readme": "README.md",
+    "changelog": "CHANGELOG.md",
+    "architecture": "docs/LDP-ARCHITECTURE.md"
+  },
+  "release": {
+    "version": "0.1.0",
+    "readiness": [
+      "build",
+      "admin-shell",
+      "public-001",
+      "landing-order-api"
+    ]
+  },
+  "manifestUpdatedAt": "2026-08-03T00:00:00.000Z",
+  "ship": {
+    "schemaVersion": 1,
+    "fastPath": "Deploy",
+    "releasePath": "Release",
+    "deployTarget": "vercel",
+    "playbook": "Tool/docs/playbooks/release-fast-path.md",
+    "script": "powershell -File E:\\Dev\\Tool\\scripts\\ship-product.ps1",
+    "preShip": [
+      "check-version-sync",
+      "verify-untracked-imports",
+      "verify-no-sibling-tool-imports",
+      "build"
+    ],
+    "preShipCommands": {
+      "check-version-sync": "node E:\\Dev\\Tool\\scripts\\check-version-sync.mjs --product-root . --no-warn-published",
+      "verify-untracked-imports": "node E:\\Dev\\Tool\\scripts\\verify-untracked-imports.mjs --product-root .",
+      "verify-no-sibling-tool-imports": "node E:\\Dev\\Tool\\scripts\\verify-no-sibling-tool-imports.mjs --product-root .",
+      "build": "corepack pnpm run build"
+    },
+    "syncedAt": "2026-08-02T18:27:53.992Z"
+  }
+}
