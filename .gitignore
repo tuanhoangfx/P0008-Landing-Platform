@@ -2,6 +2,9 @@ node_modules
 dist
 .vercel
 .runtime
+dev-server.log
+dev-server.err.log
+.dev-vite.env.json
 *.local
 .env
 .env.*
