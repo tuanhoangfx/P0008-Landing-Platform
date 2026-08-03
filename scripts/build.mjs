@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 import { spawnSync } from "node:child_process";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-function run(label, cmd, args) {
-  const r = spawnSync(cmd, args, { stdio: "inherit", shell: true, windowsHide: true });
-  if (r.status !== 0) {
-    console.error(`build failed at ${label}`);
-    process.exit(r.status ?? 1);
-  }
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+
+function runNode(modulePath, args = []) {
+  const result = spawnSync(process.execPath, [modulePath, ...args], { stdio: "inherit", cwd: root });
+  if (result.status !== 0) process.exit(result.status ?? 1);
 }
 
-run("tsc", "pnpm", ["exec", "tsc", "--noEmit"]);
-run("vite", "pnpm", ["exec", "vite", "build"]);
+if (!process.env.VERCEL) {
+  runNode(path.join(root, "node_modules/typescript/bin/tsc"), ["--noEmit"]);
+}
+runNode(path.join(root, "node_modules/vite/bin/vite.js"), ["build"]);

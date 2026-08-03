@@ -2,24 +2,29 @@
   "compilerOptions": {
     "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "allowJs": true,
     "skipLibCheck": true,
-    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
-    "allowImportingTsExtensions": true,
     "isolatedModules": true,
-    "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@tool-workspace/hub-ui": ["vendor/hub-ui/src/index.ts"],
+      "@tool-workspace/hub-ui/*": ["vendor/hub-ui/src/*"],
+      "@tool-workspace/hub-identity": ["vendor/hub-identity/src/index.ts"],
+      "@tool-workspace/hub-identity/*": ["vendor/hub-identity/src/*"],
+      "@tool-workspace/hub-query": ["vendor/hub-query/src/index.ts"],
+      "@tool-workspace/hub-query/*": ["vendor/hub-query/src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "vite.config.ts"]
 }

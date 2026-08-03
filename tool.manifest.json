@@ -16,7 +16,33 @@
     "React",
     "TypeScript",
     "Vite",
-    "Tailwind CSS"
+    "Tailwind CSS",
+    "@tool-workspace/hub-ui"
+  ],
+  "uiShell": {
+    "golden": "P0020",
+    "mainMode": "directory",
+    "splitScreens": []
+  },
+  "uiScreens": [
+    {
+      "screen": "overview",
+      "template": "document-toc",
+      "golden": "P0004/overview-toc",
+      "notes": "Architecture + quick links with left TOC rail"
+    },
+    {
+      "screen": "pages",
+      "template": "directory",
+      "golden": "P0004/users",
+      "notes": "Landing pages registry directory"
+    },
+    {
+      "screen": "templates",
+      "template": "directory",
+      "golden": "P0004/users",
+      "notes": "Landing template registry directory"
+    }
   ],
   "commands": {
     "dev": "pnpm dev",
@@ -70,8 +96,16 @@
     ],
     "dnsRequired": "A ldp.infi.io.vn 76.76.21.21",
     "productionBranch": "main",
-    "team": "tuanhoangfxs-projects",
-    "notes": "Landing Platform SPA — admin + numeric public paths. Order API: api/landing-order.mjs"
+    "team": "tuan-hoangs-projects-ad21fb52",
+    "notes": "Landing Platform SPA — admin + numeric public paths. Order API: api/landing-order.mjs",
+    "projectId": "prj_3jEmdg7sfMtkXPeOGgeZ7WiQWqsQ",
+    "previewUrl": "https://ldp.infi.io.vn",
+    "customDomain": "https://ldp.infi.io.vn",
+    "teamId": "team_L9Vj1YDi9IbNjOZO5nZADaPb",
+    "deployHookUrl": "https://api.vercel.com/v1/integrations/deploy/prj_3jEmdg7sfMtkXPeOGgeZ7WiQWqsQ/oqRfFQZYWq",
+    "deployHookName": "ship-production",
+    "migratedAt": "2026-08-02T20:14:41.810Z",
+    "migratedFromTeam": "tuanhoangfxs-projects"
   },
   "vercelEnvValidation": {
     "requiredKeys": [
@@ -90,7 +124,7 @@
     "architecture": "docs/LDP-ARCHITECTURE.md"
   },
   "release": {
-    "version": "0.1.0",
+    "version": "0.1.1",
     "readiness": [
       "build",
       "admin-shell",
@@ -118,6 +152,10 @@
       "verify-no-sibling-tool-imports": "node E:\\Dev\\Tool\\scripts\\verify-no-sibling-tool-imports.mjs --product-root .",
       "build": "corepack pnpm run build"
     },
-    "syncedAt": "2026-08-02T18:27:53.992Z"
+    "syncedAt": "2026-08-02T18:27:53.992Z",
+    "deployThrottle": {
+      "maxPerWindow": 2,
+      "windowHours": 24
+    }
   }
 }

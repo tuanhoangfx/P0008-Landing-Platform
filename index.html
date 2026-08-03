@@ -1,20 +1,45 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en" class="theme-hub">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f36e36" />
+    <meta name="theme-color" content="#6366f1" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Arima:wght@400;700&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=K2D:wght@600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/hub-boot.css" />
     <title>Landing Platform</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💇</text></svg>" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #0b1020;
+        color: #e8ecff;
+      }
+      #root {
+        min-height: 100%;
+        height: 100%;
+      }
+    </style>
   </head>
   <body>
+    <div id="hub-boot-loader" class="hub-boot-loader--pane" role="status" aria-label="Loading Landing Platform">
+      <div class="hub-boot-orb" aria-hidden="true">
+        <span class="hub-boot-orb__ring"></span>
+        <span class="hub-boot-orb__ring hub-boot-orb__ring--dash"></span>
+        <span class="hub-boot-orb__ring hub-boot-orb__ring--inner"></span>
+        <span class="hub-boot-orb__core">
+          <img src="/icons/tools/P0008.svg" alt="" width="20" height="20" decoding="async" />
+        </span>
+      </div>
+    </div>
     <div id="root"></div>
+    <script src="/hub-boot-fallback.js"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

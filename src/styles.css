@@ -1,0 +1,13 @@
+@import "./styles/hub-ui-styles.css";
+@import "./theme/hub-appearance.css";
+@import "./theme/p0008-hub-shell.css";
+
+body:has(.hub-app.theme-hub) {
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+.hub-users-row.is-selected {
+  box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.3);
+}

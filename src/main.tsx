@@ -1,11 +1,27 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { HubQueryProvider } from "@tool-workspace/hub-query";
+import { initHubUserZoom, mountHubApp } from "@tool-workspace/hub-ui";
 import App from "./App";
-import "./index.css";
-import "./landing/landing-effects.css";
+import { AppErrorBoundary } from "./ui/AppErrorBoundary";
+import { hubQueryClient } from "./lib/hub-query-client";
+import { setupHubUi } from "./lib/hub-ui-setup";
+import "./theme/hub-boot.css";
+import "./theme/p0008-globals.css";
+import "./theme/hub-appearance.css";
+import "./styles.css";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
+initHubUserZoom();
+setupHubUi();
+
+const rootEl = document.getElementById("root");
+if (!rootEl) throw new Error("#root not found");
+
+mountHubApp(rootEl, () => {
+  createRoot(rootEl).render(
+    <HubQueryProvider client={hubQueryClient}>
+      <AppErrorBoundary>
+        <App />
+      </AppErrorBoundary>
+    </HubQueryProvider>,
+  );
+});

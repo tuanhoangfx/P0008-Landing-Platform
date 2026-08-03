@@ -1,4 +1,6 @@
 import { useEffect, type CSSProperties } from "react";
+import "../index.css";
+import "./landing-effects.css";
 import type { HairLandingConfig } from "@/landing/types";
 import { resolveTheme } from "@/landing/types";
 import { RevealBlock } from "@/landing/components/RevealBlock";

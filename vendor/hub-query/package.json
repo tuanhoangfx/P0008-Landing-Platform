@@ -1,0 +1,24 @@
+{
+  "name": "@tool-workspace/hub-query",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "TanStack Query defaults + query key factories for Hub tools.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^5.80.0",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tanstack/react-query": "^5.80.7",
+    "@types/react": "^19.2.7",
+    "react": "^19.2.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.6"
+  },
+  "scripts": {
+    "test": "vitest run"
+  }
+}

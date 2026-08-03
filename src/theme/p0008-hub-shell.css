@@ -1,0 +1,68 @@
+/* P0008 — Hub shell layout (P0024/P0020 golden chrome bleed) */
+
+.hub-app.p0008-hub-app {
+  min-height: 100vh;
+  min-width: 1180px;
+}
+
+.p0008-hub-app {
+  --p0008-chrome-bleed: var(--app-tab-header-px, 1.5rem);
+  --p0008-frame-gutter: var(--p0008-frame-px, 0.75rem);
+}
+
+.p0008-hub-app .app-tab-header {
+  margin-left: calc(-1 * var(--p0008-chrome-bleed));
+  margin-right: calc(-1 * var(--p0008-chrome-bleed));
+  padding-left: var(--p0008-chrome-bleed);
+  padding-right: var(--p0008-chrome-bleed);
+}
+
+.p0008-hub-app .hub-chrome-sticky {
+  margin-left: calc(-1 * var(--p0008-chrome-bleed));
+  margin-right: calc(-1 * var(--p0008-chrome-bleed));
+}
+
+.p0008-hub-app .hub-filter-sticky {
+  margin-left: calc(-1 * var(--p0008-chrome-bleed));
+  margin-right: calc(-1 * var(--p0008-chrome-bleed));
+  padding-left: var(--p0008-chrome-bleed);
+  padding-right: var(--p0008-chrome-bleed);
+}
+
+.p0008-hub-app .hub-chrome-sticky > .px-6 {
+  padding-left: var(--p0008-chrome-bleed);
+  padding-right: var(--p0008-chrome-bleed);
+}
+
+.hub-app.p0008-hub-app > main.p0008-hub-main {
+  padding: 0 var(--p0008-frame-gutter) var(--p0008-frame-gutter);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.p0008-hub-main .hub-tab-chrome,
+.p0008-hub-main .hub-directory-screen {
+  min-height: 0;
+}
+
+.p0008-hub-app .app-tab-header__start {
+  align-items: center;
+}
+
+.p0008-hub-app .app-tab-header__start > h1 {
+  line-height: 1.25;
+}
+
+.p0008-hub-app .app-tab-header {
+  margin-bottom: 0;
+  border-bottom-width: 0;
+}
+
+.p0008-hub-app .hub-tab-content-zone {
+  margin-top: 0;
+}
+
+/* Override p0008-globals main padding — frame gutter SSOT */
+.hub-app.p0008-hub-app > main.hub-main {
+  padding: 0 var(--p0008-frame-gutter) var(--p0008-frame-gutter);
+}

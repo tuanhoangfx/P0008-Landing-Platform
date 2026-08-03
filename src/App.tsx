@@ -1,13 +1,13 @@
 import { readAppZone, readPageCode } from "@/lib/app-zone";
 import { resolvePageConfig } from "@/config";
+import { AdminConsoleApp } from "@/features/admin/AdminConsoleApp";
 import { HairLandingPage } from "@/landing/HairLandingPage";
-import { LandingAdminApp } from "@/admin/LandingAdminApp";
 
 export default function App() {
   const zone = readAppZone();
 
   if (zone === "admin") {
-    return <LandingAdminApp />;
+    return <AdminConsoleApp />;
   }
 
   const pathCode = readPageCode();

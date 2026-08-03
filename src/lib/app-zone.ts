@@ -8,6 +8,7 @@ export const RESERVED_PATH_SEGMENTS = new Set([
   "pages",
   "admin",
   "assets",
+  "overview",
 ]);
 
 /** Public landing pages use numeric path codes: /001, /002, … */
