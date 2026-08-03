@@ -2,7 +2,7 @@
   "name": "p0008-landing-platform",
   "private": true,
   "version": "0.1.5",
-  "packageManager": "pnpm@9.15.9",
+  "packageManager": "pnpm@10.34.5",
   "type": "module",
   "description": "Landing Platform — admin + public COD funnels at ldp.infi.io.vn.",
   "scripts": {
