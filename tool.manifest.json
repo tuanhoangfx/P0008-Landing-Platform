@@ -104,7 +104,7 @@
     "teamId": "team_L9Vj1YDi9IbNjOZO5nZADaPb",
     "deployHookUrl": "https://api.vercel.com/v1/integrations/deploy/prj_3jEmdg7sfMtkXPeOGgeZ7WiQWqsQ/oqRfFQZYWq",
     "deployHookName": "ship-production",
-    "migratedAt": "2026-08-02T20:14:41.810Z",
+    "migratedAt": "2026-08-03T08:13:36.877Z",
     "migratedFromTeam": "tuanhoangfxs-projects"
   },
   "vercelEnvValidation": {
@@ -124,7 +124,7 @@
     "architecture": "docs/LDP-ARCHITECTURE.md"
   },
   "release": {
-    "version": "0.1.1",
+    "version": "0.1.5",
     "readiness": [
       "build",
       "admin-shell",
@@ -132,7 +132,7 @@
       "landing-order-api"
     ]
   },
-  "manifestUpdatedAt": "2026-08-03T00:00:00.000Z",
+  "manifestUpdatedAt": "2026-08-03T08:13:18.563Z",
   "ship": {
     "schemaVersion": 1,
     "fastPath": "Deploy",
