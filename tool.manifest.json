@@ -50,7 +50,7 @@
     "preview": "pnpm preview",
     "mirror:assets": "node scripts/mirror-landing-assets.mjs --slug 001"
   },
-  "deployTarget": "vercel",
+  "deployTarget": "lenovo-static",
   "dependsOn": [],
   "siteProfiles": {
     "ldp": {
@@ -97,7 +97,7 @@
     "dnsRequired": "A ldp.infi.io.vn 76.76.21.21",
     "productionBranch": "main",
     "team": "tuan-hoangs-projects-ad21fb52",
-    "notes": "Landing Platform SPA — admin + numeric public paths. Order API: api/landing-order.mjs",
+    "notes": "Retired prod path — P0008 is Lenovo nginx + Cloudflare tunnel (lenovo-static).",
     "projectId": "prj_3jEmdg7sfMtkXPeOGgeZ7WiQWqsQ",
     "previewUrl": "https://ldp.infi.io.vn",
     "customDomain": "https://ldp.infi.io.vn",
@@ -105,7 +105,8 @@
     "deployHookUrl": "https://api.vercel.com/v1/integrations/deploy/prj_3jEmdg7sfMtkXPeOGgeZ7WiQWqsQ/oqRfFQZYWq",
     "deployHookName": "ship-production",
     "migratedAt": "2026-08-03T08:20:50.375Z",
-    "migratedFromTeam": "tuanhoangfxs-projects"
+    "migratedFromTeam": "tuanhoangfxs-projects",
+    "retiredAt": "2026-08-06T18:38:14.702Z"
   },
   "vercelEnvValidation": {
     "requiredKeys": [
@@ -132,25 +133,27 @@
       "landing-order-api"
     ]
   },
-  "manifestUpdatedAt": "2026-08-03T08:13:18.563Z",
+  "manifestUpdatedAt": "2026-08-06T18:38:14.703Z",
   "ship": {
     "schemaVersion": 1,
     "fastPath": "Deploy",
     "releasePath": "Release",
-    "deployTarget": "vercel",
+    "deployTarget": "lenovo-static",
     "playbook": "Tool/docs/playbooks/release-fast-path.md",
     "script": "powershell -File E:\\Dev\\Tool\\scripts\\ship-product.ps1",
     "preShip": [
       "check-version-sync",
       "verify-untracked-imports",
       "verify-no-sibling-tool-imports",
-      "build"
+      "build",
+      "check-lenovo-deploy-target"
     ],
     "preShipCommands": {
       "check-version-sync": "node E:\\Dev\\Tool\\scripts\\check-version-sync.mjs --product-root . --no-warn-published",
       "verify-untracked-imports": "node E:\\Dev\\Tool\\scripts\\verify-untracked-imports.mjs --product-root .",
       "verify-no-sibling-tool-imports": "node E:\\Dev\\Tool\\scripts\\verify-no-sibling-tool-imports.mjs --product-root .",
-      "build": "corepack pnpm run build"
+      "build": "corepack pnpm run build",
+      "check-lenovo-deploy-target": "node E:\\Dev\\Tool\\scripts\\check-lenovo-deploy-target.mjs --code P0008 --json"
     },
     "syncedAt": "2026-08-02T18:27:53.992Z",
     "deployThrottle": {
