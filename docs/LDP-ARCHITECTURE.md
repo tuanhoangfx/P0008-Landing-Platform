@@ -2,10 +2,17 @@
 
 ## Domain
 
-- **Host:** `ldp.infi.io.vn` (single Vercel project)
+- **Host:** `ldp.infi.io.vn` (Lenovo static + Cloudflare — `deployTarget: lenovo-static`)
 - **Admin:** `/`, `/pages`, `/templates`
 - **Public:** `/001`, `/002`, … (numeric `pathCode`, 3–4 digits)
 - **Reserved:** `/api`, `/preview`, `/admin`, `/assets`
+
+## Deploy SSOT
+
+```powershell
+node Tool/scripts/provision-lenovo-spa-hosting.mjs --code P0008
+node Tool/scripts/deploy-lenovo-static.mjs --code P0008
+```
 
 ## Templates
 
