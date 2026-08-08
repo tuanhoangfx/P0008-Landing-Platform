@@ -20,8 +20,14 @@ export function useDirectorySearchQuery(opts: UseDirectorySearchQueryOptions = {
 
   useEffect(() => {
     if (resolvedQuery === query) return;
+    // Upstream-owned debounce (HubSearchField): apply sync so controlled `value={query}`
+    // cannot lag one frame behind flush and clobber Vietnamese IME drafts.
+    if (debounceMs === 0 || live) {
+      setQuery(resolvedQuery);
+      return;
+    }
     startTransition(() => setQuery(resolvedQuery));
-  }, [query, resolvedQuery]);
+  }, [query, resolvedQuery, debounceMs, live]);
 
   return useMemo(
     () => ({

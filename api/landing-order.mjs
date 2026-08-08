@@ -87,14 +87,14 @@ export default async function handler(req) {
         currency: "VND",
         qty: tier === "2-clip" ? 2 : 1,
         notes: orderNotes,
-        sheet_status: "Pending",
-        pay_status: "Unpaid",
+        sheet_status: "⏳ Pending",
         metadata: {
           source: "p0008-landing",
           landing_path: productSlug,
           tier,
           color,
           ship_address: address,
+          pay_status: "💳 Unpaid",
         },
       })
       .select("id")

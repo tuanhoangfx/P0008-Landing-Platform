@@ -58,7 +58,7 @@ export function TemplatesDirectoryScreen() {
   const listResetKey = hubDirectoryListResetKey(search.query, filterValues, sortKey, sortDir);
 
   const kpis: KpiTileData[] = useMemo(
-    () => [{ key: "templates", label: "Templates", value: rows.length, toneClass: "text-violet-300" }],
+    () => [{ prefKey: "templates", label: "Templates", value: rows.length, tone: "violet" }],
     [rows.length],
   );
 

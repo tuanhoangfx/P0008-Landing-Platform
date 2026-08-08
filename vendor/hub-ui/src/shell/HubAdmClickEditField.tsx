@@ -516,6 +516,8 @@ export type HubAdmReadonlyFieldProps = {
   empty?: boolean;
   /** `inline` — badges, toggles, copy chips (full value width, centered row). */
   valueLayout?: "text" | "inline";
+  /** Optional control after the value (e.g. copy icon). Does not shrink. */
+  trailingAction?: ReactNode;
 };
 
 /** Account-detail modal — label + read-only value (no edit affordance). */
@@ -526,16 +528,17 @@ export function HubAdmReadonlyField({
   className = "",
   empty = false,
   valueLayout = "text",
+  trailingAction,
 }: HubAdmReadonlyFieldProps) {
   return (
     <AdmInlineFieldShell
       header={header}
       labelHint={labelHint}
       className={`hub-adm-inline-field--readonly${className ? ` ${className}` : ""}`}
-      valueClassName="hub-adm-inline-field__value"
+      valueClassName={`hub-adm-inline-field__value${trailingAction ? " hub-adm-inline-field__value--has-trailing" : ""}`}
     >
       <span
-        className={`hub-adm-readonly-value${
+        className={`hub-adm-readonly-value min-w-0 flex-1${
           empty ? " hub-adm-readonly-value--empty" : ""
         }${
           valueLayout === "inline"
@@ -545,6 +548,9 @@ export function HubAdmReadonlyField({
       >
         {children}
       </span>
+      {trailingAction ? (
+        <span className="hub-adm-click-filter__trailing inline-flex shrink-0 items-center">{trailingAction}</span>
+      ) : null}
     </AdmInlineFieldShell>
   );
 }

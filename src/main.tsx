@@ -5,9 +5,7 @@ import App from "./App";
 import { AppErrorBoundary } from "./ui/AppErrorBoundary";
 import { hubQueryClient } from "./lib/hub-query-client";
 import { setupHubUi } from "./lib/hub-ui-setup";
-import "./theme/hub-boot.css";
 import "./theme/p0008-globals.css";
-import "./theme/hub-appearance.css";
 import "./styles.css";
 
 initHubUserZoom();

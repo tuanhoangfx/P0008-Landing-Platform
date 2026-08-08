@@ -1,7 +1,6 @@
 import { StrictMode, useCallback, useEffect, useMemo, useState } from "react";
 import {
   HubAppLogProvider,
-  HubToolLoadingProvider,
   resolveHubActiveScreenId,
   useHubActiveScreenSync,
 } from "@tool-workspace/hub-ui";
@@ -10,7 +9,6 @@ import { OverviewScreen } from "@/features/overview/OverviewScreen";
 import { PagesDirectoryScreen } from "@/features/pages/PagesDirectoryScreen";
 import { TemplatesDirectoryScreen } from "@/features/templates/TemplatesDirectoryScreen";
 import { readAppScreen, writeAppScreen, type AppScreen } from "@/lib/app-screen";
-import { P0008_BRAND_ICON, P0008_PRODUCT } from "@/lib/product-brand";
 
 function AdminConsoleInner() {
   const [screen, setScreen] = useState<AppScreen>(() => readAppScreen());
@@ -48,9 +46,7 @@ function AdminConsoleInner() {
 export function AdminConsoleApp() {
   return (
     <StrictMode>
-      <HubToolLoadingProvider toolCode={P0008_PRODUCT.code} toolName={P0008_PRODUCT.name} iconSrc={P0008_BRAND_ICON}>
-        <AdminConsoleInner />
-      </HubToolLoadingProvider>
+      <AdminConsoleInner />
     </StrictMode>
   );
 }

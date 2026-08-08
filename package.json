@@ -6,6 +6,8 @@
   "type": "module",
   "description": "Landing Platform — admin + public COD funnels at ldp.infi.io.vn.",
   "scripts": {
+    "predev": "node ../scripts/run-script-chain.cjs -- node ../scripts/sync-hub-ui-vendor.cjs --code P0008 -- node ../scripts/sync-hub-identity-vendor.cjs -- node ../scripts/verify-hub-vendor-prereqs.mjs --code P0008 -- node ../scripts/verify-hub-ui-exports.cjs P0008 --fix -- node ../scripts/sync-hub-brand-icons.mjs --code P0008 -- node ../scripts/audit-react-hook-imports.cjs --sidebar P0008 -- node ../scripts/hub-ui-css-check.mjs --code P0008 -- node ../scripts/hub-ui-parity-check.mjs --code P0008 -- node ../scripts/hub-ssot-wave-gate.mjs --code P0008",
+    "gates": "node ../scripts/run-script-chain.cjs -- node ../scripts/hub-ui-css-check.mjs --code P0008 -- node ../scripts/hub-ui-parity-check.mjs --code P0008 -- node ../scripts/hub-ssot-wave-gate.mjs --code P0008",
     "dev": "vite --host 127.0.0.1 --port 3008",
     "build": "node scripts/build.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 4008",
@@ -23,6 +25,7 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@types/node": "^22",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.2.0",

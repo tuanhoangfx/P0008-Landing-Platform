@@ -111,6 +111,12 @@ export type FilterDef = {
   allRowIconShell?: HubBrandIconShell;
   /** Rich label hint — hover filter facet name (directory column hint SSOT). */
   labelHint?: HubDirectoryColumnHintContent;
+  /**
+   * Multi-select top-row behavior.
+   * - `all-options` (default): toggle every option in the catalog.
+   * - `visible-options`: toggle only rows currently visible after panel search.
+   */
+  multiSelectAllMode?: "all-options" | "visible-options";
 };
 
 const FILTER_ICONS: Record<string, HubGlyphComponent> = {
@@ -623,18 +629,55 @@ export function HubMultiFilterDropdown({
   }, [open, usePortal]);
 
   const filtered = filter.options.filter((o) => !search || o.label.toLowerCase().includes(search.toLowerCase()));
+  const allMode =
+    filter.multiSelectAllMode ??
+    // SSOT: the "first row" (select/unselect) should operate on what the user can see
+    // after panel search filters the option list.
+    "visible-options";
   const allValues = filter.options.map((o) => o.value);
   const allSelected = selected.length > 0 && selected.length === allValues.length;
   const someSelected = selected.length > 0 && !allSelected;
+  const visibleValues = filtered.map((o) => o.value);
+  const visibleSelectedCount = visibleValues.filter((v) => selected.includes(v)).length;
+  const allVisibleSelected = visibleValues.length > 0 && visibleSelectedCount === visibleValues.length;
+  const someVisibleSelected = visibleSelectedCount > 0 && !allVisibleSelected;
 
   function toggle(v: string) {
     if (selected.includes(v)) onChange(selected.filter((x) => x !== v));
     else onChange([...selected, v]);
   }
   function toggleAll() {
+    if (allMode === "visible-options") {
+      if (visibleValues.length === 0) return;
+      if (allVisibleSelected) {
+        onChange(selected.filter((v) => !visibleValues.includes(v)));
+        return;
+      }
+      const next = [...selected];
+      for (const value of visibleValues) {
+        if (!next.includes(value)) next.push(value);
+      }
+      onChange(next);
+      return;
+    }
     if (allSelected) onChange([]);
     else onChange(allValues);
   }
+  const allRowChecked = allMode === "visible-options" ? allVisibleSelected : allSelected;
+  const allRowIndeterminate = allMode === "visible-options" ? someVisibleSelected : someSelected;
+  const allRowLabel =
+    allMode === "visible-options"
+      ? allVisibleSelected
+        ? "Unselect shown"
+        : "Select shown"
+      : filterAllRowLabel(filter);
+  const allRowCount =
+    allMode === "visible-options"
+      ? visibleValues.length
+      : (filter.totalCount ??
+        (filter.options.some((o) => o.count !== undefined)
+          ? filter.options.reduce((sum, o) => sum + (o.count ?? 0), 0)
+          : filter.options.length));
 
   const buttonLabel = (() => {
     if (triggerFormat === "value") {
@@ -768,17 +811,10 @@ export function HubMultiFilterDropdown({
               />
               <div className={HUB_FILTER_DROPDOWN_LIST_CLASS}>
                 <button type="button" onClick={toggleAll} className={rowClass}>
-                  <HubFilterDropdownCircle checked={allSelected} indeterminate={someSelected} />
+                  <HubFilterDropdownCircle checked={allRowChecked} indeterminate={allRowIndeterminate} />
                   <FilterAllRowGlyph filter={filter} directoryParity={directoryValueTypo} compact={compactDropdown} />
-                  <span className="min-w-0 flex-1 truncate text-left">{filterAllRowLabel(filter)}</span>
-                  <FilterOptionCount
-                    value={
-                      filter.totalCount ??
-                      (filter.options.some((o) => o.count !== undefined)
-                        ? filter.options.reduce((sum, o) => sum + (o.count ?? 0), 0)
-                        : filter.options.length)
-                    }
-                  />
+                  <span className="min-w-0 flex-1 truncate text-left">{allRowLabel}</span>
+                  <FilterOptionCount value={allRowCount} />
                 </button>
                 <div className="my-1 border-t border-white/5" />
                 {filtered.map((o) => (
@@ -809,17 +845,10 @@ export function HubMultiFilterDropdown({
             />
             <div className={HUB_FILTER_DROPDOWN_LIST_CLASS}>
               <button type="button" onClick={toggleAll} className={rowClass}>
-                <HubFilterDropdownCircle checked={allSelected} indeterminate={someSelected} />
+                <HubFilterDropdownCircle checked={allRowChecked} indeterminate={allRowIndeterminate} />
                 <FilterAllRowGlyph filter={filter} directoryParity={directoryValueTypo} compact={compactDropdown} />
-                <span className="min-w-0 flex-1 truncate text-left">{filterAllRowLabel(filter)}</span>
-                <FilterOptionCount
-                  value={
-                    filter.totalCount ??
-                    (filter.options.some((o) => o.count !== undefined)
-                      ? filter.options.reduce((sum, o) => sum + (o.count ?? 0), 0)
-                      : filter.options.length)
-                  }
-                />
+                <span className="min-w-0 flex-1 truncate text-left">{allRowLabel}</span>
+                <FilterOptionCount value={allRowCount} />
               </button>
               <div className="my-1 border-t border-white/5" />
               {filtered.map((o) => (

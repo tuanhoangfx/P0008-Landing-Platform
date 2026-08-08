@@ -391,7 +391,13 @@ export {
   DIRECTORY_SEARCH_CLIENT_FILTER_DEBOUNCE_MS,
   DIRECTORY_SEARCH_CLIENT_FILTER_OPTS,
   DIRECTORY_SEARCH_CLIENT_FILTER_LIVE_OPTS,
+  DIRECTORY_SEARCH_FILTERBAR_QUERY_FORBIDDEN,
+  directoryFacetCountQuery,
 } from "./lib/directory-search-contract";
+export {
+  useStableDirectoryFilterToolbar,
+  type StableDirectoryFilterToolbarCounts,
+} from "./hooks/useStableDirectoryFilterToolbar";
 export {
   useHubClientDirectorySearchQuery,
   isHubClientDirectorySearchActive,
@@ -694,9 +700,16 @@ export {
 } from "./lib/hub-entity-log";
 export {
   isHubTempEntityId,
+  reseedHubDetailDraftAfterSave,
   runHubDetailOptimisticSave,
   type HubDetailOptimisticSaveOptions,
 } from "./lib/hub-detail-optimistic-save";
+export {
+  mergeHubDetailDisplayRow,
+  useHubDetailDirtyBaseline,
+  useHubDetailDisplayRow,
+  type UseHubDetailDisplayRowOptions,
+} from "./lib/use-hub-detail-dirty-baseline";
 export {
   isHubMultilineDraftDirty,
   isHubMultilinePersistDirty,
@@ -1022,6 +1035,7 @@ export {
   readHubEmbedHostZoom,
   resolveHubDisplayAppVersion,
 } from "./shell/hub-embed-mode";
+export { HUB_EMBED_HOST_MAIN_FLEX_EXTRA } from "./shell/hub-embed-host-main-extra";
 export { useNavGroupOpenState } from "./shell/useNavGroupOpenState";
 export {
   applyFirstVisitNavGroupDefaults,

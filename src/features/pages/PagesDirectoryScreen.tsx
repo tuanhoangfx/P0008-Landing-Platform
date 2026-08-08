@@ -53,12 +53,12 @@ export function PagesDirectoryScreen() {
 
   const kpis: KpiTileData[] = useMemo(
     () => [
-      { key: "total", label: "Pages", value: rows.length, toneClass: "text-emerald-300" },
+      { prefKey: "total", label: "Pages", value: rows.length, tone: "emerald" },
       {
-        key: "published",
+        prefKey: "published",
         label: "Published",
         value: rows.filter((p) => p.status === "published").length,
-        toneClass: "text-sky-300",
+        tone: "sky",
       },
     ],
     [rows],
