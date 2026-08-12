@@ -20,14 +20,17 @@ export function useDirectorySearchQuery(opts: UseDirectorySearchQueryOptions = {
 
   useEffect(() => {
     if (resolvedQuery === query) return;
-    // Upstream-owned debounce (HubSearchField): apply sync so controlled `value={query}`
-    // cannot lag one frame behind flush and clobber Vietnamese IME drafts.
-    if (debounceMs === 0 || live) {
+    // `live` is the only sync path — a live consumer renders `query` as the field value,
+    // so transition lag would clobber Vietnamese IME drafts. Debounced consumers
+    // (including debounceMs 0 with upstream HubSearchField debounce) bind the field to
+    // `queryInput`/fieldQuery, never `query` (DIRECTORY_SEARCH_FILTERBAR_QUERY_FORBIDDEN),
+    // so the heavy filter apply must stay interruptible on large catalogs.
+    if (live) {
       setQuery(resolvedQuery);
       return;
     }
     startTransition(() => setQuery(resolvedQuery));
-  }, [query, resolvedQuery, debounceMs, live]);
+  }, [query, resolvedQuery, live]);
 
   return useMemo(
     () => ({

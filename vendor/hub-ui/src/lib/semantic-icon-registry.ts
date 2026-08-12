@@ -161,6 +161,7 @@ const REGISTRY: Record<SemanticIconKey, SemanticIconMeta> = {
   "log.session": { icon: ScrollText, className: "text-cyan-300", tone: "cyan" },
   "log.scope": { icon: ScrollText, className: "text-cyan-300", tone: "cyan" },
   "log.panel": { icon: FileText, className: "text-cyan-300", tone: "cyan" },
+  "log.releaseNotes": { icon: ScrollText, className: "text-indigo-300", tone: "indigo" },
   "kpi.fanpages.pages": { icon: LayoutGrid, className: "text-indigo-300", tone: "indigo" },
   "kpi.fanpages.linked": { icon: Users, className: "text-emerald-300", tone: "emerald" },
   "kpi.fanpages.chatbotLive": {
@@ -226,6 +227,8 @@ const REGISTRY: Record<SemanticIconKey, SemanticIconMeta> = {
   "filter.health": { icon: Activity, className: "text-emerald-400", tone: "emerald" },
   "filter.status": { icon: Flag, className: "text-violet-400", tone: "violet" },
   "filter.role": { icon: ShieldCheck, className: "text-emerald-300", tone: "emerald" },
+  "filter.sales": { icon: CircleDollarSign, className: "text-amber-300", tone: "amber" },
+  "filter.revenue": { icon: CircleDollarSign, className: "text-amber-300", tone: "amber" },
   "filter.permission": { icon: ShieldCheck, className: "text-emerald-300", tone: "emerald" },
   "filter.access": { icon: ShieldCheck, className: "text-emerald-300", tone: "emerald" },
   "filter.note": { icon: FileText, className: "text-indigo-300", tone: "indigo" },

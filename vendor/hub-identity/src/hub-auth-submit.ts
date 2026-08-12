@@ -1,11 +1,18 @@
 import { canonicalLoginId, hubAuthEmailsForSignIn, looksLikeEmail, sanitizeHubLoginInput } from "./hub-login";
-import { fetchResolvedHubAuthEmails } from "./hub-resolve-login-client";
+import {
+  type HubResolveLoginLookup,
+  resolveHubLoginEmails,
+} from "./hub-resolve-login-client";
 
 export const HUB_INVALID_LOGIN = /invalid login credentials/i;
 
 /** Returned when resolve-login finds no profile for a User ID (not wrong password). */
 export const HUB_UNKNOWN_USER_ID_MESSAGE =
   "User ID not found — check spelling or sign in with your email.";
+
+/** Returned when resolve-login API is unreachable or returns a non-OK response. */
+export const HUB_RESOLVE_LOGIN_UNAVAILABLE_MESSAGE =
+  "Sign-in service unavailable. Try again in a moment or sign in with your email.";
 
 export type HubPasswordAuthResult<T> = {
   data: T | null;
@@ -39,11 +46,14 @@ export async function signInWithHubPassword<T extends { session: unknown | null 
     .map((email) => email.trim().toLowerCase())
     .filter(Boolean);
   let resolveLookupUsed = false;
+  let resolveLookup: HubResolveLoginLookup = "skipped";
   if (mode === "signin" && !looksLikeEmail(login) && !extraEmails.length) {
     resolveLookupUsed = true;
-    extraEmails = await fetchResolvedHubAuthEmails(login, {
+    const resolved = await resolveHubLoginEmails(login, {
       resolveLoginApiUrl: options.resolveLoginApiUrl,
     });
+    extraEmails = resolved.emails;
+    resolveLookup = resolved.lookup;
   }
   const baseEmails = hubAuthEmailsForSignIn(login);
   const authEmails = [...new Set([...extraEmails, ...baseEmails])];
@@ -68,12 +78,19 @@ export async function signInWithHubPassword<T extends { session: unknown | null 
   if (
     mode === "signin" &&
     resolveLookupUsed &&
-    extraEmails.length === 0 &&
-    canonicalLoginId(login) &&
     lastError &&
     HUB_INVALID_LOGIN.test(lastError.message)
   ) {
-    return { data: null, error: new Error(HUB_UNKNOWN_USER_ID_MESSAGE), authEmail: authEmails[0] ?? null };
+    if (resolveLookup === "unavailable") {
+      return {
+        data: null,
+        error: new Error(HUB_RESOLVE_LOGIN_UNAVAILABLE_MESSAGE),
+        authEmail: authEmails[0] ?? null,
+      };
+    }
+    if (extraEmails.length === 0 && canonicalLoginId(login)) {
+      return { data: null, error: new Error(HUB_UNKNOWN_USER_ID_MESSAGE), authEmail: authEmails[0] ?? null };
+    }
   }
 
   return { data: null, error: lastError, authEmail: authEmails[0] ?? null };

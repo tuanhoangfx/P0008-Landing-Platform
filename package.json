@@ -12,7 +12,9 @@
     "build": "node scripts/build.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 4008",
     "typecheck": "tsc --noEmit",
-    "mirror:assets": "node scripts/mirror-landing-assets.mjs --slug 001"
+    "mirror:assets": "node scripts/mirror-landing-assets.mjs --slug 001",
+    "ship:lenovo": "node ../scripts/deploy-lenovo-static.mjs --code P0008",
+    "ship:lenovo:fast": "node ../scripts/deploy-lenovo-static.mjs --code P0008 --skip-build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.88.0",

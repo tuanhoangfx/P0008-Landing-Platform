@@ -134,6 +134,11 @@ export { DirectoryTableColumnsResetAction } from "./prefs/DirectoryTableColumnsR
 export { compactIconSize, HUB_CHROME_ICON_PX, HUB_COMPACT_SCALE, HUB_DIRECTORY_HEADER_GLYPH_PX } from "./ui-scale";
 export { deployLabel } from "./lib/deploy-label";
 export { HUB_NO_SPELLCHECK_PROPS } from "./lib/no-spellcheck";
+export { HubChromeActivityAge, type HubChromeActivityAgeProps } from "./shell/HubChromeActivityAge";
+export {
+  useHubHeaderBundleFreshness,
+  type HubHeaderBundleFreshness,
+} from "./shell/useHubHeaderBundleFreshness";
 export { formatTabHeaderTimestamp } from "./lib/tab-header-timestamp";
 export {
   resolveAppVersionReleaseMeta,
@@ -220,7 +225,7 @@ export {
   clearDirectoryOrderFreeze,
 } from "./loading/directory-order-freeze";
 export { useTabFrozenRows } from "./loading/useTabFrozenRows";
-export { useHubDirectoryChromeReady } from "./loading/useHubDirectoryChromeReady";
+export { useHubDirectoryChromeReady, HUB_DIRECTORY_CHROME_READY_FALLBACK_MS } from "./loading/useHubDirectoryChromeReady";
 export {
   useHubStaleIdleMemo,
   hubFilterValuesFingerprint,
@@ -230,6 +235,13 @@ export { HubInactiveTabContent } from "./loading/HubInactiveTabContent";
 export { useHubVaultBoot, type HubVaultBootOptions } from "./loading/useHubVaultBoot";
 export { mountHubApp } from "./loading/mount-hub-app";
 export { installHubChunkReloadGuard } from "./loading/hub-chunk-reload-guard";
+export {
+  installHubPerfBlackbox,
+  hubBlackboxEvent,
+  beginHubBlackboxSpan,
+  type HubBlackboxEntry,
+  type HubBlackboxOptions,
+} from "./lib/hub-perf-blackbox";
 export { HubLoaderRoot } from "./shell/HubLoaderRoot";
 export {
   HubMainChromeInsetSync,
@@ -428,6 +440,11 @@ export {
 export { HubListChromeHeader, type HubListChromeHeaderProps } from "./shell/HubListChromeHeader";
 export { KpiStrip, type KpiStripTone, type KpiTileData } from "./shell/KpiStrip";
 export { MiniBarChart, type BarItem } from "./shell/MiniBarChart";
+export {
+  AnalyticsCaptionLabel,
+  ChartLegendRowLabel,
+  resolveAnalyticsLabelGlyph,
+} from "./shell/AnalyticsCaptionHint";
 export {
   DirectoryChartBand,
   directoryChartBandNode,
@@ -1025,6 +1042,7 @@ export {
   type HubMainShellClassOptions,
   type HubMainShellMode,
   type ToolManifestUiShell,
+  type ToolManifestUiShellInput,
 } from "./shell/hub-main-shell-class";
 export { applyHubEmbedDocumentClass, isHubEmbedMode } from "./shell/hub-embed-mode";
 export {
@@ -1372,6 +1390,7 @@ export {
   HUB_ADM_GRID_SLOT_SPACER_CLASS,
   HUB_ADM_GRID_SLOT_SPACER_MID_CLASS,
   HUB_ADM_GRID_SLOT_SPACER_TAIL_CLASS,
+  hubAdmGridSlotPadClass,
   HUB_ADM_TYPE_MONO_CLASS,
   HUB_ADM_TYPE_NAV_CLASS,
   HUB_ADM_LOG_MUTED_CLASS,
@@ -1432,8 +1451,15 @@ export {
   type HubAdmClickDateFieldProps,
 } from "./shell/HubAdmClickDateField";
 export {
+  HubAdmDetailCopyTrailingAction,
+  buildHubAdmDetailCopyTrailingAction,
+  mergeHubAdmTrailingActions,
+  type HubAdmDetailCopyTrailingActionProps,
+} from "./shell/hub-adm-detail-copy-action";
+export {
   HubBulkDetailField,
   HubBulkDetailRowSpacers,
+  HubAdmGridSlotPad,
   HUB_BULK_DETAIL_FIELD_COMPONENT,
   groupHubBulkDetailFieldsForRows,
   resolveHubBulkDetailFieldComponent,
@@ -1471,6 +1497,12 @@ export { HubAdmNoteSearchBar, type HubAdmNoteSearchBarProps } from "./shell/HubA
 export { HubAdmNoteHighlightText } from "./shell/HubAdmNoteHighlightText";
 export { HubAdmNoteReadonlyBody, type HubAdmNoteReadonlyBodyProps } from "./shell/HubAdmNoteReadonlyBody";
 export { HubAdmNoteEditorField, type HubAdmNoteEditorFieldProps } from "./shell/HubAdmNoteEditorField";
+export {
+  HubAdmDetailNoteLineField,
+  HUB_ADM_DETAIL_NOTE_LINE_CLASS,
+  HUB_ADM_DETAIL_NOTE_LINE_CONTROL_CLASS,
+  type HubAdmDetailNoteLineFieldProps,
+} from "./shell/HubAdmDetailNoteLineField";
 export { HubAdmNoteRail, type HubAdmNoteRailEditorProps, type HubAdmNoteRailProps, type HubAdmNoteRailReadonlyProps } from "./shell/HubAdmNoteRail";
 export { HubAdmBulkFieldCell, type HubAdmBulkFieldCellProps } from "./shell/HubAdmBulkFieldCell";
 export {
@@ -1542,22 +1574,76 @@ export {
   HUB_HEADER_PANEL_BTN_CLASS,
   type HubHeaderPanelButtonProps,
 } from "./shell/HubHeaderPanelButton";
-export { HubUsageLogPanel, type HubLogEntry, type HubLogQuickAction, type HubUsageLogPanelProps } from "./shell/HubUsageLogPanel";
+export {
+  HubVersionUpdateStatusIcon,
+  type HubVersionUpdateState,
+  type HubVersionUpdateStatusIconProps,
+} from "./shell/HubVersionUpdateStatusIcon";
+export {
+  HubVersionReleaseNotes,
+  type HubVersionReleaseNotesProps,
+} from "./shell/HubVersionReleaseNotes";
+export {
+  HUB_RELEASE_NOTES_URL,
+  buildHubReleaseUserSummary,
+  ensureHubReleaseNotesIncludeCurrent,
+  hasUnseenHubReleaseNotes,
+  hubReleaseNoteActivityAt,
+  hubReleaseNotesSeenKey,
+  hubReleaseSummaryIsRedundant,
+  humanizeHubReleaseBullet,
+  humanizeHubReleaseNoteTitle,
+  inferHubReleaseNoteKind,
+  markHubReleaseNotesSeen,
+  normalizeReleaseNotesVersion,
+  parseHubReleaseNotesPayload,
+  readHubReleaseNotesSeen,
+  type HubReleaseNoteEntry,
+  type HubReleaseNoteKind,
+} from "./lib/hub-version-release-notes-core";
+export { HubUsageLogPanel, type HubLogEntry, type HubLogQuickAction, type HubLogExtraSection, type HubUsageLogPanelProps } from "./shell/HubUsageLogPanel";
 export {
   HubAppLogProvider,
   useHubAppLog,
+  HUB_APP_LOG_GLOBAL_SCREEN,
+  isHubAppLogVisibleOnTab,
   type HubAppLogBoot,
   type HubAppLogEventDetail,
   type HubAppLogProviderProps,
 } from "./shell/HubAppLogProvider";
-export { HubLogButton, type HubLogButtonProps, type HubLogButtonVariant, type HubLogExtraSection } from "./shell/HubLogButton";
+export { HubLogButton, type HubLogButtonProps, type HubLogButtonVariant } from "./shell/HubLogButton";
 export {
   HubNotifyPanel,
+  resolveHubNotifyAlertIcon,
   type HubNotifyAlert,
   type HubNotifyAlertSeverity,
   type HubNotifyPanelProps,
   type HubNotifyQuickAction,
+  type HubNotifySeveritySectionOverride,
 } from "./shell/HubNotifyPanel";
+export {
+  HubActivityFeedRows,
+  HubActivityFeedToolbar,
+  HubOpsFeedFilterProvider,
+  filterHubActivityFeedItems,
+  hubActivityKindLabel,
+  resolveHubActivityKindMeta,
+  useHubActivityFeedFilter,
+  useHubOpsFeedFilterOptional,
+  type HubActivityFeedItem,
+  type HubActivityFeedKind,
+  type HubActivityFeedRowsProps,
+  type HubActivityFeedToolbarProps,
+  type HubActivityKindFilter,
+  type HubOpsFeedFilterValue,
+} from "./shell/HubActivityFeed";
+export {
+  hasUnreadNotifyAlerts,
+  markAllNotifySeen,
+  markNotifySeenId,
+  readNotifySeenIds,
+  writeNotifySeenIds,
+} from "./shell/hub-notify-seen";
 export { HubHeaderOpsPanels, type HubHeaderOpsPanelsProps } from "./shell/HubHeaderOpsPanels";
 export { HubNotifyButton, type HubNotifyButtonProps } from "./shell/HubNotifyButton";
 export { HubFilterRowButton, type HubFilterRowButtonProps, type HubFilterRowTone } from "./shell/HubFilterRowButton";
@@ -1587,6 +1673,7 @@ export {
 } from "./shell/HubDirectoryBulkActions";
 export {
   HUB_ANALYTICS_CAPTION_TYPO_CLASS,
+  HUB_CHART_ROW_TYPO_SSOT,
   HUB_DIRECTORY_BODY_VALUE_TYPO_SSOT,
   HUB_DIRECTORY_HEADER_LABEL_TYPO_SSOT,
   HUB_DIRECTORY_TOOLBAR_TYPO_CLASS,
@@ -1708,8 +1795,13 @@ export {
   type HubUserChangePasswordModalProps,
 } from "./auth/HubUserChangePasswordModal";
 export {
+  HubUserChangeUsernameModal,
+  type HubUserChangeUsernameModalProps,
+} from "./auth/HubUserChangeUsernameModal";
+export {
   HUB_CHANGE_EMAIL_TOC,
   HUB_CHANGE_PASSWORD_TOC,
+  HUB_CHANGE_USERNAME_TOC,
   hubUserChangeSectionIcon,
   hubUserChangeTocItems,
   type HubUserChangeTocEntry,

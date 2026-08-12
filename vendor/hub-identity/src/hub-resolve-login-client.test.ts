@@ -1,31 +1,48 @@
-import { describe, expect, it, vi } from "vitest";
-import { fetchResolvedHubAuthEmails } from "./hub-resolve-login-client";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { resolveHubLoginEmails } from "./hub-resolve-login-client";
 
-describe("fetchResolvedHubAuthEmails", () => {
-  it("returns empty for email input", async () => {
-    await expect(fetchResolvedHubAuthEmails("a@corp.com")).resolves.toEqual([]);
-  });
-
-  it("returns empty for invalid user id", async () => {
-    await expect(fetchResolvedHubAuthEmails("ab")).resolves.toEqual([]);
-  });
-
-  it("maps loginId via resolve-login API", async () => {
-    const fetchMock = vi.fn().mockResolvedValue({
-      json: async () => ({ ok: true, authEmails: ["czpgo@outlook.com"] }),
-    });
-    vi.stubGlobal("fetch", fetchMock);
-
-    await expect(
-      fetchResolvedHubAuthEmails("czpgo", { resolveLoginApiUrl: "/api/hub/auth/resolve-login" }),
-    ).resolves.toEqual(["czpgo@outlook.com"]);
-
-    expect(fetchMock).toHaveBeenCalledWith("/api/hub/auth/resolve-login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ loginId: "czpgo" }),
-    });
-
+describe("resolveHubLoginEmails", () => {
+  afterEach(() => {
     vi.unstubAllGlobals();
+  });
+
+  it("returns ok with emails on HTTP 200", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({ ok: true, authEmails: ["czpgo@outlook.com"] }),
+      }),
+    );
+
+    const result = await resolveHubLoginEmails("czpgo");
+    expect(result).toEqual({ emails: ["czpgo@outlook.com"], lookup: "ok" });
+  });
+
+  it("returns not_found when profile missing", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({ ok: true, authEmails: [] }),
+      }),
+    );
+
+    const result = await resolveHubLoginEmails("notauser");
+    expect(result).toEqual({ emails: [], lookup: "not_found" });
+  });
+
+  it("returns unavailable on non-OK HTTP", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: false,
+        status: 405,
+        json: async () => ({}),
+      }),
+    );
+
+    const result = await resolveHubLoginEmails("czpgo");
+    expect(result).toEqual({ emails: [], lookup: "unavailable", httpStatus: 405 });
   });
 });

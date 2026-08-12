@@ -18,7 +18,7 @@ export type HubLogButtonProps = {
 /** Golden Log trigger — pairs with `HubAppLogProvider` (header tab log + footer session log). */
 export function HubLogButton({
   variant = "tab",
-  emptyMessage = "Chưa có thao tác trong phiên này.",
+  emptyMessage = "No actions logged in this session yet.",
   title,
   subtitle,
   quickActions,

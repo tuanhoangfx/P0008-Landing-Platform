@@ -86,7 +86,9 @@
   "urls": {
     "local": "http://127.0.0.1:3008",
     "admin": "https://ldp.infi.io.vn/",
-    "landing001": "https://ldp.infi.io.vn/001"
+    "landing001": "https://ldp.infi.io.vn/001",
+    "preview": "https://ldp.infi.io.vn",
+    "prodProbe": "https://ldp.infi.io.vn"
   },
   "vercel": {
     "project": "p0008-landing-platform",
@@ -97,7 +99,7 @@
     "dnsRequired": "A ldp.infi.io.vn 76.76.21.21",
     "productionBranch": "main",
     "team": "tuan-hoangs-projects-ad21fb52",
-    "notes": "Retired prod path — P0008 is Lenovo nginx + Cloudflare tunnel (lenovo-static).",
+    "notes": "ARCHIVED — Vercel 402-paused. Prod = CF Tunnel → Lenovo nginx (lenovo-static). git push does NOT deploy. Deploy: pnpm run ship:lenovo or ship-product.ps1 -Keyword Deploy.",
     "projectId": "prj_3jEmdg7sfMtkXPeOGgeZ7WiQWqsQ",
     "previewUrl": "https://ldp.infi.io.vn",
     "customDomain": "https://ldp.infi.io.vn",
@@ -106,7 +108,9 @@
     "deployHookName": "ship-production",
     "migratedAt": "2026-08-03T08:20:50.375Z",
     "migratedFromTeam": "tuanhoangfxs-projects",
-    "retiredAt": "2026-08-06T18:38:14.702Z"
+    "retiredAt": "2026-08-06T18:38:14.702Z",
+    "legacy": true,
+    "status": "archived-402-paused"
   },
   "vercelEnvValidation": {
     "requiredKeys": [
@@ -117,7 +121,11 @@
       "TOC_SUPABASE_URL",
       "TOC_SUPABASE_SERVICE_ROLE",
       "TOC_CRM_USER_ID"
-    ]
+    ],
+    "deployTarget": "lenovo-static",
+    "shipScript": "node ../scripts/deploy-lenovo-static.mjs --code P0008",
+    "syncScript": null,
+    "notes": "Prod bundle gates probe urls.app (Lenovo). Vercel env sync deprecated."
   },
   "docs": {
     "readme": "README.md",
@@ -145,6 +153,7 @@
       "check-version-sync",
       "verify-untracked-imports",
       "verify-no-sibling-tool-imports",
+      "hub-workspace-chrome-ssot",
       "build",
       "check-lenovo-deploy-target"
     ],
@@ -153,12 +162,37 @@
       "verify-untracked-imports": "node E:\\Dev\\Tool\\scripts\\verify-untracked-imports.mjs --product-root .",
       "verify-no-sibling-tool-imports": "node E:\\Dev\\Tool\\scripts\\verify-no-sibling-tool-imports.mjs --product-root .",
       "build": "corepack pnpm run build",
-      "check-lenovo-deploy-target": "node E:\\Dev\\Tool\\scripts\\check-lenovo-deploy-target.mjs --code P0008 --json"
+      "check-lenovo-deploy-target": "node E:\\Dev\\Tool\\scripts\\check-lenovo-deploy-target.mjs --code P0008 --json",
+      "hub-workspace-chrome-ssot": "node E:\\Dev\\Tool\\scripts\\audit-hub-workspace-chrome-ssot.mjs --json"
     },
     "syncedAt": "2026-08-02T18:27:53.992Z",
     "deployThrottle": {
       "maxPerWindow": 2,
       "windowHours": 24
     }
+  },
+  "deploy": {
+    "target": "lenovo-static",
+    "domain": "ldp.infi.io.vn",
+    "ship": "node ../scripts/deploy-lenovo-static.mjs --code P0008",
+    "pnpm": "ship:lenovo",
+    "playbook": "Tool/docs/playbooks/release-fast-path.md",
+    "notes": "Prod = CF Tunnel → Lenovo nginx. Env baked at local build (.env.shared). git push does NOT deploy. Do NOT use provision-cf-pages-product.mjs (DNS repoint risk)."
+  },
+  "prodEnvValidation": {
+    "requiredKeys": [
+      "LDP_SUPABASE_URL",
+      "LDP_SUPABASE_SERVICE_ROLE"
+    ],
+    "optionalKeys": [
+      "TOC_SUPABASE_URL",
+      "TOC_SUPABASE_SERVICE_ROLE",
+      "TOC_CRM_USER_ID"
+    ],
+    "deployTarget": "lenovo-static",
+    "shipScript": "node ../scripts/deploy-lenovo-static.mjs --code P0008",
+    "syncScript": null,
+    "notes": "Canonical prod bundle/env gate — probes urls.app (Lenovo). vercelEnvValidation is legacy alias.",
+    "schemaVersion": 1
   }
 }
