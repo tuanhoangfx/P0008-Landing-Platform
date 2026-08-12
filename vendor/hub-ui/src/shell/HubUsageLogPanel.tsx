@@ -11,6 +11,10 @@ import {
   HubOpsFeedFilterProvider,
   type HubActivityKindFilter,
 } from "./HubActivityFeed";
+import {
+  HUB_LOG_EMPTY_MESSAGE,
+  HUB_LOG_TITLE,
+} from "./hub-chrome-messages";
 
 export type HubLogEntry = {
   id: string;
@@ -78,9 +82,9 @@ function LogRows({ logs, formatter }: { logs: HubLogEntry[]; formatter: Intl.Dat
 /** Usage log — same HubToolDetailModal shell as Settings (TOC · sections · fixed size). */
 export function HubUsageLogPanel({
   logs,
-  title = "Log",
+  title = HUB_LOG_TITLE,
   subtitle = "Runtime actions in this session",
-  emptyMessage = "No actions logged in this session yet.",
+  emptyMessage = HUB_LOG_EMPTY_MESSAGE,
   compact = false,
   sidebarRow = false,
   badge,

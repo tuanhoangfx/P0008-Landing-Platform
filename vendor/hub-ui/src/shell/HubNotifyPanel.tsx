@@ -23,6 +23,7 @@ import {
   type HubActivityFeedItem,
   type HubActivityKindFilter,
 } from "./HubActivityFeed";
+import { HUB_NOTIFY_EMPTY_MESSAGE } from "./hub-chrome-messages";
 
 export type HubNotifyAlertSeverity = "ok" | "warn" | "bad";
 
@@ -141,7 +142,7 @@ export function HubNotifyPanel({
   title = "Notify",
   triggerTitle,
   subtitle = "Operational alerts for this screen",
-  emptyMessage = "No alerts — everything looks healthy.",
+  emptyMessage = HUB_NOTIFY_EMPTY_MESSAGE,
   compact = false,
   sidebarRow = false,
   trackUnread = true,

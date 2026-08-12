@@ -1404,6 +1404,20 @@ export {
   HUB_ACCOUNT_DETAIL_MAIN_SCROLL_ROOT,
 } from "./shell/hubAccountDetailModal";
 export {
+  HUB_LOG_EMPTY_MESSAGE,
+  HUB_LOG_SUBTITLE_GLOBAL,
+  HUB_LOG_SUBTITLE_TAB,
+  HUB_LOG_TITLE,
+  HUB_NOTIFY_EMPTY_MESSAGE,
+  HUB_REFRESH_LABEL,
+  HUB_REFRESHING_LABEL,
+  HUB_RELOAD_EMBEDDED_TITLE,
+  HUB_SETTINGS_TITLE,
+  HUB_WORKSPACE_USER_EMPTY_EMAIL,
+  HUB_WORKSPACE_USER_FOOTER_TITLE,
+  HUB_WORKSPACE_USER_MODAL_TITLE,
+} from "./shell/hub-chrome-messages";
+export {
   HubAccountDetailModalFrame,
   type HubAccountDetailModalFrameProps,
 } from "./shell/HubAccountDetailModalFrame";
