@@ -1,4 +1,4 @@
-import type { LucideIcon } from "lucide-react";
+import type { HubGlyphComponent } from "../types/filter-badge";
 import type { HubBrandIconId } from "./resolve-hub-brand-icon";
 import type { HubDirectoryColumnHintContent } from "../table/HubDirectoryColumnHint";
 import type { HubDirectoryColumnMetaInput } from "../table/hub-directory-table-meta";
@@ -20,7 +20,7 @@ export type DirectoryColumnMetaOptions = {
   /** Override buildDirectoryColumns default header align (code→start, date→center). */
   headerAlign?: "start" | "center";
   /** Prefer Display-pref / product icon over semantic registry (P0004 Users Tools / P000x). */
-  headerIcon?: LucideIcon;
+  headerIcon?: HubGlyphComponent;
   headerIconClassName?: string;
 };
 
@@ -29,7 +29,7 @@ export type DirectoryColumnHeaderMeta = {
   colClass: string;
   role: HubTableColumnRole;
   width: string;
-  headerIcon: LucideIcon;
+  headerIcon: HubGlyphComponent;
   headerIconClassName: string;
   headerBrandIcon?: HubBrandIconId;
   headerEmoji?: string;
@@ -58,7 +58,7 @@ export function createDirectoryColumnMetaHelpers() {
       colClass,
       role,
       width,
-      headerIcon: (options?.headerIcon ?? icon.headerIcon) as LucideIcon,
+      headerIcon: options?.headerIcon ?? icon.headerIcon,
       headerIconClassName: options?.headerIconClassName ?? icon.headerIconClassName,
       headerBrandIcon: useImage || useLucideOverride ? undefined : icon.headerBrandIcon,
       headerEmoji: options?.headerEmoji,
