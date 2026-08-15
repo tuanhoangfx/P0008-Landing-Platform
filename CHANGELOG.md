@@ -1,3 +1,21 @@
+# Changelog
+
+## 2026-08-15 - P0008 Git backup
+
+- Version: `0.2.1`
+- Timestamp: 2026-08-15 21:52 (UTC+7)
+- Type: Patch
+- Status: Committed
+
+### Changes
+
+- Git/Commit Minor bump (P0008): 0.1.5 → 0.2.1 (MINOR+1, PATCH=1).
+
+### Verification
+
+- pending
+
+---
 # Changelog — P0008 Landing Platform
 
 ## 2026-08-03 — Overview TOC + TabScreenChrome HubTabScreenBody SSOT

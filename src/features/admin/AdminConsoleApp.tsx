@@ -31,8 +31,11 @@ function AdminConsoleInner() {
     return <OverviewScreen />;
   }, [screen]);
 
+  const logPersistKey = "P0008:anon";
+
   return (
     <HubAppLogProvider
+      persistKey={logPersistKey}
       activeScreen={resolveHubActiveScreenId(screen)}
       bootLog={{ scope: "P0008", message: "Landing Platform admin", screen }}
     >

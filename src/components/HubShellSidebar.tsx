@@ -66,6 +66,7 @@ export function HubShellSidebar({ screen, onNavigate }: Props) {
             session={null}
             labels={labels}
             roleKey={roleKey}
+            getHubClient={() => getIdentitySupabase()}
             profileRoleClient={getIdentitySupabase()}
             profileRoleUserId={undefined}
             footerTitle="Open workspace user information"

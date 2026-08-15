@@ -31,6 +31,7 @@ export function ConsoleTabHeader({ screen, actions, centerStats = [] }: Props) {
       titleIconClass={nav?.iconTone ? navBadgeIconClass(nav.iconTone) : "text-indigo-300"}
       title={SCREEN_LABELS[screen]}
       metaItems={buildConsoleVersionMetaItems(APP_VERSION, toolManifest)}
+      versionReleaseNotesCode="P0008"
       centerStats={centerStats}
       actions={actions}
     />

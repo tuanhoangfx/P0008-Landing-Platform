@@ -112,7 +112,7 @@
     "architecture": "docs/LDP-ARCHITECTURE.md"
   },
   "release": {
-    "version": "0.1.5",
+    "version": "0.2.1",
     "readiness": [
       "build",
       "admin-shell",
@@ -120,7 +120,7 @@
       "landing-order-api"
     ]
   },
-  "manifestUpdatedAt": "2026-08-06T18:38:14.703Z",
+  "manifestUpdatedAt": "2026-08-15T14:52:13.623Z",
   "ship": {
     "schemaVersion": 1,
     "fastPath": "Deploy",
@@ -133,6 +133,7 @@
       "verify-untracked-imports",
       "verify-no-sibling-tool-imports",
       "hub-workspace-chrome-ssot",
+      "build-if-dist-stale",
       "build",
       "check-lenovo-deploy-target"
     ],
@@ -142,7 +143,8 @@
       "verify-no-sibling-tool-imports": "node E:\\Dev\\Tool\\scripts\\verify-no-sibling-tool-imports.mjs --product-root .",
       "build": "corepack pnpm run build",
       "check-lenovo-deploy-target": "node E:\\Dev\\Tool\\scripts\\check-lenovo-deploy-target.mjs --code P0008 --json",
-      "hub-workspace-chrome-ssot": "node E:\\Dev\\Tool\\scripts\\audit-hub-workspace-chrome-ssot.mjs --json"
+      "hub-workspace-chrome-ssot": "node E:\\Dev\\Tool\\scripts\\audit-hub-workspace-chrome-ssot.mjs --json",
+      "build-if-dist-stale": "node E:\\Dev\\Tool\\scripts\\build-if-dist-stale.mjs --product-root . --code P0008"
     },
     "syncedAt": "2026-08-02T18:27:53.992Z",
     "deployThrottle": {

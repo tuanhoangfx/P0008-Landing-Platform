@@ -16,7 +16,7 @@ toc.infi.io.vn
 
 ## Separate CRM (doanh nghiệp riêng)
 
-Giống **P0026 → P0005**, nhưng **không dùng** `crm.infi.io.vn` (Infi shared).
+Giống **P0015 → P0005**, nhưng **không dùng** `crm.infi.io.vn` (Infi shared).
 
 | Layer | SSOT | TOC instance |
 |-------|------|--------------|
@@ -56,9 +56,9 @@ node scripts/mirror-landing-assets.mjs --slug ldp01
 # Then point config image URLs to /products/ldp01/...
 ```
 
-## vs P0026
+## vs P0015
 
-| | P0026 Enzy | P0014 TOC |
+| | P0015 Enzy | P0014 TOC |
 |--|------------|-----------|
 | Landing | N/A | Native `/ldp01` |
 | CRM source | `crm.infi.io.vn` | TOC P0005 deploy |

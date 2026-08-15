@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-08-15T14:52:14.208Z",
+  "entries": [
+    {
+      "version": "0.2.1",
+      "date": "2026-08-15",
+      "at": "2026-08-15T21:52:00+07:00",
+      "title": "P0008 Git backup",
+      "bullets": [
+        "Git/Commit Minor bump (P0008): 0.1.5 → 0.2.1 (MINOR+1, PATCH=1)."
+      ],
+      "kind": "improve",
+      "userTitle": "P0008 Git backup",
+      "userSummary": "",
+      "userHighlights": [
+        "Git Commit Minor bump : 0.1.5 → 0.2.1 ."
+      ]
+    }
+  ]
+}
