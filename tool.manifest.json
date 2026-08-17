@@ -118,9 +118,14 @@
       "admin-shell",
       "public-001",
       "landing-order-api"
-    ]
+    ],
+    "latestPublished": {
+      "tag": "v0.2.1",
+      "url": "https://github.com/tuanhoangfx/P0008-Landing-Platform/releases/tag/v0.2.1",
+      "publishedAt": "2026-08-17T19:19:02.237Z"
+    }
   },
-  "manifestUpdatedAt": "2026-08-15T14:52:13.623Z",
+  "manifestUpdatedAt": "2026-08-17T19:19:02.237Z",
   "ship": {
     "schemaVersion": 1,
     "fastPath": "Push",
