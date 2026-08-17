@@ -5,7 +5,7 @@
 - Version: `0.2.2`
 - Timestamp: 2026-08-18 02:37 (UTC+7)
 - Type: Patch
-- Status: Committed
+- Status: Verified
 - Release: https://ldp.infi.io.vn
 
 ### Changes

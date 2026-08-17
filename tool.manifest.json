@@ -122,10 +122,10 @@
     "latestPublished": {
       "tag": "v0.2.2",
       "url": "https://github.com/tuanhoangfx/P0008-Landing-Platform/releases/tag/v0.2.2",
-      "publishedAt": "2026-08-17T20:07:48.993Z"
+      "publishedAt": "2026-08-17T20:08:57.905Z"
     }
   },
-  "manifestUpdatedAt": "2026-08-17T20:07:48.993Z",
+  "manifestUpdatedAt": "2026-08-17T20:08:57.905Z",
   "ship": {
     "schemaVersion": 1,
     "fastPath": "Push",
