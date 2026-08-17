@@ -35,6 +35,7 @@ export * from "./ensure-fresh-supabase-auth";
 export * from "./supabase-auth-error";
 export * from "./hub-identity-cross-origin";
 export * from "./mirror-supabase-auth";
+export * from "./data-box-mirror-auth-emails";
 export * from "./workspace-dual-sign-in";
 export * from "./hub-identity-relay";
 export * from "./workspace-auth-session";

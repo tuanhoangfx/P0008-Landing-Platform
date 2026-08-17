@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-18 - Patch bump for completed agent task
+
+- Version: `0.2.2`
+- Timestamp: 2026-08-18 02:37 (UTC+7)
+- Type: Patch
+- Status: Committed
+
+### Changes
+
+- Automatic patch bump after completed P0008 task.
+
+### Verification
+
+- pending
+
+---
 ## 2026-08-15 - P0008 Git backup
 
 - Version: `0.2.1`

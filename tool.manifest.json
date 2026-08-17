@@ -112,7 +112,7 @@
     "architecture": "docs/LDP-ARCHITECTURE.md"
   },
   "release": {
-    "version": "0.2.1",
+    "version": "0.2.2",
     "readiness": [
       "build",
       "admin-shell",
@@ -125,7 +125,7 @@
       "publishedAt": "2026-08-17T19:19:02.237Z"
     }
   },
-  "manifestUpdatedAt": "2026-08-17T19:19:02.237Z",
+  "manifestUpdatedAt": "2026-08-17T19:37:58.332Z",
   "ship": {
     "schemaVersion": 1,
     "fastPath": "Push",
