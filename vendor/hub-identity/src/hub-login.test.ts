@@ -1,12 +1,19 @@
 import { describe, expect, it } from "vitest";
 import {
+  classifyHubLoginIdentifier,
+  hubAccountEmailLabel,
   hubAuthEmailFromLogin,
   hubAuthEmailFromLoginOrEmail,
   hubAuthEmailsForSignIn,
   hubAuthEmailsFromLogin,
   hubDisplayEmail,
   hubDisplayLoginId,
+  hubOpaqueAuthEmailFromUserId,
+  isHubOpaqueAuthEmail,
   isHubSyntheticEmail,
+  isHubTechnicalAuthEmail,
+  looksLikePhoneLogin,
+  normalizeHubPhoneForLookup,
   resolveHubLogin,
   sanitizeHubLoginInput,
 } from "./hub-login";
@@ -29,6 +36,27 @@ describe("hub-login", () => {
   it("aliases crpgo → czpgo auth email", () => {
     expect(resolveHubLogin("crpgo").loginId).toBe("czpgo");
     expect(hubAuthEmailsForSignIn("crpgo")[0]).toBe("czpgo@infix1.io.vn");
+  });
+
+  it("aliases phuongkt01 → phuongkd01 for resolve-login username", () => {
+    expect(classifyHubLoginIdentifier("phuongkt01")).toEqual({
+      kind: "username",
+      sanitized: "phuongkt01",
+      loginId: "phuongkd01",
+      phoneNormalized: null,
+    });
+    expect(resolveHubLogin("phuongkt01").loginId).toBe("phuongkd01");
+  });
+
+  it("keys the opaque auth email on the immutable user id", () => {
+    const userId = "7C9E6679-7425-40DE-944B-E07FC1F90AE7";
+    expect(hubOpaqueAuthEmailFromUserId(userId)).toBe(
+      "u_7c9e6679-7425-40de-944b-e07fc1f90ae7@auth.infi.internal",
+    );
+    expect(isHubOpaqueAuthEmail(hubOpaqueAuthEmailFromUserId(userId))).toBe(true);
+    expect(isHubSyntheticEmail(hubOpaqueAuthEmailFromUserId(userId))).toBe(false);
+    expect(isHubTechnicalAuthEmail(hubOpaqueAuthEmailFromUserId(userId))).toBe(true);
+    expect(() => hubOpaqueAuthEmailFromUserId("  ")).toThrow(/Invalid Hub user id/);
   });
 
   it("keeps real email logins unchanged", () => {
@@ -75,6 +103,31 @@ describe("hub-login", () => {
     expect(sanitizeHubLoginInput(" CS00761\u200B ")).toBe("CS00761");
   });
 
+  it("classifies phone identifiers and normalizes VN local numbers", () => {
+    expect(classifyHubLoginIdentifier("+84 901 234 567")).toMatchObject({
+      kind: "phone",
+      phoneNormalized: "84901234567",
+    });
+    expect(normalizeHubPhoneForLookup("0901 234 567")).toBe("84901234567");
+    expect(looksLikePhoneLogin("0901234567")).toBe(true);
+    expect(hubAuthEmailsForSignIn("0901234567")).toEqual([]);
+    expect(resolveHubLogin("0901234567")).toMatchObject({
+      kind: "phone",
+      authEmail: "",
+      isEmailLogin: false,
+    });
+  });
+
+  it("keeps alphanumeric usernames out of the phone path", () => {
+    expect(classifyHubLoginIdentifier("oi0906029").kind).toBe("username");
+    expect(looksLikePhoneLogin("oi0906029")).toBe(false);
+  });
+
+  it("rejects malformed short digit strings as phone", () => {
+    expect(normalizeHubPhoneForLookup("12345")).toBeNull();
+    expect(looksLikePhoneLogin("12345")).toBe(false);
+  });
+
   it("OI0906029 normalizes to oi0906029 without digit corruption", () => {
     expect(resolveHubLogin("OI0906029")).toMatchObject({
       authEmail: "oi0906029@infix1.io.vn",
@@ -107,5 +160,33 @@ describe("hub-login", () => {
         contactEmail: "real@corp.com",
       }),
     ).toBe("real@corp.com");
+  });
+
+  it("never surfaces opaque Hub auth email; account label uses profiles.email SSOT", () => {
+    const opaque = "u_fa7950dc-3153-479e-b4b1-6a357bcf656b@auth.infi.internal";
+    expect(hubDisplayEmail({ authEmail: opaque })).toBe("");
+    expect(hubAccountEmailLabel({ authEmail: opaque })).toBe("Not linked");
+    expect(
+      hubAccountEmailLabel({
+        authEmail: opaque,
+        profileEmail: "kinhdoanh03@enzyvina.com",
+      }),
+    ).toBe("kinhdoanh03@enzyvina.com");
+  });
+
+  it("account label never paints synthetic @infix1.io.vn — profiles.email only", () => {
+    expect(
+      hubAccountEmailLabel({
+        authEmail: "duyceo01@infix1.io.vn",
+        profileEmail: null,
+        contactEmail: null,
+      }),
+    ).toBe("Not linked");
+    expect(
+      hubAccountEmailLabel({
+        authEmail: "duyceo01@infix1.io.vn",
+        profileEmail: "kinhdoanh@enzyvina.com",
+      }),
+    ).toBe("kinhdoanh@enzyvina.com");
   });
 });

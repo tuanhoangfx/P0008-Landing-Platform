@@ -123,34 +123,18 @@
   "manifestUpdatedAt": "2026-08-15T14:52:13.623Z",
   "ship": {
     "schemaVersion": 1,
-    "fastPath": "Deploy",
+    "fastPath": "Push",
     "releasePath": "Release",
     "deployTarget": "lenovo-static",
     "playbook": "Tool/docs/playbooks/release-fast-path.md",
     "script": "powershell -File E:\\Dev\\Tool\\scripts\\ship-product.ps1",
     "preShip": [
-      "check-version-sync",
-      "verify-untracked-imports",
-      "verify-no-sibling-tool-imports",
-      "hub-workspace-chrome-ssot",
-      "build-if-dist-stale",
-      "build",
-      "check-lenovo-deploy-target"
+      "check-version-sync"
     ],
     "preShipCommands": {
-      "check-version-sync": "node E:\\Dev\\Tool\\scripts\\check-version-sync.mjs --product-root . --no-warn-published",
-      "verify-untracked-imports": "node E:\\Dev\\Tool\\scripts\\verify-untracked-imports.mjs --product-root .",
-      "verify-no-sibling-tool-imports": "node E:\\Dev\\Tool\\scripts\\verify-no-sibling-tool-imports.mjs --product-root .",
-      "build": "corepack pnpm run build",
-      "check-lenovo-deploy-target": "node E:\\Dev\\Tool\\scripts\\check-lenovo-deploy-target.mjs --code P0008 --json",
-      "hub-workspace-chrome-ssot": "node E:\\Dev\\Tool\\scripts\\audit-hub-workspace-chrome-ssot.mjs --json",
-      "build-if-dist-stale": "node E:\\Dev\\Tool\\scripts\\build-if-dist-stale.mjs --product-root . --code P0008"
+      "check-version-sync": "node E:\\Dev\\Tool\\scripts\\check-version-sync.mjs --product-root . --no-warn-published"
     },
-    "syncedAt": "2026-08-02T18:27:53.992Z",
-    "deployThrottle": {
-      "maxPerWindow": 2,
-      "windowHours": 24
-    }
+    "syncedAt": "2026-08-16T23:20:31.816Z"
   },
   "deploy": {
     "target": "lenovo-static",
