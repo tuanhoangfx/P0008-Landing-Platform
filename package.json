@@ -1,7 +1,7 @@
 {
   "name": "p0008-landing-platform",
   "private": true,
-  "version": "0.2.2",
+  "version": "0.2.8",
   "packageManager": "pnpm@10.34.5",
   "type": "module",
   "description": "Landing Platform — admin + public COD funnels at ldp.infi.io.vn.",
@@ -11,7 +11,7 @@
     "dev": "vite --host 127.0.0.1 --port 3008",
     "build": "node scripts/build.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 4008",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
     "mirror:assets": "node scripts/mirror-landing-assets.mjs --slug 001",
     "ship:lenovo": "node ../scripts/deploy-lenovo-static.mjs --code P0008",
     "ship:lenovo:fast": "node ../scripts/deploy-lenovo-static.mjs --code P0008 --skip-build"
@@ -19,9 +19,9 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.88.0",
     "@tanstack/react-query": "^5.80.7",
-    "@tool-workspace/hub-identity": "file:./vendor/hub-identity",
-    "@tool-workspace/hub-query": "file:./vendor/hub-query",
-    "@tool-workspace/hub-ui": "file:./vendor/hub-ui",
+    "@tool-workspace/hub-identity": "workspace:@dev/hub-identity@*",
+    "@tool-workspace/hub-query": "workspace:*",
+    "@tool-workspace/hub-ui": "workspace:*",
     "lucide-react": "^0.561.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
