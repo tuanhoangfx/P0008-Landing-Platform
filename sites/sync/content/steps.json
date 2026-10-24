@@ -1,0 +1,194 @@
+[
+  {
+    "id": "install-open",
+    "chapter": "install",
+    "order": 1,
+    "title_vi": "Cài đặt và mở Folder Sync",
+    "body_vi": "Chạy bộ cài **Folder Sync Setup** (.exe) như mọi ứng dụng Windows — rclone đã nằm sẵn trong bộ cài. Mở Folder Sync: thanh bên trái có **Jobs**, **Drives** và **System**; màn Jobs liệt kê mọi cặp thư mục cùng trạng thái đồng bộ.",
+    "title_en": "Install and open Folder Sync",
+    "body_en": "Run the **Folder Sync Setup** (.exe) like any Windows app — rclone ships inside the installer. Open Folder Sync: the left sidebar holds **Jobs**, **Drives** and **System**; the Jobs screen lists every folder pair with its sync state.",
+    "shot": "shots/jobs-overview.webp",
+    "highlight": {
+      "x": 12.4,
+      "y": 22,
+      "w": 62.8,
+      "h": 32
+    }
+  },
+  {
+    "id": "drives-signin",
+    "chapter": "drives",
+    "order": 1,
+    "title_vi": "Đăng nhập Google Drive",
+    "body_vi": "Mở **Drives**, bấm **+ New** (hoặc **Sign in** trên một dòng). Trình duyệt mở trang đồng ý của Google; xác nhận xong, token quay về cổng cục bộ `127.0.0.1:53682` và được lưu vào `rclone.conf`. Mỗi tài khoản hiện trạng thái **Signed in**, dung lượng đã dùng / tổng và số Job đang dùng nó.",
+    "title_en": "Sign in to Google Drive",
+    "body_en": "Open **Drives** and press **+ New** (or **Sign in** on a row). Your browser shows Google's consent page; once you accept, the token returns to the local callback `127.0.0.1:53682` and is saved in `rclone.conf`. Each account shows **Signed in**, used / total storage and how many jobs use it.",
+    "shot": "shots/drives-list.webp",
+    "highlight": {
+      "x": 12.5,
+      "y": 23.2,
+      "w": 85.3,
+      "h": 14.5
+    }
+  },
+  {
+    "id": "drive-detail",
+    "chapter": "drives",
+    "order": 2,
+    "title_vi": "Xem chi tiết một tài khoản",
+    "body_vi": "Bấm vào một dòng để mở chi tiết: dung lượng trống, nút **Empty Trash** cho thùng rác Drive, giới hạn băng thông và proxy riêng cho tài khoản, danh sách Job dùng tài khoản này, cùng Note và Log.",
+    "title_en": "Open an account",
+    "body_en": "Click a row to open its detail: free space, an **Empty Trash** button for the Drive trash, a per-account bandwidth limit and proxy, the jobs that use this account, plus Note and Log.",
+    "shot": "shots/drive-detail.webp",
+    "highlight": {
+      "x": 17,
+      "y": 14.4,
+      "w": 66,
+      "h": 71.1
+    }
+  },
+  {
+    "id": "job-new",
+    "chapter": "jobs",
+    "order": 1,
+    "title_vi": "Tạo Job và chọn chiều đồng bộ",
+    "body_vi": "Trên **Jobs**, bấm **+ New**. Đặt tên, rồi chọn **Mode**: **Two-way** (rclone bisync, hai bên luôn giống nhau), **→ Remote** (đẩy từ máy lên Drive) hoặc **→ Local** (kéo từ Drive về máy). **Debounce** mặc định 20 giây; có thể chọn 1 phút, 5 phút hoặc Manual.",
+    "title_en": "Create a job and pick the direction",
+    "body_en": "On **Jobs**, press **+ New**. Name it, then pick a **Mode**: **Two-way** (rclone bisync, both sides stay identical), **→ Remote** (push PC → Drive) or **→ Local** (pull Drive → PC). **Debounce** defaults to 20 seconds; 1 minute, 5 minutes or Manual are also available.",
+    "shot": "shots/job-new.webp",
+    "highlight": {
+      "x": 58.8,
+      "y": 24.6,
+      "w": 21.9,
+      "h": 15.9
+    }
+  },
+  {
+    "id": "job-folder-pick",
+    "chapter": "jobs",
+    "order": 2,
+    "title_vi": "Chọn thư mục ngay trong hộp thoại",
+    "body_vi": "Ô **Local** và **Drive** mở một cây thư mục ngay tại chỗ: chọn tài khoản Drive, đi vào thư mục con, hoặc bấm **New folder** để tạo thư mục mới. Ô **Exclude** đã có sẵn danh sách bỏ qua như `node_modules`, `.git`, tệp khóa Office `~$*`, cache Premiere. Bấm **Create** để lưu Job.",
+    "title_en": "Pick folders inside the dialog",
+    "body_en": "The **Local** and **Drive** fields open a folder tree in place: choose the Drive account, browse into subfolders, or press **New folder** to create one. **Exclude** comes pre-filled with junk such as `node_modules`, `.git`, Office lock files `~$*` and Premiere caches. Press **Create** to save the job.",
+    "shot": "shots/job-folder-pick.webp",
+    "highlight": {
+      "x": 26.5,
+      "y": 32.8,
+      "w": 54.8,
+      "h": 34.5
+    }
+  },
+  {
+    "id": "jobs-filter",
+    "chapter": "monitor",
+    "order": 1,
+    "title_vi": "Lọc Jobs bằng thẻ KPI",
+    "body_vi": "Dải thẻ phía trên bảng đếm Job theo thời gian tạo và trạng thái — **Synced**, **Syncing**, **Failed**, **Stopped**. Bấm một thẻ để lọc bảng; bấm **Clear** để bỏ lọc. Cột **Run** bật hoặc dừng theo dõi cho từng Job.",
+    "title_en": "Filter jobs with the KPI cards",
+    "body_en": "The cards above the table count jobs by creation time and by state — **Synced**, **Syncing**, **Failed**, **Stopped**. Click a card to filter the table; **Clear** removes the filter. The **Run** column starts or stops watching for each job.",
+    "shot": "shots/jobs-kpi-filter.webp",
+    "highlight": {
+      "x": 44,
+      "y": 14.5,
+      "w": 7.5,
+      "h": 5.3
+    }
+  },
+  {
+    "id": "jobs-console",
+    "chapter": "monitor",
+    "order": 2,
+    "title_vi": "Đọc History và Console",
+    "body_vi": "Cột phải có **History** — mỗi lượt đồng bộ kèm số tệp và giờ chạy — và **Console** với log rclone trực tiếp. Lọc log bằng **All**, **SYNC**, **DIFF**, **CONF**, **SYS**; ví dụ SYNC cho thấy “Bisync successful” và số tệp đã kiểm.",
+    "title_en": "Read History and Console",
+    "body_en": "The right rail holds **History** — every sync run with its file count and time — and **Console** with the live rclone log. Filter the log with **All**, **SYNC**, **DIFF**, **CONF**, **SYS**; SYNC, for instance, shows “Bisync successful” and how many files were checked.",
+    "shot": "shots/jobs-console.webp",
+    "highlight": {
+      "x": 76.4,
+      "y": 52.4,
+      "w": 22.5,
+      "h": 46.8
+    }
+  },
+  {
+    "id": "job-detail",
+    "chapter": "detail",
+    "order": 1,
+    "title_vi": "Mở chi tiết một Job",
+    "body_vi": "Bấm vào một dòng Job: bên trái là mục lục **Job / Folders**, ở giữa là cấu hình (Mode, Debounce, Max File, Proxy, Local, Drive, Exclude), bên phải là **Note** và **Log** ghi lại mọi thay đổi. Sửa xong bấm **Save**.",
+    "title_en": "Open a job",
+    "body_en": "Click a job row: the left column navigates **Job / Folders**, the middle holds its settings (Mode, Debounce, Max File, Proxy, Local, Drive, Exclude), and the right keeps a **Note** and a **Log** of every change. Press **Save** when done.",
+    "shot": "shots/job-detail.webp",
+    "highlight": {
+      "x": 17,
+      "y": 14.4,
+      "w": 66,
+      "h": 71.1
+    }
+  },
+  {
+    "id": "job-folders",
+    "chapter": "detail",
+    "order": 2,
+    "title_vi": "So sánh cây thư mục máy ↔ Drive",
+    "body_vi": "Phần **Folders** gộp hai phía thành một cây và đếm **Synced**, **Local** (chỉ có trên máy), **Drive** (chỉ có trên Drive) và **Diff** (khác nhau). Nếu có bản xung đột `.conflict-<giờ>`, chọn giữ bản trên máy hoặc bản kia — bản bị bỏ chuyển vào thùng rác của Folder Sync.",
+    "title_en": "Compare the PC ↔ Drive tree",
+    "body_en": "**Folders** merges both sides into one tree and counts **Synced**, **Local** (PC only), **Drive** (Drive only) and **Diff** (different). If a `.conflict-<stamp>` copy exists, keep the local file or the other copy — the discarded one moves to Folder Sync's trash.",
+    "shot": "shots/job-detail-folders.webp",
+    "highlight": {
+      "x": 26.3,
+      "y": 23.4,
+      "w": 38.3,
+      "h": 66.3
+    }
+  },
+  {
+    "id": "system-host",
+    "chapter": "system",
+    "order": 1,
+    "title_vi": "Kiểm tra máy chủ đồng bộ",
+    "body_vi": "**System** cho biết rclone đang dùng (đường dẫn và phiên bản), cổng giao diện `:3009` / máy chủ `:6009` và thư mục dữ liệu. Thanh trên cùng tóm tắt “Ready rclone”, chế độ mạng và số tệp trong thùng rác.",
+    "title_en": "Check the sync host",
+    "body_en": "**System** shows which rclone is in use (path and version), the UI `:3009` / host `:6009` ports and the data folder. The top bar sums it up: “Ready rclone”, the network mode and the trash count.",
+    "shot": "shots/system-host.webp",
+    "highlight": {
+      "x": 12,
+      "y": 5.2,
+      "w": 43.1,
+      "h": 48
+    }
+  },
+  {
+    "id": "system-network",
+    "chapter": "system",
+    "order": 2,
+    "title_vi": "Giới hạn mạng và proxy",
+    "body_vi": "Trong **Network QoS & Proxy**: giới hạn **Bandwidth**, **API Rate** (lệnh/giây tới Google Drive, mặc định 8), số **Transfers** song song, và **Global Proxy** (HTTP hoặc SOCKS5). **Proxy Failover** mặc định tự chuyển về kết nối Direct khi proxy không tới được. Bấm **Test Connection** để kiểm tra.",
+    "title_en": "Network limits and proxy",
+    "body_en": "Under **Network QoS & Proxy**: cap **Bandwidth**, **API Rate** (requests per second to Google Drive, 8 by default), parallel **Transfers**, and set a **Global Proxy** (HTTP or SOCKS5). **Proxy Failover** falls back to a Direct connection when the proxy is unreachable. Press **Test Connection** to check.",
+    "shot": "shots/system-network.webp",
+    "highlight": {
+      "x": 55.6,
+      "y": 5.2,
+      "w": 43.1,
+      "h": 49.3
+    }
+  },
+  {
+    "id": "system-safety",
+    "chapter": "system",
+    "order": 3,
+    "title_vi": "Không có gì bị xoá âm thầm",
+    "body_vi": "Mọi lần xoá trên Drive đi vào **thùng rác Google Drive** (`--drive-use-trash`). Tệp bị xoá hoặc ghi đè trên máy được chuyển vào thư mục sao lưu theo mốc giờ. Khi xung đột, bản mới hơn thắng và bản còn lại được giữ với đuôi `.conflict-<giờ>`. Bản sao lưu cũ hơn 30 ngày được dọn tự động.",
+    "title_en": "Nothing is silently lost",
+    "body_en": "Every Drive delete goes to **Google Drive Trash** (`--drive-use-trash`). Files deleted or overwritten on the PC move to a timestamped backup folder. On a conflict the newer file wins and the other is kept with a `.conflict-<stamp>` suffix. Backups older than 30 days are cleaned up automatically.",
+    "shot": "shots/system-safety.webp",
+    "highlight": {
+      "x": 12,
+      "y": 55.5,
+      "w": 86.7,
+      "h": 43.1
+    }
+  }
+]

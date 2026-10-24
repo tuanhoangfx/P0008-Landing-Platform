@@ -1,3 +1,4 @@
+/** Typed uiShell from tool.manifest.json — JSON import widens literals to string. */
 import type { ToolManifestUiShell } from "@tool-workspace/hub-ui";
 import toolManifest from "../../tool.manifest.json";
 

@@ -1,10 +1,12 @@
 @import "./styles/hub-ui-styles.css";
-@import "../vendor/hub-ui/src/styles/hub-appearance.css";
-@import "./theme/p0008-hub-shell.css";
+@import "./theme/p0008-layout.css";
 
 body:has(.hub-app.theme-hub) {
   background: var(--bg);
   color: var(--text);
   overflow: hidden;
-  font-family: Inter, system-ui, sans-serif;
+}
+
+#root {
+  height: 100%;
 }

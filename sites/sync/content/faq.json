@@ -1,0 +1,38 @@
+[
+  {
+    "q": "Sửa cùng một tệp trên máy và trên Drive thì sao?",
+    "a": "Lượt đồng bộ hai chiều giữ bản **mới hơn** làm tệp chính; bản còn lại được giữ nguyên với đuôi `.conflict-<giờ>`. Mở chi tiết Job để chọn giữ bản nào — bản bị bỏ vào thùng rác của Folder Sync, không mất.",
+    "q_en": "What if I edit the same file on the PC and on Drive?",
+    "a_en": "The two-way run keeps the **newer** copy as the main file; the other is kept with a `.conflict-<stamp>` suffix. Open the job detail to choose which one to keep — the discarded copy goes to Folder Sync's trash, not away."
+  },
+  {
+    "q": "Lỡ xoá cả thư mục trên máy, Drive có bị xoá theo không?",
+    "a": "Lượt chạy sẽ xoá theo — nhưng trên Drive tệp vào **thùng rác Google Drive** (khôi phục được), còn tệp xoá trên máy vào thư mục sao lưu theo mốc giờ. Ngoài ra rclone bisync tự dừng khi một lượt định xoá quá nhiều tệp cùng lúc.",
+    "q_en": "If I delete a whole folder on my PC, does Drive lose it too?",
+    "a_en": "The run mirrors the delete — but on Drive the files land in **Google Drive Trash** (recoverable), and local deletes go to a timestamped backup folder. rclone bisync also stops on its own when a run would delete too many files at once."
+  },
+  {
+    "q": "Vì sao lưu tệp xong phải đợi 20 giây mới đồng bộ?",
+    "a": "Word, Excel, Photoshop hay trình soạn code ghi tệp tạm liên tục trong lúc lưu. Đợi thư mục yên lặng 20 giây giúp chỉ chạy một lượt gọn khi bạn đã lưu xong. Có thể đổi sang 1 phút, 5 phút hoặc Manual trong từng Job.",
+    "q_en": "Why does it wait 20 seconds after I save?",
+    "a_en": "Word, Excel, Photoshop and code editors write temp files rapidly while saving. Waiting for 20 quiet seconds means one clean run once you're done. Change it to 1 minute, 5 minutes or Manual per job."
+  },
+  {
+    "q": "Có cần tự cài rclone không?",
+    "a": "Không. Bộ cài **Folder Sync Setup** đã kèm `rclone.exe` và máy chủ đồng bộ cục bộ — cài xong là dùng được trên Windows 10/11 64-bit.",
+    "q_en": "Do I need to install rclone myself?",
+    "a_en": "No. **Folder Sync Setup** bundles `rclone.exe` and the local sync host — install it and go, on Windows 10/11 64-bit."
+  },
+  {
+    "q": "Tệp có được lưu thật trên ổ đĩa không?",
+    "a": "Có. Folder Sync giữ **bản sao đầy đủ** trên ổ đĩa — không phải kiểu tệp “tải khi mở” của Google Drive for desktop. Mở tệp không cần mạng.",
+    "q_en": "Are files really stored on my disk?",
+    "a_en": "Yes. Folder Sync keeps a **full mirror** on disk — not the files-on-demand style of Google Drive for desktop. Opening a file needs no network."
+  },
+  {
+    "q": "Đăng nhập Google Drive có an toàn không?",
+    "a": "Bạn đăng nhập trên trang của Google trong trình duyệt; Google trả token về cổng cục bộ `127.0.0.1:53682` trên chính máy bạn, và token được lưu trong `rclone.conf` trên máy. Folder Sync không gửi token đi đâu khác.",
+    "q_en": "Is the Google Drive sign-in safe?",
+    "a_en": "You sign in on Google's own page in your browser; Google returns the token to the local callback `127.0.0.1:53682` on your machine, and it is stored in `rclone.conf` locally. Folder Sync sends it nowhere else."
+  }
+]

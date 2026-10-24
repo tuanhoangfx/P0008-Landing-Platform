@@ -1,0 +1,153 @@
+{
+  "heroShot": "install-open",
+  "highlights": ["drives-signin", "job-new", "job-folder-pick", "jobs-console", "job-folders", "system-safety"],
+  "pipeline": [
+    { "chapter": "drives", "color": "#34d399" },
+    { "chapter": "jobs", "color": "#38bdf8" },
+    { "chapter": "system", "color": "#fbbf24" }
+  ],
+  "vi": {
+    "meta": {
+      "title": "Folder Sync — Đồng bộ hai chiều thư mục máy tính ↔ Google Drive trên Windows",
+      "description": "Folder Sync giữ thư mục trên máy Windows và nhiều tài khoản Google Drive luôn giống nhau: đồng bộ hai chiều bằng rclone bisync, chờ bạn lưu xong mới chạy, xoá vào thùng rác, xung đột giữ cả hai bản.",
+      "ogTitle": "Folder Sync — thư mục máy tính và Google Drive luôn giống nhau",
+      "ogDescription": "Đồng bộ hai chiều, bản sao đầy đủ trên ổ đĩa, không mất tệp."
+    },
+    "hero": {
+      "pill": "Windows · rclone bisync",
+      "title": "Thư mục trên máy và Google Drive,",
+      "titleEm": "luôn giống nhau",
+      "lead": "Ghép một thư mục trên máy với một thư mục Google Drive — Folder Sync đồng bộ hai chiều mỗi khi bạn lưu xong. Mọi tệp nằm thật trên ổ đĩa, xoá thì vào thùng rác, xung đột thì giữ cả hai bản.",
+      "primary": "Tải cho Windows",
+      "secondary": "Xem hướng dẫn",
+      "stepsSuffix": "bước"
+    },
+    "stats": [
+      { "text": "Hai chiều", "label": "rclone bisync, bản sao đầy đủ" },
+      { "count": 20, "suffix": " giây", "label": "chờ lưu xong rồi mới đồng bộ" },
+      { "text": "Nhiều Drive", "label": "mỗi Job chọn một tài khoản" },
+      { "count": 0, "label": "tệp bị xoá âm thầm" }
+    ],
+    "pipelineHead": { "eyebrow": "Cách hoạt động", "title": "Ba màn hình.", "titleEm": "Một luồng đồng bộ.", "lead": "Kết nối Drive, ghép thư mục, rồi để Folder Sync tự theo dõi — System giữ mạng và dữ liệu an toàn." },
+    "pipelineNodes": [
+      { "body": "Đăng nhập một hoặc nhiều tài khoản Google Drive; xem dung lượng và số tệp từng tài khoản.", "out": "Chọn tài khoản cho Job →" },
+      { "body": "Ghép thư mục máy ↔ Drive, chọn Two-way hoặc một chiều, đặt thời gian chờ; theo dõi History và Console.", "out": "Đồng bộ khi bạn lưu xong →" },
+      { "body": "Giới hạn băng thông, proxy tự chuyển Direct, thùng rác Drive và thư mục sao lưu theo mốc giờ.", "out": "Không mất tệp ✓" }
+    ],
+    "featuresHead": { "eyebrow": "Tính năng", "title": "Đồng bộ thật,", "titleEm": "không mất tệp.", "lead": "Những thứ Folder Sync tự lo để bạn chỉ việc làm việc trong thư mục của mình." },
+    "guideHead": { "eyebrow": "Hướng dẫn nhanh", "title": "Từ cài đặt đến", "titleEm": "Job đồng bộ đầu tiên.", "lead": "Cuộn xuống để đi qua từng màn hình — ảnh chụp từ chính ứng dụng.", "more": "Xem đủ {n} bước hướng dẫn →" },
+    "videoHead": { "eyebrow": "Video hướng dẫn", "title": "Một phút rưỡi,", "titleEm": "đủ để bắt đầu.", "lead": "Năm chương: Drives, tạo Job, theo dõi, đối chiếu, System. Có phụ đề Việt và Anh — bấm thanh thời gian để nhảy tới chương bạn cần." },
+    "faqHead": { "eyebrow": "Hỏi đáp", "title": "Câu hỏi thường gặp" },
+    "cta": { "title": "Sẵn sàng đồng bộ thư mục đầu tiên?", "body": "Bộ cài Windows 64-bit, đã kèm rclone. Kết nối Google Drive và tạo Job trong vài phút.", "primary": "Tải Folder Sync", "secondary": "Hướng dẫn cài đặt" },
+    "guidePage": {
+      "title": "Hướng dẫn sử dụng Folder Sync — từng bước, có ảnh thật",
+      "description": "Hướng dẫn Folder Sync từng bước: cài đặt, kết nối Google Drive, tạo Job đồng bộ, theo dõi, đối chiếu cây thư mục, cấu hình mạng và an toàn.",
+      "ogTitle": "Hướng dẫn sử dụng Folder Sync",
+      "eyebrow": "Hướng dẫn",
+      "stepsSuffix": "bước",
+      "h1": "Học Folder Sync",
+      "h1Em": "trong mười phút.",
+      "lead": "Sáu chương ngắn theo đúng thứ tự bạn dùng: cài đặt, Drives, tạo Job, theo dõi, đối chiếu, System.",
+      "videoEyebrow": "Video đầy đủ",
+      "videoTitle": "Xem toàn bộ trong 90 giây",
+      "videoLead": "Giọng đọc tiếng Việt, phụ đề Việt và Anh, chia chương.",
+      "stepsEyebrow": "Tất cả các bước",
+      "stepsTitle": "Toàn bộ hành trình,",
+      "stepsTitleEm": "một trang."
+    },
+    "downloadPage": {
+      "title": "Tải Folder Sync cho Windows",
+      "description": "Tải bộ cài Folder Sync mới nhất cho Windows 10/11 64-bit. Đã kèm rclone, đồng bộ hai chiều với Google Drive.",
+      "h1": "Tải Folder Sync",
+      "latest": "Bản mới nhất",
+      "primary": "Tải bộ cài (.exe)",
+      "all": "Tất cả phiên bản",
+      "note": "Bấm nút để tải. File được tải trực tiếp từ GitHub Releases.",
+      "install": [
+        { "title": "Chạy file `Folder-Sync-Setup-….exe`", "body": "Nếu Windows SmartScreen hiện cảnh báo, bấm *More info → Run anyway*." },
+        { "title": "Làm theo trình cài đặt", "body": "Chọn thư mục cài (mặc định là được) rồi bấm Install." },
+        { "title": "Mở Folder Sync", "body": "Từ Start Menu hoặc biểu tượng trên Desktop. Vào **Drives** để đăng nhập Google Drive trước, rồi tạo Job ở **Jobs**." }
+      ],
+      "reqs": [
+        { "label": "Hệ điều hành", "value": "Windows 10 / 11 · 64-bit" },
+        { "label": "Đi kèm", "value": "rclone · máy chủ đồng bộ cục bộ" },
+        { "label": "Lưu trữ", "value": "Google Drive (nhiều tài khoản)" },
+        { "label": "Dữ liệu", "value": "Bản sao đầy đủ trên ổ đĩa" }
+      ],
+      "guideLink": "Xem hướng dẫn có ảnh →"
+    },
+    "rail": { "top": "Giới thiệu", "pipeline": "Cách hoạt động", "features": "Tính năng", "guide": "Hướng dẫn", "video": "Video", "faq": "Hỏi đáp", "download": "Tải về", "chapters": "Các chương", "steps": "Tất cả các bước", "chapterSteps": "Các bước", "allChapters": "← Tất cả chương" }
+  },
+  "en": {
+    "meta": {
+      "title": "Folder Sync — Two-way PC ↔ Google Drive folder sync for Windows",
+      "description": "Folder Sync keeps folders on your Windows PC and several Google Drive accounts identical: two-way sync with rclone bisync, runs only after your save settles, deletes go to trash, conflicts keep both copies.",
+      "ogTitle": "Folder Sync — your PC folders and Google Drive, always the same",
+      "ogDescription": "Two-way sync, a full mirror on disk, no lost files."
+    },
+    "hero": {
+      "pill": "Windows · rclone bisync",
+      "title": "Your PC folders and Google Drive,",
+      "titleEm": "always the same",
+      "lead": "Pair a folder on your PC with a Google Drive folder — Folder Sync syncs both ways every time you finish saving. Every file lives on disk, deletes go to trash, and conflicts keep both copies.",
+      "primary": "Download for Windows",
+      "secondary": "Read the guide",
+      "stepsSuffix": "steps"
+    },
+    "stats": [
+      { "text": "Two-way", "label": "rclone bisync, full mirror" },
+      { "count": 20, "suffix": " s", "label": "settle time before a sync runs" },
+      { "text": "Many Drives", "label": "each job picks an account" },
+      { "count": 0, "label": "files silently deleted" }
+    ],
+    "pipelineHead": { "eyebrow": "How it works", "title": "Three screens.", "titleEm": "One sync flow.", "lead": "Connect Drive, pair folders, then let Folder Sync watch — System keeps your network and data safe." },
+    "pipelineNodes": [
+      { "body": "Sign in to one or more Google Drive accounts; see each account's storage and file counts.", "out": "Pick an account for a job →" },
+      { "body": "Pair PC ↔ Drive folders, choose Two-way or one direction, set the settle time; follow History and Console.", "out": "Syncs once your save settles →" },
+      { "body": "Bandwidth limits, proxy with Direct failover, Google Drive Trash and timestamped backup folders.", "out": "No lost files ✓" }
+    ],
+    "featuresHead": { "eyebrow": "Features", "title": "Real sync,", "titleEm": "no lost files.", "lead": "What Folder Sync takes care of, so you just work in your own folders." },
+    "guideHead": { "eyebrow": "Quick guide", "title": "From install to", "titleEm": "your first sync job.", "lead": "Scroll to walk through each screen — every screenshot comes from the app itself.", "more": "See all {n} steps →" },
+    "videoHead": { "eyebrow": "Video tutorial", "title": "Ninety seconds,", "titleEm": "enough to start.", "lead": "Five chapters: Drives, new job, monitor, compare, System. Vietnamese narration with Vietnamese and English subtitles — click the timeline to jump to a chapter." },
+    "faqHead": { "eyebrow": "FAQ", "title": "Frequently asked questions" },
+    "cta": { "title": "Ready to sync your first folder?", "body": "Windows 64-bit installer with rclone included. Connect Google Drive and create a job in minutes.", "primary": "Download Folder Sync", "secondary": "Install guide" },
+    "guidePage": {
+      "title": "Folder Sync guide — step by step, with real screenshots",
+      "description": "Step-by-step Folder Sync guide: install, connect Google Drive, create a sync job, monitor, compare folder trees, set up network and safety.",
+      "ogTitle": "Folder Sync guide",
+      "eyebrow": "Guide",
+      "stepsSuffix": "steps",
+      "h1": "Learn Folder Sync",
+      "h1Em": "in ten minutes.",
+      "lead": "Six short chapters in the order you'll use them: install, Drives, new job, monitor, compare, System.",
+      "videoEyebrow": "Full video",
+      "videoTitle": "The whole tour in 90 seconds",
+      "videoLead": "Vietnamese narration, Vietnamese and English subtitles, with chapters.",
+      "stepsEyebrow": "All steps",
+      "stepsTitle": "The whole journey,",
+      "stepsTitleEm": "on one page."
+    },
+    "downloadPage": {
+      "title": "Download Folder Sync for Windows",
+      "description": "Get the latest Folder Sync installer for Windows 10/11 64-bit. rclone included, two-way sync with Google Drive.",
+      "h1": "Download Folder Sync",
+      "latest": "Latest release",
+      "primary": "Download installer (.exe)",
+      "all": "All versions",
+      "note": "The file downloads straight from GitHub Releases.",
+      "install": [
+        { "title": "Run `Folder-Sync-Setup-….exe`", "body": "If Windows SmartScreen warns you, click *More info → Run anyway*." },
+        { "title": "Follow the installer", "body": "Pick a folder (the default is fine) and click Install." },
+        { "title": "Open Folder Sync", "body": "From the Start Menu or the desktop icon. Sign in to Google Drive under **Drives** first, then create a job under **Jobs**." }
+      ],
+      "reqs": [
+        { "label": "System", "value": "Windows 10 / 11 · 64-bit" },
+        { "label": "Included", "value": "rclone · local sync host" },
+        { "label": "Storage", "value": "Google Drive (several accounts)" },
+        { "label": "Data", "value": "Full mirror on disk" }
+      ],
+      "guideLink": "See the illustrated guide →"
+    },
+    "rail": { "top": "Overview", "pipeline": "How it works", "features": "Features", "guide": "Guide", "video": "Video", "faq": "FAQ", "download": "Download", "chapters": "Chapters", "steps": "All steps", "chapterSteps": "Steps", "allChapters": "← All chapters" }
+  }
+}

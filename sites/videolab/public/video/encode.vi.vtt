@@ -1,0 +1,29 @@
+WEBVTT
+
+1
+00:00:00.350 --> 00:00:05.264
+Chương ba: Encode — đưa mọi clip về cùng một chuẩn để đăng lên mạng xã hội.
+
+2
+00:00:06.317 --> 00:00:10.264
+Với Encode, bấm New và chọn các clip cần chuẩn hoá.
+
+3
+00:00:14.518 --> 00:00:21.826
+Ở cột Setting, chọn profile — ví dụ video dọc 9:16 — số luồng chạy song song, và thư mục lưu.
+
+4
+00:00:24.226 --> 00:00:25.661
+Bấm Start.
+
+5
+00:00:25.611 --> 00:00:31.083
+Nếu máy có card đồ hoạ, Video Lab tự dùng GPU để mã hoá nhanh hơn nhiều lần.
+
+6
+00:00:32.184 --> 00:00:37.759
+Khi xong, Video Lab báo kết quả và hỏi bạn muốn mở thư mục hay ở lại màn hình Encode.
+
+7
+00:00:49.297 --> 00:00:53.987
+Tất cả clip giờ có cùng một chuẩn, ghép với nhau sẽ không còn bị đứng hình.

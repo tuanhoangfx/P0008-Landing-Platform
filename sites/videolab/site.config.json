@@ -1,0 +1,36 @@
+{
+  "$schema": "../../engine/site.schema.json",
+  "id": "videolab",
+  "name": "Video Lab",
+  "product": "P0010",
+  "registryKey": "P0010-SITE",
+  "template": "product-guide",
+  "origin": "https://videolab.infi.io.vn",
+  "base": "/intro/",
+  "langs": [
+    "vi",
+    "en"
+  ],
+  "legacyRootPaths": [
+    "guide",
+    "download"
+  ],
+  "devPort": 3108,
+  "appVersionFrom": "Tool/P0010-Video-Lab/package.json",
+  "releases": {
+    "repo": "tuanhoangfx/Video-Lab-Releases",
+    "asset": "Setup.*\\.exe$"
+  },
+  "copy": {
+    "vi": {
+      "heroAlt": "Video Lab — màn hình Mixer",
+      "footNote": "Mixer và Encode chạy hoàn toàn trên máy của bạn — video không rời khỏi ổ đĩa.",
+      "downloadNote": "Bộ cài Windows 64-bit"
+    },
+    "en": {
+      "heroAlt": "Video Lab — Mixer screen",
+      "footNote": "Mixer and Encode run entirely on your machine — your videos never leave the disk.",
+      "downloadNote": "Windows 64-bit installer"
+    }
+  }
+}

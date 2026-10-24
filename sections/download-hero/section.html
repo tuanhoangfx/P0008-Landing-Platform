@@ -1,0 +1,16 @@
+<section class="page-hero page-hero--center">
+  <div class="hero__aura" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap wrap--narrow">
+    <img src="/favicon.svg" width="88" height="88" alt="" class="dl__logo" data-hero-item>
+    <h1 data-split>{{c.downloadPage.h1}}</h1>
+    <p class="hero__lead" data-hero-item data-dl-status>{{c.downloadPage.latest}} <b data-release-tag>{{releaseTag}}</b> · <span data-release-size>{{releaseSize}}</span></p>
+    <div class="hero__cta hero__cta--center" data-hero-item>
+      <a class="btn btn--primary btn--lg" href="{{releaseUrl}}" data-dl-link data-magnetic>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>{{c.downloadPage.primary}}</span>
+      </a>
+      <a class="btn btn--ghost btn--lg" href="{{releasesPage}}" rel="noopener">{{c.downloadPage.all}}</a>
+    </div>
+    <p class="muted small" data-hero-item>{{c.downloadPage.note}}</p>
+  </div>
+</section>

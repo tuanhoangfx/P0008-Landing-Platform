@@ -1,0 +1,117 @@
+{
+  "voice": "vi-VN-HoaiMyNeural",
+  "rate": "+6%",
+  "captionFix": {
+    "chín trên mười sáu": "9:16",
+    "ten-eighty": "1080p",
+    "videolab chấm infi chấm io chấm v n": "videolab.infi.io.vn",
+    "hơn ba trăm giọng": "hơn 300 giọng"
+  },
+  "intro": {
+    "kicker": "Video hướng dẫn",
+    "title": "Video Lab",
+    "sub": "Dựng cảnh · Ghép hàng loạt · Chuẩn hoá — trong một cửa sổ",
+    "say": "Chào bạn! Đây là Video Lab — ứng dụng gom cả dây chuyền làm video vào một cửa sổ. Trong vài phút tới, mình sẽ đi qua từng màn hình: Studio, Mixer và Encode."
+  },
+  "chapters": {
+    "install": {
+      "say": "Đầu tiên, mở Video Lab sau khi cài đặt."
+    },
+    "studio": {
+      "say": "Chương một: Studio — biến ảnh và kịch bản thành video có giọng đọc."
+    },
+    "mixer": {
+      "say": "Chương hai: Mixer — ghép Intro, Main và Outro thành hàng loạt video."
+    },
+    "encode": {
+      "say": "Chương ba: Encode — đưa mọi clip về cùng một chuẩn để đăng lên mạng xã hội."
+    },
+    "system": {
+      "say": "Cuối cùng là màn hình Hệ thống."
+    }
+  },
+  "scenes": {
+    "install-open": {
+      "label": "Mở Video Lab",
+      "say": "Bên trái là thanh điều hướng với ba màn hình chính. Mỗi màn hình đều chia làm hai: vùng làm việc lớn ở giữa, và cột cài đặt ở bên phải."
+    },
+    "studio-output-settings": {
+      "label": "Cài đặt đầu ra",
+      "say": "Mở Settings để chọn khung hình. Ở đây mình chọn chín trên mười sáu cho video dọc, và chế độ Fit để thời lượng ảnh tự khớp với giọng đọc."
+    },
+    "studio-images": {
+      "label": "Thêm ảnh vào thư viện",
+      "say": "Bấm Upload để đưa ảnh vào thư viện. Video Lab nhận ảnh PNG, JPG và WebP, bạn cũng có thể chọn cả một thư mục."
+    },
+    "studio-keyframe": {
+      "label": "Đưa ảnh lên timeline",
+      "say": "Chọn tất cả ảnh rồi bấm Add to Keyframe. Mỗi ảnh trở thành một cảnh trên timeline, theo đúng thứ tự."
+    },
+    "studio-script": {
+      "label": "Dán kịch bản",
+      "say": "Dán kịch bản vào khung Script. Video Lab tự đếm số từ và ước lượng thời gian đọc cho bạn."
+    },
+    "studio-voice": {
+      "label": "Chọn giọng đọc",
+      "say": "Tìm và chọn giọng đọc. Có hơn ba trăm giọng ở nhiều ngôn ngữ — ở đây là giọng tiếng Việt Hoài My."
+    },
+    "studio-export": {
+      "label": "Xuất video",
+      "say": "Bấm Export. Video Lab tạo giọng đọc, ghép ảnh theo từng cảnh và xuất ra một file MP4 hoàn chỉnh."
+    },
+    "mixer-add-inputs": {
+      "label": "Thêm Intro · Main · Outro",
+      "say": "Sang Mixer, bấm New. Lần lượt chọn các clip Intro, Outro và Main — mỗi nhóm một tab."
+    },
+    "mixer-inputs": {
+      "label": "Clip đã được kiểm tra",
+      "say": "Lưu lại. Video Lab đọc ngay độ dài, độ phân giải và định dạng của từng clip."
+    },
+    "mixer-settings": {
+      "label": "Chọn cách ghép",
+      "say": "Ở cột Setting, chọn cách ghép: theo thứ tự hay ngẫu nhiên, mỗi video có mấy clip Main, tổng cộng bao nhiêu video, và chạy song song mấy luồng."
+    },
+    "mixer-running": {
+      "label": "Bấm Start",
+      "say": "Bấm Start. Các video được ghép song song, tiến độ từng dòng hiện ngay trên bảng Output."
+    },
+    "mixer-done": {
+      "label": "Video đã sẵn sàng",
+      "say": "Xong! Mỗi dòng là một video hoàn chỉnh. Lịch sử chạy được lưu ở khung History, còn chi tiết kỹ thuật nằm trong Console."
+    },
+    "mixer-output-detail": {
+      "label": "Xem chi tiết một video",
+      "say": "Bấm vào một dòng để xem chi tiết: các clip đã dùng, cách ghép và thời gian xử lý của video đó."
+    },
+    "encode-queue": {
+      "label": "Đưa clip vào Encode",
+      "say": "Với Encode, bấm New và chọn các clip cần chuẩn hoá."
+    },
+    "encode-settings": {
+      "label": "Chọn profile",
+      "say": "Ở cột Setting, chọn profile — ví dụ video dọc chín trên mười sáu — số luồng chạy song song, và thư mục lưu."
+    },
+    "encode-running": {
+      "label": "Bắt đầu chuẩn hoá",
+      "say": "Bấm Start. Nếu máy có card đồ hoạ, Video Lab tự dùng GPU để mã hoá nhanh hơn nhiều lần."
+    },
+    "encode-done": {
+      "label": "Encode hoàn tất",
+      "say": "Khi xong, Video Lab báo kết quả và hỏi bạn muốn mở thư mục hay ở lại màn hình Encode."
+    },
+    "encode-results": {
+      "label": "Kết quả Encode",
+      "say": "Tất cả clip giờ có cùng một chuẩn, ghép với nhau sẽ không còn bị đứng hình."
+    },
+    "system": {
+      "label": "Trạng thái hệ thống",
+      "say": "Màn hình Hệ thống cho biết worker, FFmpeg và bộ mã hoá phần cứng có đang hoạt động hay không — rất tiện khi cần kiểm tra."
+    }
+  },
+  "outro": {
+    "kicker": "Bắt đầu ngay",
+    "title": "videolab.infi.io.vn",
+    "sub": "Tải bộ cài Windows và xem hướng dẫn chi tiết từng bước",
+    "say": "Vậy là xong! Tải Video Lab và xem hướng dẫn chi tiết tại videolab chấm infi chấm io chấm v n. Chúc bạn làm video thật nhanh!"
+  }
+}

@@ -1,0 +1,169 @@
+WEBVTT
+
+1
+00:00:00.350 --> 00:00:01.679
+Chào bạn!
+
+2
+00:00:01.629 --> 00:00:06.665
+Đây là Video Lab — ứng dụng gom cả dây chuyền làm video vào một cửa sổ.
+
+3
+00:00:06.665 --> 00:00:12.313
+Trong vài phút tới, mình sẽ đi qua từng màn hình: Studio, Mixer và Encode.
+
+4
+00:00:13.426 --> 00:00:16.866
+Đầu tiên, mở Video Lab sau khi cài đặt.
+
+5
+00:00:17.928 --> 00:00:21.215
+Bên trái là thanh điều hướng với ba màn hình chính.
+
+6
+00:00:21.165 --> 00:00:26.684
+Mỗi màn hình đều chia làm hai: vùng làm việc lớn ở giữa, và cột cài đặt ở bên phải.
+
+7
+00:00:27.795 --> 00:00:32.485
+Chương một: Studio — biến ảnh và kịch bản thành video có giọng đọc.
+
+8
+00:00:33.561 --> 00:00:36.069
+Mở Settings để chọn khung hình.
+
+9
+00:00:36.019 --> 00:00:41.939
+Ở đây mình chọn 9:16 cho video dọc, và chế độ Fit để thời lượng ảnh tự khớp với giọng đọc.
+
+10
+00:00:43.061 --> 00:00:46.041
+Bấm Upload để đưa ảnh vào thư viện.
+
+11
+00:00:45.991 --> 00:00:51.840
+Video Lab nhận ảnh PNG, JPG và WebP, bạn cũng có thể chọn cả một thư mục.
+
+12
+00:00:52.939 --> 00:00:56.002
+Chọn tất cả ảnh rồi bấm Add to Keyframe.
+
+13
+00:00:55.952 --> 00:00:59.772
+Mỗi ảnh trở thành một cảnh trên timeline, theo đúng thứ tự.
+
+14
+00:01:00.873 --> 00:01:03.240
+Dán kịch bản vào khung Script.
+
+15
+00:01:03.190 --> 00:01:07.235
+Video Lab tự đếm số từ và ước lượng thời gian đọc cho bạn.
+
+16
+00:01:08.351 --> 00:01:10.376
+Tìm và chọn giọng đọc.
+
+17
+00:01:10.326 --> 00:01:14.842
+Có hơn 300 giọng ở nhiều ngôn ngữ — ở đây là giọng tiếng Việt Hoài My.
+
+18
+00:01:16.073 --> 00:01:17.626
+Bấm Export.
+
+19
+00:01:17.576 --> 00:01:23.343
+Video Lab tạo giọng đọc, ghép ảnh theo từng cảnh và xuất ra một file MP4 hoàn chỉnh.
+
+20
+00:01:24.463 --> 00:01:29.731
+Chương hai: Mixer — ghép Intro, Main và Outro thành hàng loạt video.
+
+21
+00:01:30.803 --> 00:01:33.194
+Sang Mixer, bấm New.
+
+22
+00:01:33.144 --> 00:01:37.825
+Lần lượt chọn các clip Intro, Outro và Main — mỗi nhóm một tab.
+
+23
+00:01:47.070 --> 00:01:48.387
+Lưu lại.
+
+24
+00:01:48.337 --> 00:01:52.972
+Video Lab đọc ngay độ dài, độ phân giải và định dạng của từng clip.
+
+25
+00:01:54.068 --> 00:02:02.850
+Ở cột Setting, chọn cách ghép: theo thứ tự hay ngẫu nhiên, mỗi video có mấy clip Main, tổng cộng bao nhiêu video, và chạy song song mấy luồng.
+
+26
+00:02:11.987 --> 00:02:13.422
+Bấm Start.
+
+27
+00:02:13.372 --> 00:02:18.007
+Các video được ghép song song, tiến độ từng dòng hiện ngay trên bảng Output.
+
+28
+00:02:19.105 --> 00:02:20.187
+Xong!
+
+29
+00:02:20.137 --> 00:02:22.908
+Mỗi dòng là một video hoàn chỉnh.
+
+30
+00:02:22.908 --> 00:02:27.943
+Lịch sử chạy được lưu ở khung History, còn chi tiết kỹ thuật nằm trong Console.
+
+31
+00:02:29.072 --> 00:02:35.106
+Bấm vào một dòng để xem chi tiết: các clip đã dùng, cách ghép và thời gian xử lý của video đó.
+
+32
+00:02:36.172 --> 00:02:41.086
+Chương ba: Encode — đưa mọi clip về cùng một chuẩn để đăng lên mạng xã hội.
+
+33
+00:02:42.139 --> 00:02:46.086
+Với Encode, bấm New và chọn các clip cần chuẩn hoá.
+
+34
+00:02:50.340 --> 00:02:57.648
+Ở cột Setting, chọn profile — ví dụ video dọc 9:16 — số luồng chạy song song, và thư mục lưu.
+
+35
+00:03:00.048 --> 00:03:01.483
+Bấm Start.
+
+36
+00:03:01.433 --> 00:03:06.905
+Nếu máy có card đồ hoạ, Video Lab tự dùng GPU để mã hoá nhanh hơn nhiều lần.
+
+37
+00:03:08.006 --> 00:03:13.581
+Khi xong, Video Lab báo kết quả và hỏi bạn muốn mở thư mục hay ở lại màn hình Encode.
+
+38
+00:03:25.119 --> 00:03:29.809
+Tất cả clip giờ có cùng một chuẩn, ghép với nhau sẽ không còn bị đứng hình.
+
+39
+00:03:30.869 --> 00:03:33.295
+Cuối cùng là màn hình Hệ thống.
+
+40
+00:03:34.370 --> 00:03:41.312
+Màn hình Hệ thống cho biết worker, FFmpeg và bộ mã hoá phần cứng có đang hoạt động hay không — rất tiện khi cần kiểm tra.
+
+41
+00:03:42.376 --> 00:03:44.000
+Vậy là xong!
+
+42
+00:03:43.950 --> 00:03:51.273
+Tải Video Lab và xem hướng dẫn chi tiết tại videolab.infi.io.vn. Chúc bạn làm video thật nhanh!

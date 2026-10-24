@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.350 --> 00:00:05.618
+Chương hai: Mixer — ghép Intro, Main và Outro thành hàng loạt video.
+
+2
+00:00:06.690 --> 00:00:09.081
+Sang Mixer, bấm New.
+
+3
+00:00:09.031 --> 00:00:13.712
+Lần lượt chọn các clip Intro, Outro và Main — mỗi nhóm một tab.
+
+4
+00:00:22.957 --> 00:00:24.274
+Lưu lại.
+
+5
+00:00:24.224 --> 00:00:28.859
+Video Lab đọc ngay độ dài, độ phân giải và định dạng của từng clip.
+
+6
+00:00:29.955 --> 00:00:38.737
+Ở cột Setting, chọn cách ghép: theo thứ tự hay ngẫu nhiên, mỗi video có mấy clip Main, tổng cộng bao nhiêu video, và chạy song song mấy luồng.
+
+7
+00:00:47.874 --> 00:00:49.309
+Bấm Start.
+
+8
+00:00:49.259 --> 00:00:53.894
+Các video được ghép song song, tiến độ từng dòng hiện ngay trên bảng Output.
+
+9
+00:00:54.992 --> 00:00:56.074
+Xong!
+
+10
+00:00:56.024 --> 00:00:58.795
+Mỗi dòng là một video hoàn chỉnh.
+
+11
+00:00:58.795 --> 00:01:03.830
+Lịch sử chạy được lưu ở khung History, còn chi tiết kỹ thuật nằm trong Console.
+
+12
+00:01:04.959 --> 00:01:10.993
+Bấm vào một dòng để xem chi tiết: các clip đã dùng, cách ghép và thời gian xử lý của video đó.

@@ -11,73 +11,16 @@
   "type": "Web",
   "owner": "Tool",
   "status": "Active",
-  "summary": "Multi-template landing host at ldp.infi.io.vn — admin on /, public pages at /001, /002, …",
+  "summary": "One static-site engine for every product landing + step-by-step guide (sites/<id>/). ldp.infi.io.vn is the Hub-UI admin of the library: Templates · Sections · Sites · System (read-only, catalog.json built from the files).",
   "stack": [
-    "React",
-    "TypeScript",
     "Vite",
-    "Tailwind CSS",
-    "@tool-workspace/hub-ui"
+    "React",
+    "Hub-UI",
+    "GSAP",
+    "Lenis",
+    "Node"
   ],
-  "uiShell": {
-    "golden": "P0020",
-    "mainMode": "directory",
-    "splitScreens": []
-  },
-  "uiScreens": [
-    {
-      "screen": "overview",
-      "template": "document-toc",
-      "golden": "P0004/overview-toc",
-      "notes": "Architecture + quick links with left TOC rail"
-    },
-    {
-      "screen": "pages",
-      "template": "directory",
-      "golden": "P0004/users",
-      "notes": "Landing pages registry directory"
-    },
-    {
-      "screen": "templates",
-      "template": "directory",
-      "golden": "P0004/users",
-      "notes": "Landing template registry directory"
-    }
-  ],
-  "commands": {
-    "dev": "pnpm dev",
-    "build": "pnpm build",
-    "preview": "pnpm preview",
-    "mirror:assets": "node scripts/mirror-landing-assets.mjs --slug 001"
-  },
   "deployTarget": "lenovo-static",
-  "dependsOn": [],
-  "siteProfiles": {
-    "ldp": {
-      "defaultPath": "/",
-      "domain": "ldp.infi.io.vn",
-      "screens": [
-        {
-          "native": "admin",
-          "path": "/"
-        },
-        {
-          "native": "pages",
-          "path": "/pages"
-        },
-        {
-          "native": "templates",
-          "path": "/templates"
-        },
-        {
-          "native": "landing",
-          "path": "/001",
-          "pathCode": "001",
-          "template": "mie-hair-cod-v1"
-        }
-      ]
-    }
-  },
   "github": {
     "repo": "tuanhoangfx/P0008-Landing-Platform",
     "branch": "main",
@@ -85,106 +28,103 @@
   },
   "urls": {
     "local": "http://127.0.0.1:3008",
-    "admin": "https://ldp.infi.io.vn/",
-    "landing001": "https://ldp.infi.io.vn/001",
-    "preview": "https://ldp.infi.io.vn",
-    "prodProbe": "https://ldp.infi.io.vn",
-    "app": "https://ldp.infi.io.vn"
+    "app": "https://ldp.infi.io.vn",
+    "prodProbe": "https://ldp.infi.io.vn/"
   },
-  "vercelEnvValidation": {
-    "requiredKeys": [
-      "LDP_SUPABASE_URL",
-      "LDP_SUPABASE_SERVICE_ROLE"
-    ],
-    "optionalKeys": [
-      "TOC_SUPABASE_URL",
-      "TOC_SUPABASE_SERVICE_ROLE",
-      "TOC_CRM_USER_ID"
-    ],
-    "deployTarget": "lenovo-static",
-    "shipScript": "node ../scripts/deploy-lenovo-static.mjs --code P0008",
-    "syncScript": null,
-    "notes": "Prod bundle gates probe urls.app (Lenovo). Vercel env sync deprecated. Prefer prodEnvValidation."
+  "health": {
+    "status": "Active",
+    "note": "ldp.infi.io.vn = Hub-UI admin (public read-only catalog, ?screen= routes) + /preview/ section renders; sites deploy under their own <CODE>-SITE keys."
   },
   "docs": {
     "readme": "README.md",
     "changelog": "CHANGELOG.md",
-    "architecture": "docs/LDP-ARCHITECTURE.md"
+    "agents": "AGENTS.md",
+    "ssot": "docs/LANDING-PLATFORM-SSOT.md"
   },
   "release": {
-    "version": "0.2.2",
+    "version": "2.1.0",
     "readiness": [
       "build",
-      "admin-shell",
-      "public-001",
-      "landing-order-api"
-    ],
-    "latestPublished": {
-      "tag": "v0.2.2",
-      "url": "https://github.com/tuanhoangfx/P0008-Landing-Platform/releases/tag/v0.2.2",
-      "publishedAt": "2026-08-17T20:08:57.905Z"
-    }
+      "audit-sites",
+      "gate"
+    ]
   },
-  "manifestUpdatedAt": "2026-08-17T20:08:57.905Z",
   "ship": {
     "schemaVersion": 1,
     "fastPath": "Push",
     "releasePath": "Release",
     "deployTarget": "lenovo-static",
     "playbook": "Tool/docs/playbooks/release-fast-path.md",
-    "script": "powershell -File E:\\Dev\\Tool\\scripts\\ship-product.ps1",
+    "script": "powershell -File E:DevToolscriptsship-product.ps1",
     "preShip": [
-      "check-version-sync"
+      "build-if-dist-stale"
+    ]
+  },
+  "sites": {
+    "engine": "engine/",
+    "templates": [
+      "product-guide"
     ],
-    "preShipCommands": {
-      "check-version-sync": "node E:\\Dev\\Tool\\scripts\\check-version-sync.mjs --product-root . --no-warn-published"
+    "registry": "sites/<id>/site.config.json",
+    "gate": "node Tool/P0008-Landing-Platform/scripts/audit-sites.mjs"
+  },
+  "versions": {
+    "current": "2.1.0"
+  },
+  "manifestUpdatedAt": "2026-10-24T02:11:41.920Z",
+  "commands": {
+    "dev": "pnpm dev",
+    "build": "pnpm build:home",
+    "typecheck": "pnpm typecheck"
+  },
+  "uiShell": {
+    "golden": "P0020",
+    "userFooter": "workspace",
+    "splitScreens": [
+      "templates",
+      "sections",
+      "sites"
+    ]
+  },
+  "uiScreens": [
+    {
+      "screen": "templates",
+      "label": "Templates",
+      "route": "/?screen=templates",
+      "template": "directory",
+      "layout": "split-workspace",
+      "golden": "P0024/places",
+      "notes": "Directory + rail: page → section chain of the selected template."
     },
-    "syncedAt": "2026-08-16T23:20:31.816Z"
-  },
-  "deploy": {
-    "target": "lenovo-static",
-    "domain": "ldp.infi.io.vn",
-    "ship": "node ../scripts/deploy-lenovo-static.mjs --code P0008",
-    "pnpm": "ship:lenovo",
-    "playbook": "Tool/docs/playbooks/_cards/deploy-ssot.md",
-    "notes": "Prod = CF Tunnel → Lenovo nginx. Env baked at local build (.env.shared). git push does NOT deploy. vercelLegacy = archive only."
-  },
-  "prodEnvValidation": {
-    "requiredKeys": [
-      "LDP_SUPABASE_URL",
-      "LDP_SUPABASE_SERVICE_ROLE"
-    ],
-    "optionalKeys": [
-      "TOC_SUPABASE_URL",
-      "TOC_SUPABASE_SERVICE_ROLE",
-      "TOC_CRM_USER_ID"
-    ],
-    "deployTarget": "lenovo-static",
-    "shipScript": "node ../scripts/deploy-lenovo-static.mjs --code P0008",
-    "syncScript": null,
-    "notes": "Canonical prod bundle/env gate — probes urls.app (Lenovo). vercelEnvValidation is legacy alias.",
-    "schemaVersion": 1
-  },
-  "vercelLegacy": {
-    "project": "p0008-landing-platform",
-    "productionUrl": "https://ldp.infi.io.vn",
-    "customDomains": [
-      "ldp.infi.io.vn"
-    ],
-    "dnsRequired": "A ldp.infi.io.vn 76.76.21.21",
-    "productionBranch": "main",
-    "team": "tuan-hoangs-projects-ad21fb52",
-    "notes": "ARCHIVED — Vercel 402-paused. Prod = CF Tunnel → Lenovo nginx (lenovo-static). git push does NOT deploy. Deploy: ship-product.ps1 -Keyword Deploy (or pnpm run ship:lenovo). Do not use this block for hosting.",
-    "projectId": "prj_3jEmdg7sfMtkXPeOGgeZ7WiQWqsQ",
-    "previewUrl": "https://ldp.infi.io.vn",
-    "customDomain": "https://ldp.infi.io.vn",
-    "teamId": "team_L9Vj1YDi9IbNjOZO5nZADaPb",
-    "deployHookUrl": "https://api.vercel.com/v1/integrations/deploy/prj_3jEmdg7sfMtkXPeOGgeZ7WiQWqsQ/oqRfFQZYWq",
-    "deployHookName": "ship-production",
-    "migratedAt": "2026-08-03T08:20:50.375Z",
-    "migratedFromTeam": "tuanhoangfxs-projects",
-    "retiredAt": "2026-08-06T18:38:14.702Z",
-    "legacy": true,
-    "status": "archived-402-paused"
+    {
+      "screen": "sections",
+      "label": "Sections",
+      "route": "/?screen=sections",
+      "template": "directory",
+      "layout": "split-workspace",
+      "golden": "P0024/places",
+      "notes": "Directory grouped by group + rail with the live engine preview iframe (/preview/…)."
+    },
+    {
+      "screen": "sites",
+      "label": "Sites",
+      "route": "/?screen=sites",
+      "template": "directory",
+      "layout": "split-workspace",
+      "golden": "P0024/places",
+      "notes": "Directory of sites/<id> + rail with og image and language URLs."
+    },
+    {
+      "screen": "system",
+      "label": "System",
+      "route": "/?screen=system",
+      "template": "system-params",
+      "golden": "P0002/system",
+      "notes": "HubSystemParamsScreen + Platform section + empty Design Template."
+    }
+  ],
+  "auth": {
+    "tier": "exempt",
+    "note": "Public read-only catalog (same tier as P0022/P0024 in hub-login-auth card). No data plane, no writes."
   }
 }

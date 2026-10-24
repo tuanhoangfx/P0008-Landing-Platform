@@ -1,0 +1,83 @@
+[
+  {
+    "id": "stream-copy-mix",
+    "icon": "zap",
+    "title_vi": "Ghép siêu nhanh bằng stream copy",
+    "body_vi": "Prefight đọc “dấu vân tay” giải mã của từng clip; nếu cùng một cụm, Mixer ghép bằng −c copy, không encode lại.",
+    "title_en": "Instant joins with stream copy",
+    "body_en": "Prefight fingerprints every clip's decoder config; when they share one cluster, Mixer joins them with −c copy — no re-encode.",
+    "source": "worker/pipeline/fingerprint_split.py · POST /jobs/preflight"
+  },
+  {
+    "id": "unified-vs-split",
+    "icon": "git-merge",
+    "title_vi": "Unified mix hoặc chia nhóm",
+    "body_vi": "Clip lệch độ phân giải/FPS được đồng bộ lại trong một lượt Unified mix, hoặc Encode trước rồi ghép copy — bạn chọn trong hộp thoại Encode.",
+    "title_en": "Unified mix or split by cluster",
+    "body_en": "Mismatched clips are rematched in one unified mix, or encoded first and then copy-joined — you choose in the Encode prompt.",
+    "source": "skip_cluster_split · src/features/mixer/MixSplitEncodeModal.tsx"
+  },
+  {
+    "id": "hardware-encoder",
+    "icon": "cpu",
+    "title_vi": "Tự nhận GPU encoder",
+    "body_vi": "Worker thử NVENC, Quick Sync và AMF bằng một lần encode mẫu và dùng bộ mã hoá phần cứng chạy được, nếu không thì quay về x264.",
+    "title_en": "Hardware encoder detection",
+    "body_en": "The worker test-encodes with NVENC, Quick Sync and AMF and uses whichever hardware encoder works, falling back to x264.",
+    "source": "worker/pipeline/concat_job.py · _hw_encoder_for"
+  },
+  {
+    "id": "lab-pin",
+    "icon": "pin",
+    "title_vi": "Encode một lần, dùng lại mãi",
+    "body_vi": "Video đã encode theo profile được ghim (lab pin); lần ghép sau Mixer dùng lại bằng stream copy thay vì encode lại.",
+    "title_en": "Encode once, reuse forever",
+    "body_en": "Clips encoded to a profile are pinned (lab pin), so later mixes reuse them via stream copy instead of re-encoding.",
+    "source": "src/lib/encode-lab-pin.ts · encode_reuse_paths"
+  },
+  {
+    "id": "parallel-workers",
+    "icon": "layers",
+    "title_vi": "Chạy song song nhiều worker",
+    "body_vi": "Đặt 1–8 luồng Concurrent cho Mixer và Encode; bảng Outputs hiện tiến độ, thời gian chờ và thời gian xử lý của từng video.",
+    "title_en": "Parallel workers",
+    "body_en": "Run 1–8 concurrent slots for Mixer and Encode; the Outputs table shows progress, queue wait and processing time per video.",
+    "source": "parallel_workers · docs/worker-api.md"
+  },
+  {
+    "id": "mix-modes",
+    "icon": "shuffle",
+    "title_vi": "Sequential / Random cho từng nhóm",
+    "body_vi": "Chọn thứ tự Main, Intro, Outro riêng, số clip Main mỗi video và tổng số video — tạo hàng loạt biến thể từ một bộ clip.",
+    "title_en": "Sequential or Random per group",
+    "body_en": "Set Main, Intro and Outro order separately, Main clips per video and the total count — batch out variants from one clip set.",
+    "source": "src/features/mixer/MixerSettingRail.tsx"
+  },
+  {
+    "id": "tts-voices",
+    "icon": "mic",
+    "title_vi": "322 giọng đọc AI",
+    "body_vi": "Studio có 322 giọng (gồm tiếng Việt Hoài My, Nam Minh), nghe thử ngay và chỉnh tốc độ đọc.",
+    "title_en": "322 AI voices",
+    "body_en": "Studio ships 322 voices (including Vietnamese Hoài My and Nam Minh) with instant preview and speed control.",
+    "source": "worker/data/edge-voices-catalog.json"
+  },
+  {
+    "id": "keyframe-scenes",
+    "icon": "film",
+    "title_vi": "Dựng cảnh trên Keyframe",
+    "body_vi": "Mỗi ảnh là một cảnh với Transition, Effect và Duration; chế độ Image, Script hoặc Fit quyết định thời lượng video theo ảnh hay theo giọng đọc.",
+    "title_en": "Keyframe scenes",
+    "body_en": "Each image is a scene with Transition, Effect and Duration; Image, Script or Fit mode sets video length by images or by narration.",
+    "source": "src/studio/components/studio/KeyframeTimeline.tsx"
+  },
+  {
+    "id": "encode-profiles",
+    "icon": "monitor",
+    "title_vi": "Profile xuất chuẩn mạng xã hội",
+    "body_vi": "Vertical 9:16, Landscape 16:9, Square 1:1, bản 4K hoặc Keep source; Fit (pad) hoặc Stretch, lưu cạnh file gốc hoặc thư mục riêng.",
+    "title_en": "Upload-ready encode profiles",
+    "body_en": "Vertical 9:16, Landscape 16:9, Square 1:1, 4K variants or Keep source; Fit (pad) or Stretch, saved beside the source or to a custom folder.",
+    "source": "src/lib/encode-preset.ts · EncodeSettingRail.tsx"
+  }
+]

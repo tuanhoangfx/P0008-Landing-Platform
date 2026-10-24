@@ -1,0 +1,74 @@
+[
+  {
+    "id": "two-way-mirror",
+    "icon": "shuffle",
+    "title_vi": "Đồng bộ hai chiều, bản sao đầy đủ",
+    "body_vi": "Chế độ **Two-way** chạy `rclone bisync`: sửa ở máy hay trên Drive đều sang bên kia, và mọi tệp nằm thật trên ổ đĩa — không phải tệp tải theo yêu cầu. Cần một chiều thì chọn **→ Remote** hoặc **→ Local**.",
+    "title_en": "Two-way, full mirror",
+    "body_en": "**Two-way** runs `rclone bisync`: edits on the PC or on Drive reach the other side, and every file lives on disk — not files-on-demand. Need one direction? Pick **→ Remote** or **→ Local**.",
+    "source": "host/rclone-ops.mjs buildSyncArgs"
+  },
+  {
+    "id": "settle-watcher",
+    "icon": "timeline",
+    "title_vi": "Chờ bạn lưu xong rồi mới đồng bộ",
+    "body_vi": "Folder Sync theo dõi thư mục trên máy và quét thay đổi trên Drive; khi thư mục yên lặng đủ thời gian chờ (20 giây, 1 phút, 5 phút hoặc thủ công) mới chạy một lượt — không đồng bộ dở lúc đang lưu.",
+    "title_en": "Waits until your save settles",
+    "body_en": "Folder Sync watches the local folder and polls Drive for changes; a run starts only after the folder has been quiet for the settle time (20 s, 1 min, 5 min or manual) — never halfway through a save.",
+    "source": "host/job-watch.mjs WATCH_SETTLE_MS · settleMsFromJob"
+  },
+  {
+    "id": "zero-loss",
+    "icon": "shield",
+    "title_vi": "Không mất tệp",
+    "body_vi": "Xoá trên Drive đi vào thùng rác Google Drive, xoá hoặc ghi đè trên máy vào thư mục sao lưu theo mốc giờ. Xung đột giữ cả hai bản (`.conflict-<giờ>`) và giải quyết bằng một cú bấm.",
+    "title_en": "No lost files",
+    "body_en": "Drive deletes go to Google Drive Trash; local deletes and overwrites go to a timestamped backup folder. Conflicts keep both copies (`.conflict-<stamp>`) and resolve in one click.",
+    "source": "--drive-use-trash · --backup-dir1 · --conflict-resolve newer · host/conflict-files.mjs"
+  },
+  {
+    "id": "self-heal",
+    "icon": "bolt",
+    "title_vi": "Tự gỡ kẹt",
+    "body_vi": "Tệp khoá `.lck` do một lượt chạy đã chết để lại được dọn trước khi chạy lại; nếu rclone mất danh sách đối chiếu, Folder Sync tự chạy lại một lần với `--resync`.",
+    "title_en": "Unsticks itself",
+    "body_en": "A stale `.lck` lock left by a dead run is cleared before the next pass; if rclone loses its comparison listings, Folder Sync retries once with `--resync`.",
+    "source": "host/bisync-lock.mjs · bisyncNeedsResync"
+  },
+  {
+    "id": "multi-drive",
+    "icon": "layers",
+    "title_vi": "Nhiều tài khoản Drive",
+    "body_vi": "Kết nối bao nhiêu tài khoản Google Drive cũng được; mỗi tài khoản có dung lượng, số tệp, băng thông và proxy riêng, và mỗi Job chọn tài khoản của nó.",
+    "title_en": "Many Drive accounts",
+    "body_en": "Connect as many Google Drive accounts as you need; each has its own storage, file counts, bandwidth and proxy, and every job picks its account.",
+    "source": "host/drive-oauth.mjs · drive-inventory.mjs"
+  },
+  {
+    "id": "network-qos",
+    "icon": "gauge",
+    "title_vi": "Không chiếm hết mạng",
+    "body_vi": "Giới hạn băng thông, số lệnh/giây tới Google Drive và số tệp truyền song song. Proxy HTTP/SOCKS5 tự chuyển về kết nối Direct khi proxy không tới được.",
+    "title_en": "Doesn't hog your network",
+    "body_en": "Cap bandwidth, requests per second to Google Drive and parallel transfers. An HTTP/SOCKS5 proxy falls back to a Direct connection when it can't be reached.",
+    "source": "host/network-qos.mjs"
+  },
+  {
+    "id": "junk-excludes",
+    "icon": "copy",
+    "title_vi": "Bỏ qua tệp rác sẵn",
+    "body_vi": "Danh sách loại trừ mặc định bỏ `node_modules`, `.git`, `dist`, tệp khoá Office `~$*`, tệp tạm và cache Premiere — sửa được cho từng Job.",
+    "title_en": "Skips junk out of the box",
+    "body_en": "The default exclude list skips `node_modules`, `.git`, `dist`, Office lock files `~$*`, temp files and Premiere caches — editable per job.",
+    "source": "host/job-watch.mjs DEFAULT_JOB_EXCLUDES"
+  },
+  {
+    "id": "bundled-rclone",
+    "icon": "cpu",
+    "title_vi": "Cài là chạy",
+    "body_vi": "Bộ cài Windows đã kèm `rclone.exe` — không cần cài công cụ dòng lệnh nào khác.",
+    "title_en": "Install and go",
+    "body_en": "The Windows installer bundles `rclone.exe` — no command-line tool to install separately.",
+    "source": "package.json build.extraResources resources/rclone"
+  }
+]

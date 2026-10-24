@@ -1,0 +1,57 @@
+[
+  {
+    "id": "install",
+    "order": 0,
+    "color": "#a78bfa",
+    "title_vi": "Cài đặt",
+    "kicker_vi": "Bắt đầu",
+    "summary_vi": "Tải bộ cài Windows, mở Video Lab và làm quen bố cục 3 màn hình chính.",
+    "title_en": "Install",
+    "summary_en": "Download the Windows installer, open Video Lab and learn the three-screen layout.",
+    "kicker_en": "Get started"
+  },
+  {
+    "id": "studio",
+    "order": 1,
+    "color": "#34d399",
+    "title_vi": "Studio",
+    "kicker_vi": "Dựng cảnh",
+    "summary_vi": "Biến ảnh và kịch bản thành video có giọng đọc: thư viện ảnh, giọng TTS, nhạc nền và timeline keyframe.",
+    "title_en": "Studio",
+    "summary_en": "Turn images and a script into a narrated video: image library, TTS voices, background music and a keyframe timeline.",
+    "kicker_en": "Build scenes"
+  },
+  {
+    "id": "mixer",
+    "order": 2,
+    "color": "#818cf8",
+    "title_vi": "Mixer",
+    "kicker_vi": "Ghép hàng loạt",
+    "summary_vi": "Ghép Intro + Main + Outro thành hàng loạt video hoàn chỉnh, chạy song song nhiều luồng FFmpeg.",
+    "title_en": "Mixer",
+    "summary_en": "Batch-join Intro + Main + Outro into finished videos, with several FFmpeg workers in parallel.",
+    "kicker_en": "Batch join"
+  },
+  {
+    "id": "encode",
+    "order": 3,
+    "color": "#fbbf24",
+    "title_vi": "Encode",
+    "kicker_vi": "Chuẩn hoá",
+    "summary_vi": "Đưa mọi clip về cùng một profile tải lên — dọc, ngang, vuông hay 4K — để ghép không lỗi hình.",
+    "title_en": "Encode",
+    "summary_en": "Normalise every clip to one upload profile — vertical, landscape, square or 4K — so joins never glitch.",
+    "kicker_en": "Normalise"
+  },
+  {
+    "id": "system",
+    "order": 4,
+    "color": "#38bdf8",
+    "title_vi": "Hệ thống",
+    "kicker_vi": "Kiểm tra",
+    "summary_vi": "Xem trạng thái worker, FFmpeg và bộ mã hoá phần cứng khi cần chẩn đoán.",
+    "title_en": "System",
+    "summary_en": "Check the worker, FFmpeg and hardware encoder status when something needs diagnosing.",
+    "kicker_en": "Check"
+  }
+]

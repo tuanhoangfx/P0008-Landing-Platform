@@ -1,36 +1,25 @@
 /**
- * P0008 Landing Platform version clock — hub-ui `resolveHubProductVersionMeta` SSOT
- * (card: hub-version-clock-ssot).
+ * P0008 version clock — hub-ui `resolveHubProductVersionMeta` SSOT (card: hub-version-clock-ssot).
  */
-import {
-  formatTabHeaderTimestamp,
-  resolveHubProductVersionMeta,
-  type AppVersionReleaseMeta,
-  type ToolManifestReleaseSlice,
-} from "@tool-workspace/hub-ui";
-import { APP_VERSION } from "./app-meta";
+import { resolveHubProductVersionMeta, type ToolManifestReleaseSlice } from "@tool-workspace/hub-ui";
 import toolManifest from "../../tool.manifest.json";
+import { APP_VERSION, LDP_PRODUCT } from "./app-meta";
 
-function readBuiltAtIso(): string | undefined {
+export function readBuiltAtIso(): string | undefined {
   const raw = import.meta.env.VITE_APP_BUILT_AT;
   return typeof raw === "string" && raw.trim() ? raw.trim() : undefined;
 }
 
-export function landingHostVersionMeta() {
+export function ldpHostVersionMeta() {
   return resolveHubProductVersionMeta({
     appVersion: APP_VERSION,
-    releaseNotesCode: "P0008",
+    releaseNotesCode: LDP_PRODUCT.code,
     manifest: toolManifest as ToolManifestReleaseSlice,
     builtAtIso: readBuiltAtIso(),
   });
 }
 
-/** HUB_SHELL_SCAFFOLD — thin re-export; logic lives in hub-ui SSOT. */
-export function resolveAppVersionReleaseMetaFromManifest(): AppVersionReleaseMeta {
-  const meta = landingHostVersionMeta();
-  return {
-    shortLabel: meta.publishedAt ? formatTabHeaderTimestamp(meta.publishedAt) : "—",
-    live: meta.live,
-    publishedAt: meta.publishedAt,
-  };
+export function resolveAppVersionReleaseMeta() {
+  const meta = ldpHostVersionMeta();
+  return { publishedAt: meta.publishedAt, live: meta.live };
 }

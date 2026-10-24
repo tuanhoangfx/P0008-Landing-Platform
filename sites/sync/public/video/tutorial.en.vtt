@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.350 --> 00:00:05.240
+Step 1: Open the Drives tab in the left navigation bar and click New or Sign in on any account row.
+
+2
+00:00:05.370 --> 00:00:11.320
+Complete the Google OAuth consent in your browser, where local port 53682 securely captures your token.
+
+3
+00:00:11.450 --> 00:00:16.410
+Folder Sync then automatically indexes your Google Drive storage quota, folder count, and file inventory.
+
+4
+00:00:18.350 --> 00:00:23.040
+Step 2: Switch to the Jobs tab and click the New button to configure a new synchronization job.
+
+5
+00:00:23.170 --> 00:00:29.080
+Select Two-Way Bisync mode, then pick your local computer folder and Google Drive target folder directly from the inline tree.
+
+6
+00:00:29.210 --> 00:00:34.410
+Set the Debounce quiet window to 20 seconds so active file saves finish cleanly before transfer begins.
+
+7
+00:00:36.350 --> 00:00:41.710
+Step 3: Monitor all active jobs inside the 7-to-3 split workspace with an interactive 8-card KPI strip.
+
+8
+00:00:41.840 --> 00:00:47.370
+Click any KPI card to filter by Synced, Syncing, or Failed states, and toggle 24/7 watchers with one click.
+
+9
+00:00:47.500 --> 00:00:52.390
+On the right rail, inspect completed Run History passes and live rclone console logs filtered by category.
+
+10
+00:00:54.350 --> 00:00:59.240
+Step 4: Click any job row to open the Layout 3 Detail Modal and switch to the Folders comparison tree.
+
+11
+00:00:59.370 --> 00:01:05.460
+Compare Local PC and Google Drive subfolders side by side with real-time Synced, Local-only, Drive-only, and Diff badges.
+
+12
+00:01:05.590 --> 00:01:10.410
+If a simultaneous edit creates a conflict file, resolve it in one click while keeping a safe backup copy.
+
+13
+00:01:12.350 --> 00:01:17.470
+Step 5: Open the System tab to fine-tune bandwidth caps, Google API rate limits, and parallel transfer threads.
+
+14
+00:01:17.600 --> 00:01:23.400
+Configure an HTTP or SOCKS5 proxy with automatic Direct failover so your sync jobs never stall if a proxy drops.
+
+15
+00:01:23.530 --> 00:01:28.430
+Every deletion is protected by Google Drive Trash, timestamped local backups, and a 10 percent mass-delete circuit breaker.

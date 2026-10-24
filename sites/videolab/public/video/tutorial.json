@@ -1,0 +1,199 @@
+{
+  "at": "2026-10-23T18:25:42.650Z",
+  "duration": 232.026668,
+  "chapters": [
+    {
+      "start": 0,
+      "text": "Giới thiệu"
+    },
+    {
+      "start": 13.076,
+      "text": "Cài đặt"
+    },
+    {
+      "start": 27.444667,
+      "text": "Studio"
+    },
+    {
+      "start": 84.113334,
+      "text": "Mixer"
+    },
+    {
+      "start": 155.822001,
+      "text": "Encode"
+    },
+    {
+      "start": 210.518668,
+      "text": "Hệ thống"
+    },
+    {
+      "start": 222.025668,
+      "text": "Tải về"
+    }
+  ],
+  "perChapter": {
+    "install": 14.368666999999999,
+    "studio": 56.668667,
+    "mixer": 71.70866699999999,
+    "encode": 54.696667,
+    "system": 11.507
+  },
+  "segments": [
+    {
+      "kind": "intro",
+      "id": "intro",
+      "dur": 13.08,
+      "speedup": 1
+    },
+    {
+      "kind": "chapter",
+      "id": "install",
+      "dur": 4.5,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "install-open",
+      "dur": 9.87,
+      "speedup": 1
+    },
+    {
+      "kind": "chapter",
+      "id": "studio",
+      "dur": 5.77,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "studio-output-settings",
+      "dur": 9.5,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "studio-images",
+      "dur": 9.88,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "studio-keyframe",
+      "dur": 7.93,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "studio-script",
+      "dur": 7.48,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "studio-voice",
+      "dur": 7.72,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "studio-export",
+      "dur": 8.39,
+      "speedup": 6.93
+    },
+    {
+      "kind": "chapter",
+      "id": "mixer",
+      "dur": 6.34,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "mixer-add-inputs",
+      "dur": 16.27,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "mixer-inputs",
+      "dur": 7,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "mixer-settings",
+      "dur": 17.92,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "mixer-running",
+      "dur": 7.12,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "mixer-done",
+      "dur": 9.97,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "mixer-output-detail",
+      "dur": 7.1,
+      "speedup": 1
+    },
+    {
+      "kind": "chapter",
+      "id": "encode",
+      "dur": 5.97,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "encode-queue",
+      "dur": 8.2,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "encode-settings",
+      "dur": 9.71,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "encode-running",
+      "dur": 7.96,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "encode-done",
+      "dur": 17.11,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "encode-results",
+      "dur": 5.75,
+      "speedup": 1
+    },
+    {
+      "kind": "chapter",
+      "id": "system",
+      "dur": 3.5,
+      "speedup": 1
+    },
+    {
+      "kind": "scene",
+      "id": "system",
+      "dur": 8.01,
+      "speedup": 1
+    },
+    {
+      "kind": "outro",
+      "id": "outro",
+      "dur": 10,
+      "speedup": 1
+    }
+  ]
+}

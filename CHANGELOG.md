@@ -1,136 +1,30 @@
 # Changelog
 
-## 2026-08-18 - Patch bump for completed agent task
+## 2026-10-24 - Hub-UI admin for ldp.infi.io.vn
 
-- Version: `0.2.2`
-- Timestamp: 2026-08-18 02:37 (UTC+7)
-- Type: Patch
-- Status: Verified
-- Release: https://ldp.infi.io.vn
-
-### Changes
-
-- Automatic patch bump after completed P0008 task.
-
-### Verification
-
-- pending
-
----
-## 2026-08-15 - P0008 Git backup
-
-- Version: `0.2.1`
-- Timestamp: 2026-08-15 21:52 (UTC+7)
-- Type: Patch
-- Status: Verified
-- Release: https://ldp.infi.io.vn
-
-### Changes
-
-- Git/Commit Minor bump (P0008): 0.1.5 → 0.2.1 (MINOR+1, PATCH=1).
-
-### Verification
-
-- pending
-
----
-# Changelog — P0008 Landing Platform
-
-## 2026-08-03 — Overview TOC + TabScreenChrome HubTabScreenBody SSOT
-
-- Version: `0.1.5`
-- Timestamp: 2026-08-03 15:13 (UTC+7)
-- Type: Patch
-- Status: Committed
-
-### Changes
-
-- Overview: `OverviewTocNav` + document-toc grid (P0024 golden); `TabScreenChrome` wraps `HubTabScreenBody`.
-- Shell CSS: `p0008-hub-shell.css` (chrome bleed SSOT); class `p0008-hub-app` / `p0008-hub-main`.
-- Tooling: `hub-shell.css.tpl`, `restore-p0008-admin-shell.mjs`, `Fix P0008 theo P0020` in fix-hub-shell.
-
----
-
-## 2026-08-03 — Re-clone admin shell P0020 SSOT
-
-- Version: `0.1.4`
-- Type: Patch
-- Status: Verified
-
-### Changes
-
-- Force re-scaffold: `sync-hub-shell P0008 --force --with-tab-header`; restore pages/templates nav + dual-zone routes.
-- Shell parity P0024: `hubMainShellClassFromManifest`, chrome-bleed CSS (`p0008-landing-hub-shell.css`), `p0008-ui-shell.ts`.
-- Overview: `HubTabScreenBody` + grid layout SSOT; sidebar DisplayPrefs + identity restored.
-
-### Verification
-
-- `node scripts/build.mjs` — pass
-- `hub-ui-preflight --code P0008` — pass
-- Stealth CDP `/`, `/pages`, `/templates` — pass
-
----
-
-## 2026-08-03 — Directory table body-only SSOT + row smoke
-
-- Version: `0.1.3`
-- Type: Patch
-- Status: Verified
-
-### Changes
-
-- Fix empty tbody on Pages/Templates: remove split-pane `wrapClassName` on body-only `HubDirectoryTableShell`.
-- Fix Pages tab crash: unique `colClass` per column in `page-column-meta.ts` (duplicate `hub-users-col--meta`).
-- Gates: `verify-directory-body-only-wrap.mjs` + preflight step; CDP row assert on `/pages` and `/templates` smoke.
-
-### Verification
-
-- `verify-directory-body-only-wrap --code P0008` — pass
-- `hub-ui-preflight --code P0008` — pass
-- Stealth shell-only `/templates` CDP rows — pass
-
----
-
-## 2026-08-03 — Hub SSOT gate + re-scaffold admin
-
-- Version: `0.1.2`
-- Type: Patch
-- Status: Verified
-
-### Changes
-
-- SSOT pipeline: P0008 auto-registered in hub-ui-preflight/parity/css/gates via `uiShell.golden` manifest.
-- Re-scaffold admin shell (`sync-hub-shell --force`); directory search SSOT hooks; version meta from hub-ui.
-- Playbook: `Tool/docs/playbooks/hub-dual-zone-landing.md`.
-
-### Verification
-
-- `node scripts/build.mjs` — pass
-- `hub-ui-preflight --code P0008` — pass
-- Stealth shell-only profile 9990 — pass
-
----
-
-## 2026-08-03 — Hub-UI admin shell (P0020 golden)
-
-- Version: `0.1.1`
-- Timestamp: 2026-08-03 02:12 (UTC+7)
+- Version: `2.1.0`
 - Type: Minor
-- Status: Ready
+- Timestamp: 2026-10-24T02:37:18.113Z
+- Status: Verified
 
 ### Changes
 
-- Admin console migrated to Hub-UI SSOT (P0020 golden): sidebar, hub header, footer, main chrome.
-- Pages + Templates tabs use `HubDirectoryScreen` + `HubDirectoryTableShell` directory tables.
-- Overview tab uses `HubTabChrome` + `HubTabScreenBody`.
-- Public landing `/001` unchanged (isolated CSS, no hub theme bleed).
+- ldp.infi.io.vn is now a read-only Hub-UI management app (P0022/P0024 shell SSOT): sidebar, tab header with Session + version chip + Notify · Log · Settings, workspace footer, boot orb, display prefs.
+- Screens Templates · Sections · Sites as split directories (FilterBar, KPI, table/cards, right rail); Sections rail shows the live engine preview; Templates rail shows the page → section chain; Sites rail shows og image + language URLs.
+- System screen: shared HubSystemParamsScreen + Platform section + empty Design Template.
+- engine/catalog.mjs writes dist/catalog.json (derived from the files) instead of a hand-styled HTML page; preview sample = the most complete site on the template.
+- scripts/build-home.mjs builds catalog → release notes → admin into one dist/ with the app-version meta.
 
-### Verification
+## 2026-10-24 - Landing Platform v2
 
-- `node scripts/build.mjs` — pass
-- Stealth pool 9990: `/`, `/pages`, `/001` — pass
-- `agent-verify-gate --code P0008` — pass (light profile)
+- Version: `2.0.0`
+- Type: Major
+- Status: Verified
 
----
+### Changes
 
-- Version: 0.1.0 — Initial Landing Platform: admin at `/`, public Mie Hair landing at `/001`, template `mie-hair-cod-v1` migrated from P0014. Domain target: `ldp.infi.io.vn`.
+- Replaced the v1 React COD landing + admin (removed; backup `Tool/.trash/P0008-Landing-Platform-2026-10-24.tgz`) with a static multi-site engine.
+- Engine extracted from the P0010 Video Lab site: build-time rendering, guided tour, section rail, ⌘K search, VI/EN with Cloudflare-trace default language, screencast tutorial recorder.
+- Template `product-guide`: one HTML per page for every language; product copy in `content/landing.json`.
+- First site `videolab` (P0010-SITE → videolab.infi.io.vn/intro/); ldp.infi.io.vn now lists all sites.
+- Gate `scripts/audit-sites.mjs`; scaffold `scripts/new-site.mjs`.

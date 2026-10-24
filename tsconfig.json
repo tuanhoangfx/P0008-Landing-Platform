@@ -2,29 +2,56 @@
   "compilerOptions": {
     "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "allowJs": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2022"
+    ],
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@tool-workspace/hub-ui": ["vendor/hub-ui/src/index.ts"],
-      "@tool-workspace/hub-ui/*": ["vendor/hub-ui/src/*"],
-      "@tool-workspace/hub-identity": ["vendor/hub-identity/src/index.ts"],
-      "@tool-workspace/hub-identity/*": ["vendor/hub-identity/src/*"],
-      "@tool-workspace/hub-query": ["vendor/hub-query/src/index.ts"],
-      "@tool-workspace/hub-query/*": ["vendor/hub-query/src/*"]
-    }
+      "@tool-workspace/hub-ui": [
+        "../../packages/hub-ui/src/index.ts"
+      ],
+      "@tool-workspace/hub-ui/*": [
+        "../../packages/hub-ui/src/*"
+      ],
+      "@tool-workspace/hub-identity": [
+        "../../packages/hub-identity/src/index.ts"
+      ],
+      "@tool-workspace/hub-identity/*": [
+        "../../packages/hub-identity/src/*"
+      ],
+      "react": [
+        "../../packages/hub-ui/node_modules/@types/react"
+      ],
+      "react/*": [
+        "../../packages/hub-ui/node_modules/@types/react/*"
+      ],
+      "react-dom": [
+        "../../packages/hub-ui/node_modules/@types/react-dom"
+      ],
+      "react-dom/*": [
+        "../../packages/hub-ui/node_modules/@types/react-dom/*"
+      ],
+      "lucide-react": [
+        "../../packages/hub-ui/node_modules/lucide-react"
+      ]
+    },
+    "allowJs": true,
+    "checkJs": false,
+    "types": [
+      "vite/client"
+    ]
   },
-  "include": ["src", "vite.config.ts"]
+  "include": [
+    "src"
+  ]
 }

@@ -5,26 +5,17 @@
   "name": "Landing Platform",
   "deployTarget": "lenovo-static",
   "release": {
-    "version": "0.2.2",
+    "version": "2.1.0",
     "readiness": [
       "build",
-      "admin-shell",
-      "public-001",
-      "landing-order-api"
-    ],
-    "latestPublished": {
-      "tag": "v0.2.2",
-      "url": "https://github.com/tuanhoangfx/P0008-Landing-Platform/releases/tag/v0.2.2",
-      "publishedAt": "2026-08-17T20:08:57.905Z"
-    }
+      "audit-sites",
+      "gate"
+    ]
   },
   "urls": {
     "local": "http://127.0.0.1:3008",
-    "admin": "https://ldp.infi.io.vn/",
-    "landing001": "https://ldp.infi.io.vn/001",
-    "preview": "https://ldp.infi.io.vn",
-    "prodProbe": "https://ldp.infi.io.vn",
-    "app": "https://ldp.infi.io.vn"
+    "app": "https://ldp.infi.io.vn",
+    "prodProbe": "https://ldp.infi.io.vn/"
   },
-  "manifestUpdatedAt": "2026-08-17T20:08:57.905Z"
+  "manifestUpdatedAt": "2026-10-24T02:11:41.920Z"
 }

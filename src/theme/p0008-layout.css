@@ -1,0 +1,520 @@
+/*
+ * P0008 Landing Platform admin — tab layout override (skill p00xx-clone-hub-shell § "{tool}-layout.css").
+ * Shell gutter = P0002/P0024 split family (frame 0.75rem, header bleed 1.5rem). Split grid/pane/rail classes
+ * come from hub-ui `hub-profile-split-layout.css`; this file only extends its flex chain to P0008 screen ids.
+ */
+
+/* ---------------------------------------------------------------- shell gutter */
+.ldp-hub-app {
+  --ldp-chrome-bleed: var(--app-tab-header-px, 1.5rem);
+  --ldp-frame-gutter: 0.75rem;
+}
+
+.ldp-hub-app .app-tab-header {
+  margin-left: calc(-1 * var(--ldp-chrome-bleed));
+  margin-right: calc(-1 * var(--ldp-chrome-bleed));
+  padding-left: var(--ldp-chrome-bleed);
+  padding-right: var(--ldp-chrome-bleed);
+}
+
+.ldp-hub-app .hub-chrome-sticky {
+  margin-left: calc(-1 * var(--ldp-chrome-bleed));
+  margin-right: calc(-1 * var(--ldp-chrome-bleed));
+}
+
+.ldp-hub-app .hub-chrome-sticky > .px-6 {
+  padding-left: var(--ldp-chrome-bleed);
+  padding-right: var(--ldp-chrome-bleed);
+}
+
+.ldp-hub-app main.ldp-hub-main {
+  padding: 0 var(--ldp-frame-gutter) var(--ldp-frame-gutter);
+}
+
+/* Split tabs + System: panes own their scroll; main never scrolls. */
+.ldp-hub-app main.ldp-hub-main.hub-main--templates,
+.ldp-hub-app main.ldp-hub-main.hub-main--sections,
+.ldp-hub-app main.ldp-hub-main.hub-main--sites,
+.ldp-hub-app main.ldp-hub-main.hub-main--system {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Flush header to pane (P0003 Profiles / P0024 Places parity). */
+.ldp-hub-app .hub-main--templates .app-tab-header,
+.ldp-hub-app .hub-main--sections .app-tab-header,
+.ldp-hub-app .hub-main--sites .app-tab-header {
+  margin-bottom: 0;
+  border-bottom-width: 0;
+}
+
+/* ---------------------------------------------------------------- split flex chain (hub-profile-split-layout parity) */
+.hub-main--templates > div:not([hidden]),
+.hub-main--templates .hub-tab-chrome-stack,
+.hub-main--templates .hub-tab-content-zone,
+.hub-main--templates .hub-tab-body-zone--split,
+.hub-main--templates .ldp-workspace__body,
+.hub-main--sections > div:not([hidden]),
+.hub-main--sections .hub-tab-chrome-stack,
+.hub-main--sections .hub-tab-content-zone,
+.hub-main--sections .hub-tab-body-zone--split,
+.hub-main--sections .ldp-workspace__body,
+.hub-main--sites > div:not([hidden]),
+.hub-main--sites .hub-tab-chrome-stack,
+.hub-main--sites .hub-tab-content-zone,
+.hub-main--sites .hub-tab-body-zone--split,
+.hub-main--sites .ldp-workspace__body {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.hub-main--templates .stealth-profile-layout,
+.hub-main--sections .stealth-profile-layout,
+.hub-main--sites .stealth-profile-layout {
+  display: grid;
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.hub-main--templates .hub-tab-content-zone,
+.hub-main--sections .hub-tab-content-zone,
+.hub-main--sites .hub-tab-content-zone {
+  margin-top: 0;
+}
+
+/* Sections rail holds a live 1440px render — give it more room than the default 30rem. */
+.ldp-split-layout--wide-rail {
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 40%);
+}
+
+/* Single-line rows (P0024 parity) + active row = the one shown in the rail. */
+.ldp-directory-frame table.ldp-directory-table td,
+.ldp-directory-frame table.ldp-directory-table th {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.ldp-directory-frame table.ldp-directory-table tr.ldp-row--active > td {
+  background: rgb(56 189 248 / 0.08);
+}
+
+.ldp-directory-frame table.ldp-directory-table tr.ldp-row--active > td:first-child {
+  box-shadow: inset 2px 0 0 rgb(56 189 248 / 0.7);
+}
+
+.ldp-directory-frame .hub-split-directory-pane__filters {
+  overflow: visible;
+  position: relative;
+  z-index: 3;
+}
+
+/* ---------------------------------------------------------------- rail */
+.ldp-rail {
+  min-height: 0;
+}
+
+/* hub-profile-split-layout gives rail panes flex:0 0 auto (workflow slot) — the P0008 rail is one full-height pane. */
+.stealth-workflow-rail.ldp-rail > .hub-split-directory-pane.ldp-rail__frame {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.ldp-rail__frame .hub-split-directory-pane__body {
+  padding: 0;
+  min-height: 0;
+  flex: 1 1 0;
+}
+
+.ldp-rail__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: var(--hub-control-h, 31px);
+}
+
+.ldp-rail__title {
+  display: flex;
+  align-items: center;
+  gap: var(--hub-inline-gap-name, 8px);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ldp-rail__subtitle {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ldp-rail__actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.ldp-rail__scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 0;
+  flex: 1 1 0;
+  overflow-y: auto;
+  padding: 0.75rem;
+}
+
+.ldp-rail__empty {
+  padding: 1rem;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.ldp-rail__section {
+  border: 1px solid rgb(255 255 255 / 0.05);
+  border-radius: 0.75rem;
+  background: rgb(255 255 255 / 0.015);
+  padding: 0.6rem 0.75rem;
+}
+
+.ldp-rail__section-title {
+  margin: 0 0 0.45rem;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ldp-rail__text {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.ldp-rail__facts {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  font-size: 12px;
+}
+
+.ldp-rail__fact {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.ldp-rail__fact dt {
+  color: var(--muted);
+}
+
+.ldp-rail__fact dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--text);
+}
+
+.ldp-hub-app code {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 11px;
+  color: #bae6fd;
+}
+
+.ldp-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ldp-chip {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  color: var(--muted);
+}
+
+.ldp-chip--accent {
+  border-color: rgb(56 189 248 / 0.35);
+  color: #bae6fd;
+}
+
+.ldp-link {
+  font-size: 12px;
+  color: #7dd3fc;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.ldp-link:hover {
+  text-decoration: underline;
+}
+
+.ldp-cmd {
+  display: block;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.5rem;
+  background: rgb(0 0 0 / 0.25);
+  border: 1px solid rgb(255 255 255 / 0.05);
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.ldp-cmd + .ldp-cmd {
+  margin-top: 6px;
+}
+
+.ldp-lang-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ldp-lang-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* Live preview (scaled 1440px engine render) */
+.ldp-scaled-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(255 255 255 / 0.06);
+  background: #07080f;
+}
+
+.ldp-scaled-frame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+  transform-origin: 0 0;
+  background: #07080f;
+}
+
+.ldp-scaled-frame[data-inert] iframe {
+  pointer-events: none;
+}
+
+.ldp-preview {
+  flex: 0 0 auto;
+  height: clamp(16rem, 46vh, 30rem);
+}
+
+.ldp-og {
+  display: block;
+  flex: 0 0 auto;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.06);
+}
+
+.ldp-og img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+  background: #0c0f1c;
+}
+
+/* Template page → section chain */
+.ldp-chain {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ldp-chain__page {
+  border-radius: 0.6rem;
+  background: rgb(0 0 0 / 0.18);
+  padding: 0.5rem 0.6rem;
+}
+
+.ldp-chain__rel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.ldp-chain__count {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.ldp-chain__sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ldp-chain__section {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  padding: 2px 8px 2px 3px;
+  border-radius: 999px;
+  border: 1px solid rgb(52 211 153 / 0.3);
+  background: transparent;
+  color: #a7f3d0;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.ldp-chain__section:hover,
+.ldp-chain__section:focus-visible {
+  background: rgb(52 211 153 / 0.12);
+  outline: none;
+}
+
+.ldp-chain__step {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: rgb(52 211 153 / 0.18);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Cards */
+.ldp-section-card__frame {
+  aspect-ratio: 16 / 10;
+  margin-bottom: 0.6rem;
+}
+
+.ldp-site-card__og {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+  border-radius: 0.6rem;
+  margin-bottom: 0.6rem;
+  background: #0c0f1c;
+}
+
+/* System → Platform cards */
+.ldp-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 0.75rem;
+}
+
+.ldp-info-card {
+  border: 1px solid rgb(255 255 255 / 0.06);
+  border-radius: 0.75rem;
+  background: var(--panel);
+  padding: 0.7rem 0.85rem;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.ldp-info-card__title {
+  margin: 0 0 0.4rem;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ldp-info-card__body p {
+  margin: 0.4rem 0 0;
+  line-height: 1.55;
+}
+
+.ldp-info-card__body ul {
+  margin: 0;
+  padding-left: 1rem;
+  line-height: 1.7;
+}
+
+.ldp-catalog-error {
+  margin: 2rem auto;
+  max-width: 36rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgb(248 113 113 / 0.35);
+  background: rgb(127 29 29 / 0.15);
+  color: var(--text);
+}
+
+.ldp-catalog-error h2 {
+  margin: 0 0 0.4rem;
+  font-size: 14px;
+}
+
+/* ---------------------------------------------------------------- workspace footer (P0022 strip) */
+.ldp-workspace-footer {
+  position: relative;
+  z-index: 4;
+  min-height: 2.5rem;
+  font-size: var(--hub-table-body-size, 12px);
+  line-height: var(--hub-table-body-line-height, 1.45);
+  border-top: 1px solid rgb(255 255 255 / 0.04);
+}
+
+.ldp-workspace-footer__row {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 1.15rem;
+  padding: 0.35rem 1rem;
+}
+
+.ldp-workspace-footer__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--hub-muted, var(--muted));
+  white-space: nowrap;
+}
+
+.ldp-workspace-footer__chip svg {
+  flex-shrink: 0;
+}
+
+.ldp-og[data-missing] {
+  position: relative;
+}
+
+.ldp-og[data-missing]::after {
+  content: attr(data-missing);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}

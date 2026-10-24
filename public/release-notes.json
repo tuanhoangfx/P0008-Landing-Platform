@@ -1,34 +1,47 @@
 {
-  "generatedAt": "2026-08-17T20:08:58.061Z",
+  "generatedAt": "2026-10-24T03:05:11.891Z",
   "entries": [
     {
-      "version": "0.2.2",
-      "date": "2026-08-18",
-      "at": "2026-08-18T02:37:00+07:00",
-      "title": "Patch bump for completed agent task",
+      "version": "2.1.0",
+      "date": "2026-10-24",
+      "at": "2026-10-24T02:37:18.113Z",
+      "title": "Hub-UI admin for ldp.infi.io.vn",
       "bullets": [
-        "Automatic patch bump after completed P0008 task."
+        "ldp.infi.io.vn is now a read-only Hub-UI management app (P0022/P0024 shell SSOT): sidebar, tab header with Session + version chip + Notify · Log · Settings, workspace footer, boot orb, display prefs.",
+        "Screens Templates · Sections · Sites as split directories (FilterBar, KPI, table/cards, right rail); Sections rail shows the live engine preview; Templates rail shows the page → section chain; Sites rail shows og image + language URLs.",
+        "System screen: shared HubSystemParamsScreen + Platform section + empty Design Template.",
+        "engine/catalog.mjs writes dist/catalog.json (derived from the files) instead of a hand-styled HTML page; preview sample = the most complete site on the template.",
+        "scripts/build-home.mjs builds catalog → release notes → admin into one dist/ with the app-version meta."
       ],
       "kind": "improve",
-      "userTitle": "Patch bump for completed agent task",
+      "userTitle": "Hub-UI admin for ldp.infi.io.vn",
       "userSummary": "",
       "userHighlights": [
-        "Automatic patch bump after completed P0008 task."
+        "Ldp.infi.io.vn is now a read-only Hub-UI management app : sidebar, tab header with Session + vers…",
+        "Screens Templates · Sections · Sites as split directories",
+        "System screen: shared Hub System Params Screen + Platform section + empty Design Template.",
+        "Writes dist catalog.json instead of a hand-styled HTML page"
       ]
     },
     {
-      "version": "0.2.1",
-      "date": "2026-08-15",
-      "at": "2026-08-15T21:52:00+07:00",
-      "title": "P0008 Git backup",
+      "version": "2.0.0",
+      "date": "2026-10-24",
+      "title": "Landing Platform v2",
       "bullets": [
-        "Git/Commit Minor bump (P0008): 0.1.5 → 0.2.1 (MINOR+1, PATCH=1)."
+        "Replaced the v1 React COD landing + admin (removed; backup Tool/.trash/P0008-Landing-Platform-2026-10-24.tgz) with a static multi-site engine.",
+        "Engine extracted from the P0010 Video Lab site: build-time rendering, guided tour, section rail, ⌘K search, VI/EN with Cloudflare-trace default language, screencast tutorial recorder.",
+        "Template product-guide: one HTML per page for every language; product copy in content/landing.json.",
+        "First site videolab (P0010-SITE → videolab.infi.io.vn/intro/); ldp.infi.io.vn now lists all sites.",
+        "Gate scripts/audit-sites.mjs; scaffold scripts/new-site.mjs."
       ],
       "kind": "improve",
-      "userTitle": "P0008 Git backup",
+      "userTitle": "Landing Platform v2",
       "userSummary": "",
       "userHighlights": [
-        "Git Commit Minor bump : 0.1.5 → 0.2.1 ."
+        "Replaced the v1 React COD landing + admin with a static multi-site engine.",
+        "Engine extracted from the P0010 Video Lab site: build-time rendering, guided tour, section rail,…",
+        "Template product-guide: one HTML per page for every language",
+        "First site videolab ; ldp.infi.io.vn now lists all sites."
       ]
     }
   ]

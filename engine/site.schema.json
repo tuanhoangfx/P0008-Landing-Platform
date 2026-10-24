@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Landing Platform site.config.json",
+  "type": "object",
+  "required": ["id", "name", "product", "registryKey", "template", "origin", "base", "langs"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$", "description": "Folder name under sites/" },
+    "name": { "type": "string", "description": "Product name shown in header, footer, window chrome" },
+    "product": { "type": "string", "pattern": "^P\d{4}$", "description": "Owning product code" },
+    "registryKey": { "type": "string", "description": "Hosting key in Tool/scripts/lib/lenovo-spa-products.mjs (<CODE>-SITE on its own domain, <CODE>-INTRO when mounted)" },
+    "mounted": { "type": "boolean", "description": "Domain root is the product app; the site is served only under base via the registry entry's mountPath (nginx alias inside the app's server block)" },
+    "template": { "type": "string", "enum": ["product-guide"] },
+    "origin": { "type": "string", "pattern": "^https://" },
+    "base": { "type": "string", "pattern": "^/(.*/)?$", "description": "Path the site lives under, e.g. /intro/" },
+    "langs": { "type": "array", "items": { "enum": ["vi", "en"] }, "minItems": 1, "description": "First = default (served without prefix)" },
+    "legacyRootPaths": { "type": "array", "items": { "type": "string" }, "description": "Root paths the 404 page forwards under base" },
+    "devPort": { "type": "integer" },
+    "appVersionFrom": { "type": "string", "description": "package.json whose version stamps app-version" },
+    "releases": { "type": "object", "properties": { "repo": { "type": "string" }, "asset": { "type": "string" } } },
+    "copy": { "type": "object", "description": "Per-language product sentences: heroAlt, footNote, downloadNote" }
+  }
+}

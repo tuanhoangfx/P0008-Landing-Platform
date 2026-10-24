@@ -1,40 +1,40 @@
 {
   "name": "p0008-landing-platform",
   "private": true,
-  "version": "0.2.8",
-  "packageManager": "pnpm@10.34.5",
+  "version": "2.1.0",
   "type": "module",
-  "description": "Landing Platform — admin + public COD funnels at ldp.infi.io.vn.",
+  "description": "P0008 Landing Platform — one static-site engine for every product landing + guide (sites/<id>/), plus the Hub-UI admin at ldp.infi.io.vn.",
   "scripts": {
-    "predev": "node ../scripts/run-script-chain.cjs -- node ../scripts/sync-hub-ui-vendor.cjs --code P0008 -- node ../scripts/sync-hub-identity-vendor.cjs -- node ../scripts/verify-hub-vendor-prereqs.mjs --code P0008 -- node ../scripts/verify-hub-ui-exports.cjs P0008 --fix -- node ../scripts/sync-hub-brand-icons.mjs --code P0008 -- node ../scripts/audit-react-hook-imports.cjs --sidebar P0008 -- node ../scripts/hub-ui-css-check.mjs --code P0008 -- node ../scripts/hub-ui-parity-check.mjs --code P0008 -- node ../scripts/hub-ssot-wave-gate.mjs --code P0008",
-    "gates": "node ../scripts/run-script-chain.cjs -- node ../scripts/hub-ui-css-check.mjs --code P0008 -- node ../scripts/hub-ui-parity-check.mjs --code P0008 -- node ../scripts/hub-ssot-wave-gate.mjs --code P0008",
-    "dev": "vite --host 127.0.0.1 --port 3008",
-    "build": "node scripts/build.mjs",
-    "preview": "vite preview --host 127.0.0.1 --port 4008",
+    "dev": "node node_modules/vite/bin/vite.js",
+    "predev": "node engine/catalog.mjs",
+    "dev:site": "node engine/dev-site.mjs --site videolab",
+    "build": "node scripts/build-all.mjs",
+    "build:home": "node scripts/build-home.mjs",
     "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
-    "mirror:assets": "node scripts/mirror-landing-assets.mjs --slug 001",
-    "ship:lenovo": "node ../scripts/deploy-lenovo-static.mjs --code P0008",
-    "ship:lenovo:fast": "node ../scripts/deploy-lenovo-static.mjs --code P0008 --skip-build"
+    "lint": "node scripts/audit-sites.mjs",
+    "new-site": "node scripts/new-site.mjs",
+    "audit": "node scripts/audit-sites.mjs",
+    "ship:lenovo": "node ../scripts/deploy-lenovo-static.mjs --code P0008"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.88.0",
-    "@tanstack/react-query": "^5.80.7",
-    "@tool-workspace/hub-identity": "workspace:@dev/hub-identity@*",
-    "@tool-workspace/hub-query": "workspace:*",
-    "@tool-workspace/hub-ui": "workspace:*",
+    "@fontsource-variable/inter": "5.2.6",
+    "@fontsource/be-vietnam-pro": "5.2.6",
+    "@tool-workspace/hub-identity": "file:../../packages/hub-identity",
+    "@tool-workspace/hub-ui": "file:../../packages/hub-ui",
+    "gsap": "3.13.0",
+    "lenis": "1.3.4",
     "lucide-react": "^0.561.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
-    "@types/node": "^22",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^5.2.0",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.19",
+    "autoprefixer": "10.4.20",
+    "postcss": "8.4.47",
+    "tailwindcss": "3.4.13",
     "typescript": "^5.9.3",
-    "vite": "^7.3.5"
+    "vite": "7.3.6"
   }
 }

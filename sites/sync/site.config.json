@@ -1,0 +1,33 @@
+{
+  "$schema": "../../engine/site.schema.json",
+  "id": "sync",
+  "name": "Folder Sync",
+  "product": "P0009",
+  "registryKey": "P0009-INTRO",
+  "template": "product-guide",
+  "origin": "https://sync.infi.io.vn",
+  "base": "/intro/",
+  "mounted": true,
+  "langs": [
+    "vi",
+    "en"
+  ],
+  "devPort": 3109,
+  "appVersionFrom": "Tool/P0009-Folder-Sync/package.json",
+  "releases": {
+    "repo": "tuanhoangfx/P0009-Folder-Sync",
+    "asset": "Setup.*.exe$"
+  },
+  "copy": {
+    "vi": {
+      "heroAlt": "Folder Sync — màn hình Jobs",
+      "footNote": "Folder Sync chạy trên máy của bạn — tệp được đồng bộ thẳng giữa ổ đĩa và Google Drive của bạn.",
+      "downloadNote": "Bộ cài Windows 64-bit, đã kèm rclone"
+    },
+    "en": {
+      "heroAlt": "Folder Sync — Jobs screen",
+      "footNote": "Folder Sync runs on your machine — files sync straight between your disk and your own Google Drive.",
+      "downloadNote": "Windows 64-bit installer, rclone included"
+    }
+  }
+}

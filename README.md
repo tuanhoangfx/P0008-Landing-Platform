@@ -1,27 +1,18 @@
-# Landing Platform (P0008)
+# P0008 Landing Platform
 
-Multi-template COD landing host at **ldp.infi.io.vn**.
+One static-site engine for every product landing + step-by-step guide.
 
-| Route | Purpose |
-|-------|---------|
-| `/` | Admin — pages, templates, asset slots (Option A) |
-| `/001` | Public — Mie Hair COD (`mie-hair-cod-v1`) |
-| `/api/*` | Order intake + future slot uploads |
-
-## Dev
+- **Admin:** https://ldp.infi.io.vn — read-only Hub-UI app: Templates · Sections (live engine previews) · Sites · System (`/?screen=…`)
+- **Sites:** `sites/<id>/` — first site `videolab` → https://videolab.infi.io.vn/intro/ (P0010 Video Lab)
+- **Template:** `templates/product-guide/` — hero, pipeline, features bento, pinned guided tour (all steps in a horizontal strip), video with VI subtitles + chapters, FAQ, download; VI/EN with IP-based default language, ⌘K search, section rail.
 
 ```bash
-cd Tool/P0008-Landing-Platform
-corepack pnpm install
-corepack pnpm dev
+pnpm install --ignore-workspace
+node engine/dev-site.mjs --site videolab
+pnpm dev                                   # admin → http://127.0.0.1:3008
+node scripts/build-home.mjs                # catalog.json + /preview/ + admin → dist/
+node scripts/new-site.mjs --id sync --name "Folder Sync" --product P0009 --origin https://sync.infi.io.vn
+node scripts/audit-sites.mjs
 ```
 
-- Admin: http://127.0.0.1:3008/
-- Landing: http://127.0.0.1:3008/001
-
-## Migration
-
-- Source template migrated from P0014 (`toc.infi.io.vn/ldp01` → `ldp.infi.io.vn/001`)
-- CRM remains on `toc.infi.io.vn/crm` (P0014 + P0005 tenant)
-
-See `docs/LDP-ARCHITECTURE.md`.
+Rules for agents: [AGENTS.md](AGENTS.md). SSOT: [docs/LANDING-PLATFORM-SSOT.md](docs/LANDING-PLATFORM-SSOT.md).

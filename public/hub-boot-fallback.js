@@ -7,9 +7,12 @@
 (function () {
   var BOOT_ID = "hub-boot-loader";
   // Cold sibling embeds compile a deep P0004 screen graph on first navigation.
-  // A 2s probe races that compilation and can falsely claim a healthy Vite
-  // server is offline before the app has a chance to mount.
-  var SERVER_PROBE_MS = 10000;
+  // A short /@vite/client probe races that compilation (and other Dev tabs'
+  // HMR queue) and used to paint "nothing is serving" while Vite is LISTEN.
+  var SERVER_PROBE_MS = 12000;
+  var SERVER_PROBE_TIMEOUT_MS = 12000;
+  var SERVER_PROBE_TRIES = 3;
+  var SERVER_PROBE_GAP_MS = 1500;
   var PREBUNDLE_HINT_MS = 28000;
   var FINAL_TIMEOUT_MS = 120000;
   var DEP_PROBE_INTERVAL_MS = 15000;
@@ -19,6 +22,18 @@
   window.__hubBootReady = false;
   var depProbeFails = 0;
   var hungShown = false;
+  var devAutoReloadScheduled = false;
+  var DEV_AUTO_RELOAD_STORAGE_KEY = "hub-boot-auto-reload-count";
+  var DEV_AUTO_RELOAD_MAX = 6;
+  var DEV_AUTO_RELOAD_PROBE_MS = 2000;
+
+  function clearDevAutoReloadCount() {
+    try {
+      window.sessionStorage.removeItem(DEV_AUTO_RELOAD_STORAGE_KEY);
+    } catch (e) {
+      /* ignore storage errors */
+    }
+  }
 
   // Every diagnostic below this line is about a local Vite dev server: it probes
   // /@vite/client and /node_modules/.vite/deps/react.js, and its hints tell you to run
@@ -49,6 +64,7 @@
     if (window.__hubBootReady) return true;
     if (!appHasRendered()) return false;
     window.__hubBootReady = true;
+    clearDevAutoReloadCount();
     var el = getLoaderEl();
     if (el) el.remove();
     return true;
@@ -93,6 +109,64 @@
       '<p style="margin:0 0 1rem;font-size:0.7rem;color:#64748b">Try hard refresh <kbd style="padding:0.1rem 0.35rem;border-radius:0.25rem;background:rgba(99,102,241,0.2);color:#a5b4fc">Ctrl+Shift+R</kbd> or restart dev server.</p>' +
       '<button type="button" onclick="location.reload()" style="cursor:pointer;border:1px solid rgba(129,140,248,0.4);border-radius:0.5rem;background:rgba(99,102,241,0.15);color:#c7d2fe;padding:0.45rem 1rem;font-size:0.75rem">Reload</button>' +
       "</div>";
+    scheduleDevBootErrorAutoReload();
+  }
+
+  function resolveDevEntryProbeUrl() {
+    try {
+      var modScript = document.querySelector('script[type="module"][src]');
+      var src = modScript && modScript.getAttribute("src");
+      if (src) return src;
+    } catch (e) {
+      /* ignore */
+    }
+    return "/src/main.tsx";
+  }
+
+  function scheduleDevBootErrorAutoReload() {
+    if (!IS_DEV_HOST || devAutoReloadScheduled || window.__hubBootReady) return;
+    var count = 0;
+    try {
+      count = Number(window.sessionStorage.getItem(DEV_AUTO_RELOAD_STORAGE_KEY) || "0") || 0;
+    } catch (e) {
+      count = 0;
+    }
+    if (count >= DEV_AUTO_RELOAD_MAX) return;
+    devAutoReloadScheduled = true;
+    var probeTicks = 0;
+    var delayMs = DEV_AUTO_RELOAD_PROBE_MS + count * 750;
+    var entryUrl = resolveDevEntryProbeUrl();
+    function tick() {
+      if (bootSettled()) return;
+      probeTicks += 1;
+      fetchProbe("/@vite/client", 2500).then(function (viteRes) {
+        if (bootSettled()) return;
+        if (!viteRes.ok) {
+          if (probeTicks < 15) window.setTimeout(tick, DEV_AUTO_RELOAD_PROBE_MS);
+          return;
+        }
+        fetchProbe(entryUrl, 3500).then(function (entryRes) {
+          if (bootSettled()) return;
+          if (!entryRes.ok) {
+            if (probeTicks < 15) window.setTimeout(tick, DEV_AUTO_RELOAD_PROBE_MS);
+            return;
+          }
+          try {
+            window.sessionStorage.setItem(DEV_AUTO_RELOAD_STORAGE_KEY, String(count + 1));
+          } catch (e) {
+            /* ignore */
+          }
+          window.location.reload();
+        });
+      });
+    }
+    window.setTimeout(tick, delayMs);
+  }
+
+  function isHardViteOffline(result) {
+    var reason = String((result && result.reason) || "");
+    if (!reason || reason === "timeout") return false;
+    return /failed|refused|network|err_connection/i.test(reason);
   }
 
   function fetchProbe(url, timeoutMs) {
@@ -172,6 +246,7 @@
 
   window.addEventListener("hub-boot-ready", function () {
     window.__hubBootReady = true;
+    clearDevAutoReloadCount();
     var el = getLoaderEl();
     if (el) el.remove();
   });
@@ -196,10 +271,23 @@
       el.setAttribute("role", "alert");
       el.style.cssText =
         "position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;background:#0b1220";
+      var lastErr = "";
+      try {
+        lastErr = String(window.__HUB_LAST_RENDER_ERROR || window.__P0021_LAST_ERROR || "").slice(0, 1200);
+      } catch (e) {
+        lastErr = "";
+      }
       el.innerHTML =
         '<div style="max-width:32rem;padding:1.5rem;text-align:center;font-family:Inter,system-ui,sans-serif;color:#e8ecff">' +
         '<p style="margin:0 0 0.5rem;font-size:0.95rem;font-weight:600">This screen stopped rendering</p>' +
-        '<p style="margin:0 0 1rem;font-size:0.75rem;line-height:1.5;color:#94a3b8">An unexpected error unmounted the app. Reload to continue; the browser console holds the stack trace.</p>' +
+        '<p style="margin:0 0 1rem;font-size:0.75rem;line-height:1.5;color:#94a3b8">An unexpected error unmounted the app. Reload to continue.</p>' +
+        (lastErr
+          ? '<pre style="margin:0 0 1rem;padding:0.75rem;border-radius:0.5rem;background:rgba(15,23,42,0.85);color:#fca5a5;font:11px/1.45 ui-monospace,Consolas,monospace;text-align:left;white-space:pre-wrap;word-break:break-word;max-height:10rem;overflow:auto">' +
+            lastErr.replace(/[<>&]/g, function (ch) {
+              return ch === "<" ? "&lt;" : ch === ">" ? "&gt;" : "&amp;";
+            }) +
+            "</pre>"
+          : "") +
         '<button type="button" onclick="location.reload()" style="cursor:pointer;border:1px solid rgba(129,140,248,0.4);border-radius:0.5rem;background:rgba(99,102,241,0.15);color:#c7d2fe;padding:0.45rem 1rem;font-size:0.75rem">Reload</button>' +
         "</div>";
       document.body.appendChild(el);
@@ -224,34 +312,68 @@
     }).observe(root, { childList: true });
   })();
 
+  function rememberRenderError(message, detail) {
+    var text = [message, detail].filter(Boolean).join("\n").slice(0, 1200);
+    if (!text) return;
+    try {
+      var prev = String(window.__HUB_LAST_RENDER_ERROR || "");
+      window.__HUB_LAST_RENDER_ERROR = prev ? (prev + "\n" + text).slice(-1200) : text;
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
   window.addEventListener("error", function (event) {
-    if (bootSettled()) return;
     var msg = event.message || "Script error";
-    var detail = event.filename ? event.filename + ":" + (event.lineno || "?") : "";
+    var detail = event.error && event.error.stack
+      ? event.error.stack
+      : event.filename
+        ? event.filename + ":" + (event.lineno || "?")
+        : "";
+    rememberRenderError(msg, detail);
+    if (bootSettled()) return;
     showBootError(msg, detail);
   });
 
   window.addEventListener("unhandledrejection", function (event) {
-    if (bootSettled()) return;
     var reason = event.reason;
     var msg = reason && reason.message ? reason.message : String(reason || "Unhandled promise rejection");
+    rememberRenderError(msg, reason && reason.stack ? reason.stack : "");
+    if (bootSettled()) return;
     showBootError(msg);
   });
 
-  window.setTimeout(function () {
+  function probeDevServer(triesLeft) {
     if (bootSettled() || hungShown || !IS_DEV_HOST) return;
-    fetchProbe("/@vite/client", 5000).then(function (r) {
+    fetchProbe("/@vite/client", SERVER_PROBE_TIMEOUT_MS).then(function (r) {
       if (bootSettled() || hungShown || r.ok) return;
-      var port = window.location.port || "PORT";
-      var reason = String(r.reason || "");
-      if (reason === "timeout" || /failed|refused|network/i.test(reason)) {
-        hungShown = true;
-        showBootError(
-          "Dev server is not responding.",
-          devRecoverHint(window.location.port),
+      if (r.reason === "timeout") {
+        showBootWaiting(
+          "Vite is compiling…",
+          "Dev server is busy (first compile or other tool tabs). Keep this tab open.",
         );
+        if (triesLeft > 1) {
+          window.setTimeout(function () {
+            probeDevServer(triesLeft - 1);
+          }, SERVER_PROBE_GAP_MS);
+        }
+        return;
       }
+      if (!isHardViteOffline(r)) return;
+      if (triesLeft > 1) {
+        showBootWaiting("Reconnecting to Vite…", "The dev server may be restarting after a file change.");
+        window.setTimeout(function () {
+          probeDevServer(triesLeft - 1);
+        }, SERVER_PROBE_GAP_MS);
+        return;
+      }
+      hungShown = true;
+      showBootError("Dev server is not responding.", devRecoverHint(window.location.port));
     });
+  }
+
+  window.setTimeout(function () {
+    probeDevServer(SERVER_PROBE_TRIES);
   }, SERVER_PROBE_MS);
 
   window.setTimeout(function () {
@@ -277,13 +399,15 @@
       return;
     }
     var port = window.location.port || "PORT";
-    var hungHint =
-      devRecoverHint(port) +
-      "\nIf recover fails (Access Denied), in PowerShell:\n" +
-      "  tskill <PID> /A\n" +
-      "  (find PID: netstat -ano | findstr :" +
-      port +
-      ")";
-    showBootError("JavaScript did not start in time.", hungHint);
+    showBootError(
+      "JavaScript did not start in time.",
+      "The HTML loaded but the app module did not mount.\n" +
+        "Hard refresh Ctrl+Shift+R and keep this tab in the foreground.\n" +
+        "If http://127.0.0.1:" +
+        port +
+        " is actually refused:\n" +
+        "  pnpm dev:node\n" +
+        "  or pnpm dev:recover",
+    );
   }, FINAL_TIMEOUT_MS);
 })();

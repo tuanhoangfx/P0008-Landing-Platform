@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.350 --> 00:00:05.450
+Bước 1: Mở tab Drives ở thanh điều hướng bên trái, sau đó nhấn nút New hoặc Sign in trên dòng tài khoản.
+
+2
+00:00:05.580 --> 00:00:11.510
+Xác nhận đăng nhập Google trên trình duyệt, cổng OAuth cục bộ 53682 sẽ tự động lưu khóa kết nối an toàn.
+
+3
+00:00:11.640 --> 00:00:16.400
+Ngay lập tức, hệ thống tự động thống kê dung lượng lưu trữ cùng toàn bộ số lượng thư mục và tệp tin trên Drive.
+
+4
+00:00:18.350 --> 00:00:23.330
+Bước 2: Chuyển sang tab Jobs và nhấn nút New ở góc trên để khởi tạo một tác vụ đồng bộ mới.
+
+5
+00:00:23.460 --> 00:00:29.390
+Chọn chế độ đồng bộ hai chiều Two-way, rồi chọn thư mục máy tính và thư mục Google Drive ngay trên cây thư mục xổ xuống.
+
+6
+00:00:29.520 --> 00:00:34.380
+Đặt thời gian chờ Debounce 20 giây để phần mềm đợi bạn lưu tệp hoàn tất trước khi bắt đầu truyền tải.
+
+7
+00:00:36.350 --> 00:00:41.450
+Bước 3: Giám sát toàn bộ tiến trình trên không gian chia đôi 7 phần 3 cùng dải 8 thẻ chỉ số KPI trực quan.
+
+8
+00:00:41.580 --> 00:00:47.310
+Nhấp vào từng thẻ KPI để lọc nhanh các tác vụ Đã đồng bộ, Đang chạy hoặc Lỗi, và bật tắt watcher 24 trên 7.
+
+9
+00:00:47.440 --> 00:00:52.390
+Ở cột bên phải, bạn theo dõi trực tiếp lịch sử từng phiên chạy cùng bảng Console phân loại luồng nhật ký theo thời gian thực.
+
+10
+00:00:54.350 --> 00:00:59.550
+Bước 4: Nhấn vào bất kỳ dòng tác vụ nào để mở cửa sổ chi tiết Layout 3 và chuyển sang mục đối chiếu cây thư mục.
+
+11
+00:00:59.680 --> 00:01:05.130
+So sánh trực tiếp từng tệp giữa máy tính và Google Drive với các nhãn trạng thái Đồng bộ, Khác biệt hoặc Chỉ có ở một bên.
+
+12
+00:01:05.260 --> 00:01:10.390
+Nếu phát sinh tệp xung đột do sửa đồng thời ở hai nơi, bạn có thể chọn giữ bản mong muốn chỉ với một cú nhấp chuột.
+
+13
+00:01:12.350 --> 00:01:17.540
+Bước 5: Mở tab System để tinh chỉnh giới hạn băng thông, tần suất gọi API Google và số luồng truyền tải song song.
+
+14
+00:01:17.670 --> 00:01:23.150
+Thiết lập Proxy HTTP hoặc SOCKS5 kèm cơ chế tự động chuyển sang kết nối trực tiếp khi Proxy bị gián đoạn.
+
+15
+00:01:23.280 --> 00:01:28.380
+Dữ liệu luôn an toàn tuyệt đối nhờ Thùng rác Google Drive, bản sao lưu theo mốc giờ và chốt chặn xóa nhầm quá 10 phần trăm.

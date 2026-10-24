@@ -1,0 +1,68 @@
+[
+  {
+    "id": "install",
+    "order": 0,
+    "color": "#a78bfa",
+    "title_vi": "Cài đặt",
+    "kicker_vi": "Bắt đầu",
+    "summary_vi": "Cài Folder Sync cho Windows và làm quen ba màn hình Jobs, Drives, System.",
+    "title_en": "Install",
+    "kicker_en": "Get started",
+    "summary_en": "Install Folder Sync for Windows and meet its three screens: Jobs, Drives and System."
+  },
+  {
+    "id": "drives",
+    "order": 1,
+    "color": "#34d399",
+    "title_vi": "Drives",
+    "kicker_vi": "Kết nối Google Drive",
+    "summary_vi": "Đăng nhập một hoặc nhiều tài khoản Google Drive, xem dung lượng và số tệp của từng tài khoản.",
+    "title_en": "Drives",
+    "kicker_en": "Connect Google Drive",
+    "summary_en": "Sign in to one or more Google Drive accounts and see each account's storage and file counts."
+  },
+  {
+    "id": "jobs",
+    "order": 2,
+    "color": "#38bdf8",
+    "title_vi": "Tạo Job",
+    "kicker_vi": "Cặp thư mục",
+    "summary_vi": "Ghép một thư mục trên máy với một thư mục Google Drive, chọn chiều đồng bộ và thời gian chờ.",
+    "title_en": "Create a job",
+    "kicker_en": "Folder pairs",
+    "summary_en": "Pair a folder on your PC with a Google Drive folder, pick the sync direction and the settle time."
+  },
+  {
+    "id": "monitor",
+    "order": 3,
+    "color": "#818cf8",
+    "title_vi": "Theo dõi",
+    "kicker_vi": "History & Console",
+    "summary_vi": "Lọc Jobs theo trạng thái, xem lịch sử từng lượt chạy và log rclone trực tiếp.",
+    "title_en": "Monitor",
+    "kicker_en": "History & Console",
+    "summary_en": "Filter jobs by state, review every run in History and read the live rclone log."
+  },
+  {
+    "id": "detail",
+    "order": 4,
+    "color": "#f472b6",
+    "title_vi": "Đối chiếu",
+    "kicker_vi": "Chi tiết Job",
+    "summary_vi": "Mở một Job để sửa cấu hình và so sánh cây thư mục máy ↔ Drive từng tệp.",
+    "title_en": "Compare",
+    "kicker_en": "Job detail",
+    "summary_en": "Open a job to edit its settings and compare the PC ↔ Drive folder tree file by file."
+  },
+  {
+    "id": "system",
+    "order": 5,
+    "color": "#fbbf24",
+    "title_vi": "System",
+    "kicker_vi": "Mạng & an toàn",
+    "summary_vi": "Giới hạn băng thông, proxy dự phòng, và các thư mục thùng rác / sao lưu / xung đột.",
+    "title_en": "System",
+    "kicker_en": "Network & safety",
+    "summary_en": "Bandwidth limits, proxy failover, and the trash / backup / conflict folders."
+  }
+]
