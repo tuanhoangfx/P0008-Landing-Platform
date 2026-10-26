@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-10-26 - Fix P0006-Video-Lab FFmpeg path in media.mjs + AppErrorBoundary deploy
+
+- Version: `2.1.2`
+- Timestamp: 2026-10-26 18:43 (UTC+7)
+- Type: Patch
+- Status: Verified
+
+### Changes
+
+- Update engine/recorder/media.mjs FFmpeg path from P0010-Video-Lab to P0006-Video-Lab so build-home succeeds
+
+### Verification
+
+- node scripts/build-home.mjs
+
+---
 ## 2026-10-26 - AppErrorBoundary + checkAndReloadIfBundleSkewed
 
 - Version: `2.1.1`

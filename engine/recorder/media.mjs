@@ -7,9 +7,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-// The workspace keeps one FFmpeg: P0010's worker/bin (VIDEO_LAB_FFMPEG overrides).
+// The workspace keeps one FFmpeg: P0006's worker/bin (VIDEO_LAB_FFMPEG overrides).
 const toolRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-const ffBin = process.env.VIDEO_LAB_FFMPEG ? path.dirname(process.env.VIDEO_LAB_FFMPEG) : path.join(toolRoot, "P0010-Video-Lab/worker/bin");
+const ffBin = process.env.VIDEO_LAB_FFMPEG ? path.dirname(process.env.VIDEO_LAB_FFMPEG) : path.join(toolRoot, "P0006-Video-Lab/worker/bin");
 export const FFMPEG = path.join(ffBin, "ffmpeg.exe");
 export const FFPROBE = path.join(ffBin, "ffprobe.exe");
 
