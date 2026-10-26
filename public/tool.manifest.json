@@ -5,7 +5,7 @@
   "name": "Landing Platform",
   "deployTarget": "lenovo-static",
   "release": {
-    "version": "2.1.2",
+    "version": "2.1.3",
     "readiness": [
       "build",
       "audit-sites",
@@ -17,8 +17,8 @@
     "app": "https://ldp.infi.io.vn",
     "prodProbe": "https://ldp.infi.io.vn/"
   },
-  "manifestUpdatedAt": "2026-10-26T11:43:45.859Z",
+  "manifestUpdatedAt": "2026-10-26T12:06:06.787Z",
   "versions": {
-    "current": "2.1.2"
+    "current": "2.1.3"
   }
 }

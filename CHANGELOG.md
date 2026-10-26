@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-10-26 - Capture script P0006-Video-Lab ffmpeg path sync
+
+- Version: `2.1.3`
+- Timestamp: 2026-10-26 19:06 (UTC+7)
+- Type: Patch
+- Status: Verified
+
+### Changes
+
+- Updated sites/sync/capture/capture.mjs to resolve ffmpeg from P0006-Video-Lab/worker/bin.
+
+### Verification
+
+- hub-ui-boot-check
+
+---
 ## 2026-10-26 - Fix P0006-Video-Lab FFmpeg path in media.mjs + AppErrorBoundary deploy
 
 - Version: `2.1.2`

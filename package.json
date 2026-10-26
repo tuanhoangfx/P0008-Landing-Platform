@@ -1,7 +1,7 @@
 {
   "name": "p0008-landing-platform",
   "private": true,
-  "version": "2.1.2",
+  "version": "2.1.3",
   "type": "module",
   "description": "P0008 Landing Platform — one static-site engine for every product landing + guide (sites/<id>/), plus the Hub-UI admin at ldp.infi.io.vn.",
   "scripts": {

@@ -36,7 +36,7 @@ const TMP = path.join(SITE, ".capture-tmp");
 const PNG_DIR = path.join(TMP, "png");
 const SHOTS = path.join(SITE, "public", "shots");
 const HIGHLIGHTS = path.join(__dirname, "highlights.json");
-const FFMPEG = process.env.P0009_CAPTURE_FFMPEG || "E:/Dev/Tool/P0010-Video-Lab/worker/bin/ffmpeg.exe";
+const FFMPEG = process.env.P0009_CAPTURE_FFMPEG || "E:/Dev/Tool/P0006-Video-Lab/worker/bin/ffmpeg.exe";
 
 const args = process.argv.slice(2);
 const arg = (k, d) => (args.includes(k) ? args[args.indexOf(k) + 1] : d);
