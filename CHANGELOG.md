@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-10-26 - AppErrorBoundary + checkAndReloadIfBundleSkewed
+
+- Version: `2.1.1`
+- Timestamp: 2026-10-26 18:32 (UTC+7)
+- Type: Patch
+- Status: Verified
+
+### Changes
+
+- Wrap P0008 root in AppErrorBoundary with checkAndReloadIfBundleSkewed on uncaught render crash
+
+### Verification
+
+- node Tool/scripts/hub-ui-boot-check.mjs --code P0008
+
+---
 ## 2026-10-24 - Hub-UI admin for ldp.infi.io.vn
 
 - Version: `2.1.0`

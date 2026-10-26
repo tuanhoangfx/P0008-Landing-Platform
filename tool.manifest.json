@@ -42,7 +42,7 @@
     "ssot": "docs/LANDING-PLATFORM-SSOT.md"
   },
   "release": {
-    "version": "2.1.0",
+    "version": "2.1.1",
     "readiness": [
       "build",
       "audit-sites",
@@ -69,9 +69,9 @@
     "gate": "node Tool/P0008-Landing-Platform/scripts/audit-sites.mjs"
   },
   "versions": {
-    "current": "2.1.0"
+    "current": "2.1.1"
   },
-  "manifestUpdatedAt": "2026-10-24T02:11:41.920Z",
+  "manifestUpdatedAt": "2026-10-26T11:32:31.213Z",
   "commands": {
     "dev": "pnpm dev",
     "build": "pnpm build:home",

@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { configureHubChromePrefs, initHubUserZoom, installHubPerfBlackbox, mountHubApp } from "@tool-workspace/hub-ui";
 import App from "./App";
+import { AppErrorBoundary } from "./components/AppErrorBoundary";
 import "./styles.css";
 
 initHubUserZoom();
@@ -17,7 +18,9 @@ if (!rootEl) throw new Error("#root not found");
 mountHubApp(rootEl, () => {
   createRoot(rootEl).render(
     <StrictMode>
-      <App />
+      <AppErrorBoundary>
+        <App />
+      </AppErrorBoundary>
     </StrictMode>,
   );
 });
