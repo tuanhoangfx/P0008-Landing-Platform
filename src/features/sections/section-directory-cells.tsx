@@ -51,7 +51,7 @@ export function renderSectionCell(col: HubDirectoryColumnDef<SectionColumnKey>, 
     case "blocks":
       return (
         <DirectoryTableBodyCell key={key} colClass={colClass}>
-          <span className={`${DIRECTORY_CELL_TRUNCATE} hub-users-cell-muted font-mono`}>
+          <span className={`${DIRECTORY_CELL_TRUNCATE} hub-users-cell-muted`}>
             {row.blocks.length ? row.blocks.join(", ") : "—"}
           </span>
         </DirectoryTableBodyCell>

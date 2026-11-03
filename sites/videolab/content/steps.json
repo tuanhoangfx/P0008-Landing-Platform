@@ -3,9 +3,9 @@
     "id": "install",
     "chapter": "install",
     "title_vi": "Cài đặt và mở Video Lab",
-    "body_vi": "Tải bộ cài Video Lab (.exe) từ trang GitHub Releases và chạy để cài như ứng dụng Windows thông thường. Mở Video Lab từ Start menu — worker FFmpeg tự khởi động cùng app, thanh bên trái có Studio, Mixer, Encode và System. Bản mới được cập nhật tự động.",
+    "body_vi": "Tải bộ cài Video Lab (.exe) từ trang GitHub Releases và chạy để cài như ứng dụng Windows thông thường. Mở Video Lab từ Start menu — worker FFmpeg tự khởi động cùng app, thanh bên trái có 6 không gian: Studio, Reup, Cut, Mixer, Encode và System. Bản mới có nút cập nhật 1-click ngay trên Header.",
     "title_en": "Install and open Video Lab",
-    "body_en": "Download the Video Lab installer (.exe) from GitHub Releases and run it like any Windows app. Launch Video Lab from the Start menu — the FFmpeg worker starts with it, and the left sidebar holds Studio, Mixer, Encode and System. New versions update automatically.",
+    "body_en": "Download the Video Lab installer (.exe) from GitHub Releases and run it like any Windows app. Launch Video Lab from the Start menu — the FFmpeg worker starts with it, and the left sidebar holds 6 workspaces: Studio, Reup, Cut, Mixer, Encode and System. New releases offer a 1-click Header update button.",
     "order": 1,
     "shot": "shots/install-open.webp",
     "highlight": {
@@ -35,9 +35,9 @@
     "id": "studio-images",
     "chapter": "studio",
     "title_vi": "Thêm ảnh vào Image Library",
-    "body_vi": "Bấm Upload trong khung Image Library và chọn ảnh PNG, JPG hoặc WebP (có thể chọn nhiều ảnh cùng lúc). Ảnh xuất hiện trong lưới thư viện bên phải; nút Folder và Drive dùng để nhập cả thư mục hoặc Google Drive.",
+    "body_vi": "Bấm Upload trong khung Image Library và chọn ảnh PNG, JPG hoặc WebP (hỗ trợ 1.000+ ảnh nhiều định dạng trộn lẫn với bộ nhớ đệm thumbnail 256px). Ảnh xuất hiện trong lưới thư viện bên phải; nút Folder và Drive dùng để nhập cả thư mục hoặc Google Drive.",
     "title_en": "Add images to the Image Library",
-    "body_en": "Click Upload in the Image Library panel and pick PNG, JPG or WebP files (multi-select works). They appear in the library grid; Folder and Drive import a whole folder or a Google Drive link.",
+    "body_en": "Click Upload in the Image Library panel and pick PNG, JPG or WebP files (supports 1,000+ mixed-extension images with a 256px disk thumbnail cache). They appear in the library grid; Folder and Drive import a whole folder or a Google Drive link.",
     "order": 3,
     "shot": "shots/studio-images.webp",
     "highlight": {
@@ -50,10 +50,10 @@
   {
     "id": "studio-keyframe",
     "chapter": "studio",
-    "title_vi": "Đưa ảnh vào Keyframe",
-    "body_vi": "Bấm Select để chọn tất cả ảnh, rồi bấm Add to Keyframe. Mỗi ảnh thành một cảnh (S1, S2…) trên dòng thời gian; kéo để đổi thứ tự, chỉnh Transition, Effect và Duration ngay trong bảng.",
-    "title_en": "Send images to the Keyframe timeline",
-    "body_en": "Click Select to pick every image, then Add to Keyframe. Each image becomes a scene (S1, S2…) on the timeline; drag to reorder and set Transition, Effect and Duration right in the table.",
+    "title_vi": "Đưa ảnh vào Keyframe và bật Loop FX",
+    "body_vi": "Bấm Select để chọn tất cả ảnh, rồi bấm Add to Keyframe. Mỗi ảnh thành một cảnh (S1, S2…) trên dòng thời gian; chọn Transition, Effect, Duration và bật nút Loop FX trên thanh công cụ Keyframe để hiệu ứng chuyển cảnh + chuyển động Ping-Pong lặp liên tục suốt thời lượng cảnh (kể cả cảnh dài 20 phút).",
+    "title_en": "Send images to Keyframe and enable Loop FX",
+    "body_en": "Click Select to pick every image, then Add to Keyframe. Each image becomes a scene (S1, S2…) on the timeline; set Transition, Effect, Duration and toggle Loop FX on the Keyframe toolbar so transitions and Ping-Pong motion repeat continuously throughout the scene (even on 20-minute holds).",
     "order": 4,
     "shot": "shots/studio-keyframe.webp",
     "highlight": {
@@ -112,13 +112,77 @@
     }
   },
   {
+    "id": "reup-overview",
+    "chapter": "reup",
+    "title_vi": "Tải video đa nền tảng hoặc thêm file cục bộ",
+    "body_vi": "Mở tab Reup ở thanh bên trái. Dán danh sách URL (YouTube, TikTok, Douyin, Facebook, Instagram) vào khung Downloader để tải hàng loạt về máy, hoặc bấm Add Videos để chọn các video có sẵn trên ổ đĩa đưa vào bảng Inputs.",
+    "title_en": "Download multi-platform videos or add local files",
+    "body_en": "Open the Reup tab in the left sidebar. Paste URLs (YouTube, TikTok, Douyin, Facebook, Instagram) into the Downloader panel to batch-fetch clips, or click Add Videos to load local files into the Inputs table.",
+    "order": 8,
+    "shot": "shots/reup-overview.webp",
+    "highlight": {
+      "x": 11.8,
+      "y": 4.9,
+      "w": 64.1,
+      "h": 46.7
+    }
+  },
+  {
+    "id": "reup-ai-settings",
+    "chapter": "reup",
+    "title_vi": "Cấu hình AI Reup, lách bản quyền và phụ đề",
+    "body_vi": "Ở cột Setting bên phải của Reup, chọn chế độ xử lý (Mirror lật ngang, Speed 1.02x–1.15x, Color Shift, Pitch Shift, Crop viền), bật tự động nhận diện giọng nói (STT) dịch phụ đề đa ngôn ngữ hoặc lồng lại giọng TTS mới, rồi bấm Start.",
+    "title_en": "Configure AI Reup transforms and subtitles",
+    "body_en": "In Reup's right-hand Setting panel, pick anti-fingerprint transforms (Mirror flip, Speed 1.02x–1.15x, Color Shift, Pitch Shift, border Crop), enable automatic speech-to-text (STT) subtitle translation or re-dub with a fresh TTS voice, then click Start.",
+    "order": 9,
+    "shot": "shots/reup-ai-settings.webp",
+    "highlight": {
+      "x": 76.4,
+      "y": 4.9,
+      "w": 22.5,
+      "h": 90.0
+    }
+  },
+  {
+    "id": "cut-overview",
+    "chapter": "cut",
+    "title_vi": "Smart Cut: thêm video dài cần tách clip",
+    "body_vi": "Mở tab Cut, bấm New → Browse để nạp một hoặc nhiều video dài vào bảng Inputs. Video Lab tự động đọc thời lượng, độ phân giải và FPS của từng file nguồn.",
+    "title_en": "Smart Cut: load long-form videos to split",
+    "body_en": "Open the Cut tab and click New → Browse to load one or more long-form videos into the Inputs table. Video Lab probes duration, resolution and FPS for every source file.",
+    "order": 10,
+    "shot": "shots/cut-overview.webp",
+    "highlight": {
+      "x": 11.8,
+      "y": 4.9,
+      "w": 64.1,
+      "h": 46.7
+    }
+  },
+  {
+    "id": "cut-modes",
+    "chapter": "cut",
+    "title_vi": "Chọn chế độ chia đoạn và xuất 1→N clip",
+    "body_vi": "Trong khung Setting của Cut, chọn chế độ tách: chia theo thời lượng cố định (Fixed Duration, ví dụ 15s / 30s / 60s), chia đều thành N phần bằng nhau, hoặc tự động dò điểm chuyển cảnh (Scene Detect). Bấm Start để xuất hàng loạt clip ngắn bằng stream copy tốc độ cao.",
+    "title_en": "Pick a split mode and batch-export 1→N clips",
+    "body_en": "In Cut's Setting panel, choose a split mode: Fixed Duration chunks (e.g. 15s / 30s / 60s), Equal N parts, or automatic Scene Detect. Click Start to batch-export short clips with fast stream copy.",
+    "order": 11,
+    "shot": "shots/cut-modes.webp",
+    "highlight": {
+      "x": 76.4,
+      "y": 4.9,
+      "w": 22.5,
+      "h": 90.0
+    }
+  },
+  {
     "id": "mixer-add",
     "chapter": "mixer",
     "title_vi": "Thêm clip Intro, Main, Outro",
     "body_vi": "Mở Mixer, bấm New. Ở cột trái chọn Main, Intro hoặc Outro, bấm Browse và chọn video cho từng nhóm. Bấm Save để thêm vào bảng, rồi Close.",
     "title_en": "Add Intro, Main and Outro clips",
     "body_en": "Open Mixer and click New. Pick Main, Intro or Outro on the left, click Browse and choose the videos for each group. Click Save to add them to the table, then Close.",
-    "order": 8,
+    "order": 12,
     "shot": "shots/mixer-add-inputs.webp",
     "highlight": {
       "x": 2,
@@ -134,7 +198,7 @@
     "body_vi": "Bảng Inputs tự đọc thời lượng, dung lượng, định dạng và độ phân giải của từng clip. Clip có Action = Ready ghép được ngay bằng stream copy, không cần encode lại.",
     "title_en": "Check the input list",
     "body_en": "The Inputs table probes each clip's duration, size, format and resolution. Clips marked Action = Ready can be joined straight away with stream copy — no re-encode.",
-    "order": 9,
+    "order": 13,
     "shot": "shots/mixer-inputs.webp",
     "highlight": {
       "x": 11.8,
@@ -150,7 +214,7 @@
     "body_vi": "Trong khung Setting: Mix mode chọn Sequential hoặc Random cho Main, Intro, Outro; Counts đặt số clip Main mỗi video và Total số video cần tạo; Workers đặt số video chạy song song. Ở Output, nhập Directory để chọn thư mục lưu.",
     "title_en": "Set up the mix",
     "body_en": "In Setting: Mix mode picks Sequential or Random for Main, Intro and Outro; Counts sets Main clips per video and the Total number of videos; Workers sets how many run in parallel. Under Output, enter a Directory for the results.",
-    "order": 10,
+    "order": 14,
     "shot": "shots/mixer-settings.webp",
     "highlight": {
       "x": 76.4,
@@ -166,7 +230,7 @@
     "body_vi": "Bấm Start. Mỗi video đầu ra hiện một dòng trong bảng Outputs với trạng thái Queued → Running, phần trăm tiến độ và chiến lược (Copy = ghép không encode lại). Pause hoặc Cancel để dừng giữa chừng.",
     "title_en": "Click Start and watch progress",
     "body_en": "Click Start. Every output gets a row in the Outputs table moving from Queued to Running, with a progress percentage and strategy (Copy = joined without re-encoding). Use Pause or Cancel to stop mid-run.",
-    "order": 11,
+    "order": 15,
     "shot": "shots/mixer-running.webp",
     "highlight": {
       "x": 11.8,
@@ -182,7 +246,7 @@
     "body_vi": "Khi xong, các dòng chuyển Done kèm thời lượng và dung lượng; bấm biểu tượng thư mục cạnh tên để mở file. Khung History lưu từng lượt chạy — rê chuột lên chấm để xem chi tiết, bấm vào một dòng để xem các clip đã ghép.",
     "title_en": "Review results and history",
     "body_en": "When finished, rows turn Done with duration and size; click the folder icon next to a name to open the file. History keeps every run — hover a dot for details, or click a row to see which clips were joined.",
-    "order": 12,
+    "order": 16,
     "shot": "shots/mixer-done.webp",
     "highlight": {
       "x": 76.9,
@@ -198,7 +262,7 @@
     "body_vi": "Mở Encode, bấm New → Browse để chọn video, rồi Save. Ở Setting chọn Profile (Vertical 9:16, Landscape 16:9, Square, 4K hoặc Keep source), số Workers và Location: Beside source hoặc Custom folder.",
     "title_en": "Encode: add videos and pick a profile",
     "body_en": "Open Encode, click New → Browse to pick videos, then Save. In Setting choose a Profile (Vertical 9:16, Landscape 16:9, Square, 4K or Keep source), the Workers count and Location: Beside source or Custom folder.",
-    "order": 13,
+    "order": 17,
     "shot": "shots/encode-settings.webp",
     "highlight": {
       "x": 76.4,
@@ -214,7 +278,7 @@
     "body_vi": "Bấm Start: từng video hiện tiến độ Encoding trong bảng Outputs và báo Encode complete khi xong. Kết quả được ghi nhớ để lần ghép sau dùng lại bằng stream copy thay vì encode lại.",
     "title_en": "Click Start and collect the results",
     "body_en": "Click Start: each video shows Encoding progress in the Outputs table and an Encode complete notice at the end. Results are remembered so the next mix can reuse them with stream copy instead of re-encoding.",
-    "order": 14,
+    "order": 18,
     "shot": "shots/encode-results.webp",
     "highlight": {
       "x": 11.8,
@@ -226,11 +290,11 @@
   {
     "id": "system",
     "chapter": "system",
-    "title_vi": "System: thông tin worker",
-    "body_vi": "Tab System cho biết địa chỉ worker (API :8029), stack giao diện và pipeline FFmpeg đang dùng. Khi Mixer hay Encode báo lỗi kết nối, kiểm tra ở đây trước.",
-    "title_en": "System: worker info",
-    "body_en": "The System tab shows the worker address (API :8029), the UI stack and the FFmpeg pipeline in use. If Mixer or Encode reports a connection error, check here first.",
-    "order": 15,
+    "title_vi": "System: thông tin worker & tự động cập nhật",
+    "body_vi": "Tab System cho biết địa chỉ worker (API :8029), bộ mã hóa phần cứng GPU và pipeline FFmpeg đang dùng. Khi có phiên bản mới trên GitHub Releases, nút Update vX.Y.Z màu xanh trên thanh Header cho phép tải và cài đặt tự động chỉ với 1 cú nhấp.",
+    "title_en": "System: worker info & 1-click auto-update",
+    "body_en": "The System tab shows the worker address (API :8029), active GPU hardware encoder and FFmpeg pipeline. Whenever a new release is published, a green Update vX.Y.Z badge appears in the Header for 1-click download and installation.",
+    "order": 19,
     "shot": "shots/system.webp",
     "highlight": {
       "x": 11.8,

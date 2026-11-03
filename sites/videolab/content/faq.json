@@ -1,44 +1,38 @@
 [
   {
-    "q": "Video Lab chạy trên máy nào?",
-    "a": "Windows 10 hoặc 11 bản 64-bit. FFmpeg đã có sẵn trong bộ cài, không cần cài riêng. Trên Windows mới cài, máy cần Microsoft Visual C++ 2015–2022 (x64) — đa số máy đã có sẵn.",
-    "q_en": "What does Video Lab run on?",
-    "a_en": "Windows 10 or 11, 64-bit. FFmpeg ships inside the installer, nothing to install separately. A fresh Windows may need Microsoft Visual C++ 2015–2022 (x64) — most machines already have it."
+    "q": "Nếu 1 ảnh trong Studio kéo dài 20 phút và bật Loop FX thì hiệu ứng có lặp đủ 20 phút không?",
+    "a": "Có. Khi bật **Loop FX** (trên thanh Keyframe hoặc trong Output Settings), cả Live Preview lẫn FFmpeg Export đều chia cảnh thành các chu kỳ ~2 giây với chuyển động **Ping-Pong** (`Zoom In ↔ Zoom Out`, `Pan Left ↔ Pan Right`). Với 1 ảnh kéo dài 20 phút (`1,200s`), Video Lab tạo khối chuẩn 4 chu kỳ có sẵn `xfade` khép kín rồi nhân bản bằng `-c copy` đủ **600 chu kỳ suốt 20 phút** chỉ trong vài giây render.",
+    "q_en": "If a single image in Studio lasts 20 minutes with Loop FX enabled, will it loop for the full 20 minutes?",
+    "a_en": "Yes. With **Loop FX** enabled (on the Keyframe bar or in Output Settings), both Live Preview and FFmpeg Export subdivide the scene into ~2-second cycles with **Ping-Pong** motion (`Zoom In ↔ Zoom Out`, `Pan Left ↔ Pan Right`). A 20-minute image (`1,200s`) builds a seamless 4-cycle `xfade` block and stream-copies (`-c copy`) all **600 cycles across the full 20 minutes** in just seconds."
   },
   {
-    "q": "Cài xong bấm mở mà không thấy cửa sổ nào?",
-    "a": "Thường do bản cũ vẫn đang chạy ngầm. Mở Task Manager, tắt hết tiến trình “Video Lab” và “video-lab-worker”, rồi mở lại. Nếu vẫn không lên, gửi file nhật ký %APPDATA%\\Video Lab\\runtime\\desktop-boot.log cho bộ phận hỗ trợ.",
-    "q_en": "I installed it but no window opens?",
-    "a_en": "Usually an older copy is still running in the background. Open Task Manager, end every “Video Lab” and “video-lab-worker” process, then start it again. If it still does not appear, send the log at %APPDATA%\\Video Lab\\runtime\\desktop-boot.log to support."
+    "q": "Tính năng AI Reup và Smart Cut hoạt động như thế nào?",
+    "a": "Trong màn **Reup**, bạn có thể dán liên kết TikTok, Douyin, YouTube hoặc Facebook để tải video về máy, hoặc chọn chế độ **AI Reup** để tự động tách lời thoại bằng Faster-Whisper STT, dịch sang ngôn ngữ đích, lồng giọng đọc AI mới và che mờ phụ đề cũ. Trong màn **Cut**, bạn có thể cắt bỏ đầu/cuối, lấy đoạn In/Out, chia đều video dài thành N tập nhỏ hoặc tự động tách theo cảnh & khoảng lặng, rồi gửi 1 chạm sang **Mixer**.",
+    "q_en": "How do AI Reup and Smart Cut work?",
+    "a_en": "In **Reup**, paste TikTok, Douyin, YouTube or Facebook URLs to download videos, or switch to **AI Reup** to transcribe speech with Faster-Whisper STT, translate, synthesize a new AI voiceover and blur/burn subtitles. In **Cut**, trim head/tail, extract In/Out ranges, split long videos into N chunks or auto-split by scene/silence, then send straight to **Mixer**."
   },
   {
-    "q": "Máy có card NVIDIA mà Video Lab báo không dùng được mã hoá phần cứng?",
-    "a": "Video Lab tự thử NVENC, Quick Sync và AMF rồi chọn cách nhanh nhất chạy được. Nếu card NVIDIA bị bỏ qua, hãy cập nhật driver lên bản 551 trở lên. Lý do cụ thể luôn hiện trong khung Console.",
-    "q_en": "I have an NVIDIA card but hardware encoding is unavailable?",
-    "a_en": "Video Lab tries NVENC, Quick Sync and AMF and keeps the fastest one that works. If your NVIDIA card is skipped, update the driver to 551 or newer. The exact reason is always shown in the Console panel."
+    "q": "Video Lab chạy trên máy nào và có cần cài thêm FFmpeg không?",
+    "a": "Windows 10 hoặc 11 bản 64-bit. **FFmpeg và Worker xử lý video đã được đóng gói sẵn bên trong bộ cài**, bạn không cần cài đặt thêm bất kỳ phần mềm phụ thuộc nào.",
+    "q_en": "What does Video Lab run on, and do I need to install FFmpeg?",
+    "a_en": "Windows 10 or 11, 64-bit. **FFmpeg and the video worker ship inside the installer**, so there is nothing extra to install."
   },
   {
-    "q": "Video ghép xong bị đứng hình sau clip đầu tiên?",
-    "a": "Do các clip được quay hoặc xuất với cấu hình khác nhau. Video Lab kiểm tra trước khi ghép và đề nghị chuẩn hoá qua màn Encode — chọn cùng một profile (ví dụ Dọc 1080×1920) rồi ghép lại.",
-    "q_en": "The joined video freezes after the first clip?",
-    "a_en": "The clips were recorded or exported with different settings. Video Lab checks before joining and offers to normalise them in Encode — pick one profile (for example Vertical 1080×1920) and join again."
+    "q": "Thư viện ảnh trong Studio có nạp được hơn 1,000 ảnh trộn nhiều định dạng (.jpg, .png, .webp) không?",
+    "a": "Được. Studio sử dụng tham chiếu đường dẫn cục bộ zero-copy, bộ nhớ đệm thumbnail `256px` trên ổ đĩa, thanh Keyframe ảo hoá ngang và bộ chuẩn hoá `ffconcat` tự động cho phép nạp và xuất mượt mà **hơn 1,000 cảnh** trộn lẫn `.jpg`, `.png` và `.webp`.",
+    "q_en": "Can Studio handle over 1,000 images mixing .jpg, .png and .webp?",
+    "a_en": "Yes. Studio uses zero-copy local file paths, a disk-backed `256px` thumbnail cache, horizontal Keyframe timeline virtualization and automatic `ffconcat` pixel-format normalization to handle **1,000+ scenes** mixing `.jpg`, `.png` and `.webp`."
   },
   {
-    "q": "Có cần Internet không?",
-    "a": "Mixer và Encode chạy hoàn toàn trên máy bạn, không cần mạng và không tải video lên đâu cả. Riêng giọng đọc TTS trong Studio cần Internet để tạo âm thanh.",
-    "q_en": "Do I need an Internet connection?",
-    "a_en": "Mixer and Encode run entirely on your machine — no network needed and nothing is uploaded. Only Studio text-to-speech needs Internet to generate the voice."
+    "q": "Máy có card NVIDIA / Intel / AMD thì Video Lab tăng tốc như thế nào?",
+    "a": "Video Lab tự thử **NVENC, Quick Sync và AMF** bằng một lần encode mẫu và chọn bộ mã hoá phần cứng nhanh nhất chạy được (nếu không có GPU sẽ tự quay về `libx264`). Lý do và bộ mã hoá đang dùng luôn hiển thị rõ trong khung **Console** và tab **System**.",
+    "q_en": "How does GPU acceleration work on NVIDIA, Intel or AMD?",
+    "a_en": "Video Lab test-encodes with **NVENC, Quick Sync and AMF** and picks the fastest hardware encoder available, falling back cleanly to `libx264`. The active encoder is always visible in **Console** and **System**."
   },
   {
-    "q": "Video xuất ra nằm ở đâu?",
-    "a": "Mặc định ở Desktop\\Video Lab\\Mixer. Bạn đổi thư mục xuất trong khung Setting của từng màn hình; bấm vào một dòng ở bảng Output để mở đúng file trong Explorer.",
-    "q_en": "Where do exported videos go?",
-    "a_en": "By default to Desktop\\Video Lab\\Mixer. Change the output folder in each screen’s Setting panel; click a row in the Output table to open that file in Explorer."
-  },
-  {
-    "q": "Ứng dụng có tự cập nhật không?",
-    "a": "Có. Khi có phiên bản mới, Video Lab tự tải về và hỏi bạn khởi động lại để cài. Bạn cũng có thể tải bộ cài mới nhất ngay trên trang này.",
+    "q": "Ứng dụng có tự cập nhật khi có phiên bản mới không?",
+    "a": "Có. Khi có phiên bản mới trên GitHub Releases, chip phiên bản trên thanh **Header** sẽ báo cập nhật để bạn tải và khởi động lại nâng cấp chỉ với 1 cú nhấp chuột.",
     "q_en": "Does the app update itself?",
-    "a_en": "Yes. When a new version is out, Video Lab downloads it and asks you to restart to install. You can also grab the latest installer right here."
+    "a_en": "Yes. When a new version lands on GitHub Releases, the version chip in the **Header** lets you download and restart to update in one click."
   }
 ]

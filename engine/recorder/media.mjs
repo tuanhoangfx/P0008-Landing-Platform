@@ -8,10 +8,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 // The workspace keeps one FFmpeg: P0006's worker/bin (VIDEO_LAB_FFMPEG overrides).
-const toolRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const toolRoot = path.resolve(__dirname, "../../..");
 const ffBin = process.env.VIDEO_LAB_FFMPEG ? path.dirname(process.env.VIDEO_LAB_FFMPEG) : path.join(toolRoot, "P0006-Video-Lab/worker/bin");
 export const FFMPEG = path.join(ffBin, "ffmpeg.exe");
 export const FFPROBE = path.join(ffBin, "ffprobe.exe");
+export const DEFAULT_BGM_P0001 = path.join(__dirname, "assets", "bgm-p0001.mp3");
 
 export function ffmpeg(args, label = "ffmpeg") {
   const r = spawnSync(FFMPEG, ["-y", "-hide_banner", "-loglevel", "error", ...args], { encoding: "utf8", windowsHide: true, maxBuffer: 1 << 26 });
@@ -49,6 +51,138 @@ export function tts(text, outDir, { voice = "vi-VN-HoaiMyNeural", rate = "+4%", 
     fs.writeFileSync(stamp, `${voice}|${rate}|${text}`);
   }
   return { mp3, srt, duration: probeDuration(mp3) };
+}
+
+const ELEVENLABS_POOL_PATH = path.join(toolRoot, "P0006-Video-Lab/data/studio_elevenlabs_pool.json");
+let cachedElevenLabsKeys = null;
+let elevenLabsKeyCursor = 0;
+
+function getElevenLabsPoolKeys() {
+  if (cachedElevenLabsKeys && cachedElevenLabsKeys.length > 0) return cachedElevenLabsKeys;
+  if (process.env.ELEVENLABS_API_KEY) {
+    cachedElevenLabsKeys = [process.env.ELEVENLABS_API_KEY.trim()];
+    return cachedElevenLabsKeys;
+  }
+  if (!fs.existsSync(ELEVENLABS_POOL_PATH)) {
+    throw new Error(`ElevenLabs pool file not found at ${ELEVENLABS_POOL_PATH}`);
+  }
+  const raw = JSON.parse(fs.readFileSync(ELEVENLABS_POOL_PATH, "utf8"));
+  const entries = Array.isArray(raw?.entries) ? raw.entries : [];
+  cachedElevenLabsKeys = entries
+    .filter(
+      (e) =>
+        e &&
+        e.xi_api_key &&
+        e.status === "active" &&
+        !e.disabled &&
+        String(e.tier || "free").toLowerCase() === "free" &&
+        e.allow_ecosystem_pool !== false &&
+        Number(e.remaining_chars ?? 1000) > 250,
+    )
+    .sort((a, b) => Number(b.remaining_chars ?? 0) - Number(a.remaining_chars ?? 0))
+    .map((e) => String(e.xi_api_key).trim());
+  if (!cachedElevenLabsKeys.length) {
+    throw new Error("No active xi_api_key found in studio_elevenlabs_pool.json");
+  }
+  return cachedElevenLabsKeys;
+}
+
+/**
+ * Narrate one line with ElevenLabs Multilingual/Flash v2.5 using the P0006/P0020 key pool.
+ * Cached by text + voiceId + settings so re-recording does not re-hit the API.
+ * Returns { mp3, srt, duration }.
+ */
+export async function ttsElevenLabs(
+  text,
+  outDir,
+  {
+    voiceId = "21m00Tcm4TlvDq8ikWAM",
+    modelId = "eleven_flash_v2_5",
+    languageCode = "vi",
+    stability = 0.48,
+    similarityBoost = 0.82,
+    style = 0.35,
+    speed = 1.15,
+    tempo = 1.18,
+    key,
+  } = {},
+) {
+  fs.mkdirSync(outDir, { recursive: true });
+  const cleanVoiceId = String(voiceId).replace(/^elevenlabs:/i, "").trim();
+  const sig = `11labs|${cleanVoiceId}|${modelId}|${languageCode}|${stability}|${similarityBoost}|${style}|${speed}|${tempo}|${text}`;
+  const id = key ?? Buffer.from(sig).toString("base64url").slice(0, 40);
+  const mp3 = path.join(outDir, `${id}.mp3`);
+  const srt = path.join(outDir, `${id}.srt`);
+  const stamp = path.join(outDir, `${id}.txt`);
+  const fresh =
+    fs.existsSync(mp3) &&
+    fs.statSync(mp3).size > 1000 &&
+    fs.existsSync(stamp) &&
+    fs.readFileSync(stamp, "utf8") === sig;
+
+  if (!fresh) {
+    const keys = getElevenLabsPoolKeys();
+    let lastErr = null;
+    let success = false;
+    const rawMp3 = `${mp3}.raw.mp3`;
+    for (let attempt = 0; attempt < Math.min(12, keys.length); attempt++) {
+      const apiKey = keys[(elevenLabsKeyCursor + attempt) % keys.length];
+      try {
+        const res = await fetch(
+          `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(cleanVoiceId)}?output_format=mp3_44100_128`,
+          {
+            method: "POST",
+            headers: {
+              "xi-api-key": apiKey,
+              "Content-Type": "application/json",
+              Accept: "audio/mpeg",
+            },
+            body: JSON.stringify({
+              text,
+              model_id: modelId,
+              ...(languageCode ? { language_code: languageCode } : {}),
+              voice_settings: {
+                stability,
+                similarity_boost: similarityBoost,
+                style,
+                speed,
+                use_speaker_boost: true,
+              },
+            }),
+          },
+        );
+        if (!res.ok) {
+          const errText = await res.text().catch(() => "");
+          lastErr = new Error(`ElevenLabs HTTP ${res.status}: ${errText.slice(0, 240)}`);
+          continue;
+        }
+        const buf = Buffer.from(await res.arrayBuffer());
+        if (buf.length < 1000) {
+          lastErr = new Error(`ElevenLabs audio payload too small (${buf.length}B)`);
+          continue;
+        }
+        fs.writeFileSync(rawMp3, buf);
+        const af = [
+          "silenceremove=start_periods=1:start_silence=0.04:start_threshold=-40dB:stop_periods=-1:stop_silence=0.22:stop_threshold=-40dB",
+          ...(tempo && Math.abs(tempo - 1) > 0.01 ? [`atempo=${Number(tempo).toFixed(3)}`] : []),
+        ].join(",");
+        ffmpeg(["-i", rawMp3, "-af", af, "-c:a", "libmp3lame", "-b:a", "160k", mp3], "11labs-post");
+        fs.rmSync(rawMp3, { force: true });
+        fs.writeFileSync(stamp, sig);
+        elevenLabsKeyCursor = (elevenLabsKeyCursor + attempt) % keys.length;
+        success = true;
+        break;
+      } catch (err) {
+        lastErr = err;
+      }
+    }
+    if (!success) {
+      throw lastErr || new Error(`ElevenLabs TTS failed for voice ${cleanVoiceId}`);
+    }
+  }
+  const duration = probeDuration(mp3);
+  writeSrt(srt, [{ start: 0, end: duration, text }]);
+  return { mp3, srt, duration };
 }
 
 /** Parse an edge-tts SRT into [{ start, end, text }] seconds. */
@@ -140,3 +274,120 @@ export function framesToVideo({ frames, t0, tEnd }, out, { fps = 30, width = 192
   );
   return out;
 }
+
+/**
+ * Generates a crisp dual-transient UI mouse click sound effect WAV (`ui-click-sfx.wav`)
+ * using FFmpeg lavfi aevalsrc (high-attack 2.15kHz + 3.85kHz woody click + micro-snap at 26ms).
+ */
+export function ensureUiClickSfx(workDir) {
+  fs.mkdirSync(workDir, { recursive: true });
+  const clickWavPath = path.join(workDir, "ui-click-sfx.wav");
+  if (fs.existsSync(clickWavPath) && fs.statSync(clickWavPath).size > 200) return clickWavPath;
+  const expr =
+    "0.58*exp(-t*190)*sin(2*PI*2150*t)+0.35*exp(-t*280)*sin(2*PI*3850*t)+0.28*gte(t,0.026)*exp(-(t-0.026)*230)*sin(2*PI*2900*(t-0.026))";
+  ffmpeg(
+    [
+      "-f", "lavfi", "-i", `aevalsrc='${expr}':s=48000:d=0.085`,
+      "-af", "highpass=f=300,lowpass=f=9500,aformat=sample_rates=48000:channel_layouts=stereo",
+      "-ar", "48000", "-ac", "2", "-c:a", "pcm_s16le",
+      clickWavPath,
+    ],
+    "ui-click-sfx",
+  );
+  return clickWavPath;
+}
+
+/**
+ * Mixes a narrated video (`videoWithVoicePath`) with tactile UI click sound effects (`clickOffsetsSec`)
+ * and P0001 background music (`bgmAudioPath`) using sidechain ducking (`sidechaincompress`)
+ * so music swells during visual transitions and ducks cleanly under speech.
+ */
+export function mixVideoWithBgmAndClicks({
+  videoWithVoicePath,
+  outMp4Path,
+  bgmAudioPath = DEFAULT_BGM_P0001,
+  clickOffsetsSec = [],
+  totalDurationSec,
+  bgmVolume = 0.25,
+  workDir = path.dirname(outMp4Path),
+}) {
+  const dur = totalDurationSec ?? probeDuration(videoWithVoicePath);
+  const fadeOutStart = Math.max(0.8, dur - 2.0);
+  const hasBgm = bgmAudioPath && fs.existsSync(bgmAudioPath);
+  const clickWav = clickOffsetsSec.length ? ensureUiClickSfx(workDir) : null;
+
+  if (!hasBgm && !clickWav) {
+    if (videoWithVoicePath !== outMp4Path) fs.copyFileSync(videoWithVoicePath, outMp4Path);
+    return outMp4Path;
+  }
+
+  const inputs = ["-i", videoWithVoicePath];
+  let nextIdx = 1;
+  let bgmIdx = -1;
+  if (hasBgm) {
+    inputs.push("-stream_loop", "-1", "-i", bgmAudioPath);
+    bgmIdx = nextIdx++;
+  }
+
+  const clickLabels = [];
+  const clickFilters = [];
+  if (clickWav) {
+    clickOffsetsSec.forEach((sec, idx) => {
+      const ms = Math.max(10, Math.round(sec * 1000));
+      inputs.push("-i", clickWav);
+      const inIdx = nextIdx++;
+      const lbl = `[clk${idx}]`;
+      clickFilters.push(`[${inIdx}:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.65,adelay=${ms}|${ms}${lbl}`);
+      clickLabels.push(lbl);
+    });
+  }
+
+  const filterParts = [];
+  // Master voice track (highpass + presence + gentle compressor)
+  filterParts.push(
+    `[0:a]aformat=sample_rates=48000:channel_layouts=stereo,highpass=f=85,equalizer=f=3100:width_type=o:width=1.4:g=2.4,acompressor=threshold=-18dB:ratio=2.4:attack=8:release=120:makeup=2dB,volume=1.15[vo_clean]`,
+  );
+
+  let voicePlusClicks = "[vo_clean]";
+  if (clickLabels.length) {
+    filterParts.push(...clickFilters);
+    filterParts.push(
+      `[vo_clean]${clickLabels.join("")}amix=inputs=${1 + clickLabels.length}:duration=first:dropout_transition=0:normalize=0[vo_sfx]`,
+    );
+    voicePlusClicks = "[vo_sfx]";
+  }
+
+  if (hasBgm) {
+    filterParts.push(`${voicePlusClicks}asplit=2[vo_main][vo_sc]`);
+    filterParts.push(
+      `[${bgmIdx}:a]aformat=sample_rates=48000:channel_layouts=stereo,afade=t=in:st=0:d=1.0,afade=t=out:st=${fadeOutStart.toFixed(2)}:d=1.8,volume=${bgmVolume.toFixed(3)}[bgm_raw]`,
+    );
+    filterParts.push(
+      `[bgm_raw][vo_sc]sidechaincompress=threshold=0.022:ratio=4.5:attack=30:release=400:makeup=1[bgm_ducked]`,
+    );
+    filterParts.push(
+      `[vo_main][bgm_ducked]amix=inputs=2:duration=first:dropout_transition=0:normalize=0,alimiter=limit=0.96[aout]`,
+    );
+  } else {
+    filterParts.push(`${voicePlusClicks}alimiter=limit=0.96[aout]`);
+  }
+
+  const tmpOut = videoWithVoicePath === outMp4Path ? `${outMp4Path}.bgm-tmp.mp4` : outMp4Path;
+  ffmpeg(
+    [
+      ...inputs,
+      "-filter_complex", filterParts.join(";"),
+      "-map", "0:v",
+      "-map", "[aout]",
+      "-t", dur.toFixed(3),
+      "-c:v", "copy",
+      "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",
+      "-movflags", "+faststart",
+      tmpOut,
+    ],
+    "mixVideoWithBgmAndClicks",
+  );
+  if (tmpOut !== outMp4Path) fs.renameSync(tmpOut, outMp4Path);
+  return outMp4Path;
+}
+

@@ -1,83 +1,83 @@
 [
   {
+    "id": "loop-fx-pingpong",
+    "icon": "film",
+    "title_vi": "Studio Loop FX & Ping-Pong suốt 20 phút",
+    "body_vi": "Gạt nút **Once / Loop FX** trên thanh Keyframe để hiệu ứng chuyển cảnh (`Slide`, `Fade`, `Zoom`) và chuyển động Ping-Pong (`Zoom In ↔ Out`, `Pan Left ↔ Right`) lặp liên tục mỗi 2 giây trong suốt thời gian trình chiếu ảnh — kể cả 1 ảnh dài 20 phút (600 chu kỳ) vẫn render xong trong vài giây nhờ cơ chế nhân bản khối `xfade` tuần hoàn.",
+    "title_en": "Studio Loop FX & 20-minute Ping-Pong cycles",
+    "body_en": "Toggle **Once / Loop FX** on the Keyframe bar so transitions (`Slide`, `Fade`, `Zoom`) and Ping-Pong motions (`Zoom In ↔ Out`, `Pan Left ↔ Right`) repeat every 2 seconds throughout each image's display duration — even a 20-minute single image (600 cycles) renders in seconds via periodic `xfade` unit-block stream copy.",
+    "source": "packages/video-pipeline-core/compose.py · SequencePreview.tsx"
+  },
+  {
+    "id": "ai-video-reup",
+    "icon": "bolt",
+    "title_vi": "Tải đa nền tảng & AI Video Reup tự động",
+    "body_vi": "Dán link **TikTok, Douyin, YouTube, Facebook** để tải hàng loạt, hoặc chạy luồng **AI Reup** trọn gói: nhận diện giọng nói **Faster-Whisper STT**, dịch đa ngôn ngữ, lồng tiếng **Edge-TTS**, làm mờ phụ đề gốc và đốt phụ đề mới.",
+    "title_en": "Multi-platform Downloader & AI Video Reup",
+    "body_en": "Paste **TikTok, Douyin, YouTube or Facebook** links to batch-download, or run the full **AI Reup** pipeline: **Faster-Whisper STT** speech recognition, translation, **Edge-TTS** voiceover, original subtitle blur mask and fresh subtitle burn-in.",
+    "source": "src/features/reup/ReupScreen.tsx · worker/pipeline/reup_job.py"
+  },
+  {
+    "id": "smart-cut-split",
+    "icon": "timeline",
+    "title_vi": "Smart Cut & Split 1→N thông minh",
+    "body_vi": "Cắt bỏ đoạn đầu/cuối (**Trim Head/Tail**), trích xuất khoảng thời gian (**Range In/Out**), chia đều thành nhiều tập (**Split Chunks**) hoặc tự động tách theo điểm chuyển cảnh & khoảng lặng (**Auto-Split Scene/Silence**), rồi gửi thẳng sang Mixer.",
+    "title_en": "Smart Cut & Split 1→N",
+    "body_en": "Trim head/tail seconds, extract exact In/Out ranges, split into equal chunks or auto-split by scene change and audio silence — then push the resulting clips to Mixer or Encode in one click.",
+    "source": "src/features/cut/CutScreen.tsx · worker/pipeline/cut_job.py"
+  },
+  {
     "id": "stream-copy-mix",
     "icon": "zap",
-    "title_vi": "Ghép siêu nhanh bằng stream copy",
-    "body_vi": "Prefight đọc “dấu vân tay” giải mã của từng clip; nếu cùng một cụm, Mixer ghép bằng −c copy, không encode lại.",
-    "title_en": "Instant joins with stream copy",
-    "body_en": "Prefight fingerprints every clip's decoder config; when they share one cluster, Mixer joins them with −c copy — no re-encode.",
+    "title_vi": "Ghép siêu nhanh bằng Stream Copy",
+    "body_vi": "Preflight đọc “dấu vân tay” giải mã của từng clip; nếu cùng một cụm cấu hình, **Mixer** ghép tức thì bằng `-c copy`, không cần encode lại.",
+    "title_en": "Instant joins with Stream Copy",
+    "body_en": "Preflight fingerprints every clip's decoder config; when they share one cluster, **Mixer** joins them with `-c copy` — no re-encode.",
     "source": "worker/pipeline/fingerprint_split.py · POST /jobs/preflight"
   },
   {
     "id": "unified-vs-split",
     "icon": "git-merge",
-    "title_vi": "Unified mix hoặc chia nhóm",
-    "body_vi": "Clip lệch độ phân giải/FPS được đồng bộ lại trong một lượt Unified mix, hoặc Encode trước rồi ghép copy — bạn chọn trong hộp thoại Encode.",
-    "title_en": "Unified mix or split by cluster",
+    "title_vi": "Unified Mix hoặc chia nhóm thông minh",
+    "body_vi": "Clip lệch độ phân giải/FPS được đồng bộ lại trong một lượt **Unified Mix**, hoặc **Encode** chuẩn hoá trước rồi ghép copy — bạn chọn ngay trong hộp thoại.",
+    "title_en": "Unified Mix or split by cluster",
     "body_en": "Mismatched clips are rematched in one unified mix, or encoded first and then copy-joined — you choose in the Encode prompt.",
     "source": "skip_cluster_split · src/features/mixer/MixSplitEncodeModal.tsx"
   },
   {
     "id": "hardware-encoder",
     "icon": "cpu",
-    "title_vi": "Tự nhận GPU encoder",
-    "body_vi": "Worker thử NVENC, Quick Sync và AMF bằng một lần encode mẫu và dùng bộ mã hoá phần cứng chạy được, nếu không thì quay về x264.",
-    "title_en": "Hardware encoder detection",
-    "body_en": "The worker test-encodes with NVENC, Quick Sync and AMF and uses whichever hardware encoder works, falling back to x264.",
-    "source": "worker/pipeline/concat_job.py · _hw_encoder_for"
+    "title_vi": "Tự nhận GPU Encoder & 1–8 luồng song song",
+    "body_vi": "Worker tự thử **NVENC, Quick Sync, AMF** bằng một lần encode mẫu và chạy 1–8 luồng song song. Bảng thư viện ảnh hỗ trợ **> 1,000 cảnh** nhờ ảo hoá thanh cuộn ngang và bộ nhớ đệm thumbnail `256px` nhẹ.",
+    "title_en": "Hardware GPU Encoder & 1,000+ scene virtualization",
+    "body_en": "The worker test-encodes with **NVENC, Quick Sync and AMF** across 1–8 parallel slots, while the Studio timeline virtualizes **> 1,000 scenes** with a disk-backed `256px` thumbnail cache.",
+    "source": "worker/pipeline/concat_job.py · src/studio/lib/image-thumbnail-cache.ts"
   },
   {
     "id": "lab-pin",
     "icon": "pin",
-    "title_vi": "Encode một lần, dùng lại mãi",
-    "body_vi": "Video đã encode theo profile được ghim (lab pin); lần ghép sau Mixer dùng lại bằng stream copy thay vì encode lại.",
-    "title_en": "Encode once, reuse forever",
-    "body_en": "Clips encoded to a profile are pinned (lab pin), so later mixes reuse them via stream copy instead of re-encoding.",
+    "title_vi": "Encode một lần, dùng lại mãi (Lab Pin)",
+    "body_vi": "Video đã encode theo profile được ghim (**Lab Pin**); những lần ghép sau Mixer tự động dùng lại bằng stream copy thay vì encode lại.",
+    "title_en": "Encode once, reuse forever (Lab Pin)",
+    "body_en": "Clips encoded to a profile are pinned (**Lab Pin**), so later mixes reuse them via stream copy instead of re-encoding.",
     "source": "src/lib/encode-lab-pin.ts · encode_reuse_paths"
-  },
-  {
-    "id": "parallel-workers",
-    "icon": "layers",
-    "title_vi": "Chạy song song nhiều worker",
-    "body_vi": "Đặt 1–8 luồng Concurrent cho Mixer và Encode; bảng Outputs hiện tiến độ, thời gian chờ và thời gian xử lý của từng video.",
-    "title_en": "Parallel workers",
-    "body_en": "Run 1–8 concurrent slots for Mixer and Encode; the Outputs table shows progress, queue wait and processing time per video.",
-    "source": "parallel_workers · docs/worker-api.md"
-  },
-  {
-    "id": "mix-modes",
-    "icon": "shuffle",
-    "title_vi": "Sequential / Random cho từng nhóm",
-    "body_vi": "Chọn thứ tự Main, Intro, Outro riêng, số clip Main mỗi video và tổng số video — tạo hàng loạt biến thể từ một bộ clip.",
-    "title_en": "Sequential or Random per group",
-    "body_en": "Set Main, Intro and Outro order separately, Main clips per video and the total count — batch out variants from one clip set.",
-    "source": "src/features/mixer/MixerSettingRail.tsx"
   },
   {
     "id": "tts-voices",
     "icon": "mic",
-    "title_vi": "322 giọng đọc AI",
-    "body_vi": "Studio có 322 giọng (gồm tiếng Việt Hoài My, Nam Minh), nghe thử ngay và chỉnh tốc độ đọc.",
-    "title_en": "322 AI voices",
-    "body_en": "Studio ships 322 voices (including Vietnamese Hoài My and Nam Minh) with instant preview and speed control.",
-    "source": "worker/data/edge-voices-catalog.json"
-  },
-  {
-    "id": "keyframe-scenes",
-    "icon": "film",
-    "title_vi": "Dựng cảnh trên Keyframe",
-    "body_vi": "Mỗi ảnh là một cảnh với Transition, Effect và Duration; chế độ Image, Script hoặc Fit quyết định thời lượng video theo ảnh hay theo giọng đọc.",
-    "title_en": "Keyframe scenes",
-    "body_en": "Each image is a scene with Transition, Effect and Duration; Image, Script or Fit mode sets video length by images or by narration.",
-    "source": "src/studio/components/studio/KeyframeTimeline.tsx"
+    "title_vi": "322 giọng đọc AI & Phụ đề CapCut",
+    "body_vi": "Studio tích hợp sẵn 322 giọng đọc (gồm tiếng Việt **Hoài My, Nam Minh**), nghe thử tức thì, chỉnh tốc độ đọc và đốt phụ đề kiểu **Line** hoặc **CapCut** nổi chữ vàng theo nhịp nói.",
+    "title_en": "322 AI voices & CapCut subtitles",
+    "body_en": "Studio ships 322 voices (including Vietnamese **Hoài My** and **Nam Minh**) with instant preview, speed control and **Line** or **CapCut** word-by-word highlight subtitles.",
+    "source": "worker/data/edge-voices-catalog.json · SequencePreview.tsx"
   },
   {
     "id": "encode-profiles",
     "icon": "monitor",
     "title_vi": "Profile xuất chuẩn mạng xã hội",
-    "body_vi": "Vertical 9:16, Landscape 16:9, Square 1:1, bản 4K hoặc Keep source; Fit (pad) hoặc Stretch, lưu cạnh file gốc hoặc thư mục riêng.",
-    "title_en": "Upload-ready encode profiles",
-    "body_en": "Vertical 9:16, Landscape 16:9, Square 1:1, 4K variants or Keep source; Fit (pad) or Stretch, saved beside the source or to a custom folder.",
+    "body_vi": "**Vertical 9:16**, **Landscape 16:9**, **Square 1:1**, bản **4K** hoặc **Keep source**; chế độ khung hình Blur, Crop, Black hoặc Gradient, lưu cạnh file gốc hoặc thư mục riêng.",
+    "title_en": "Upload-ready social profiles",
+    "body_en": "**Vertical 9:16**, **Landscape 16:9**, **Square 1:1**, **4K** variants or **Keep source**; Blur, Crop, Black or Gradient framing, saved beside the source or to a custom folder.",
     "source": "src/lib/encode-preset.ts · EncodeSettingRail.tsx"
   }
 ]

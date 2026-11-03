@@ -5,11 +5,13 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { createContent, expandSections, renderPage } from "./render.mjs";
 
-export const platformRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-export const devRoot = path.resolve(platformRoot, "../..");
+const rawPlatformRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+export const platformRoot = (fs.realpathSync.native ?? fs.realpathSync)(rawPlatformRoot);
+export const devRoot = (fs.realpathSync.native ?? fs.realpathSync)(path.resolve(platformRoot, "../.."));
 export const sectionsDir = path.join(platformRoot, "sections");
 const engineClient = path.join(platformRoot, "engine", "client");
 
@@ -47,24 +49,77 @@ export function versionOf(site) {
   return { appVersion: v, siteVersion: `${v}+site.${stamp}` };
 }
 
+function readProductManifestRelease(site) {
+  try {
+    const pkgRel = site.config.appVersionFrom;
+    if (!pkgRel) return null;
+    const prodDir = path.dirname(path.join(devRoot, pkgRel));
+    const mfPath = path.join(prodDir, "tool.manifest.json");
+    if (!fs.existsSync(mfPath)) return null;
+    const mf = JSON.parse(fs.readFileSync(mfPath, "utf8"));
+    const pub = mf?.release?.latestPublished;
+    if (!pub?.tag) return null;
+    const asset = pub.asset || {};
+    const sizeBytes = Number(asset.size || 0);
+    return {
+      tag: pub.tag,
+      url: asset.downloadUrl || pub.url || "",
+      size: sizeBytes > 0 ? `${Math.round(sizeBytes / 1024 / 1024)} MB` : "",
+      date: (pub.publishedAt || "").slice(0, 10),
+      ...(asset.sha256 ? { sha256: asset.sha256 } : {}),
+      ...(asset.feedUrl ? { feedUrl: asset.feedUrl } : {}),
+    };
+  } catch {
+    return null;
+  }
+}
+
 /** Latest installer for the download buttons; last good answer cached in content/release.json. */
 export async function latestRelease(site) {
   const repo = site.config.releases?.repo;
   const cacheFile = path.join(site.dir, "content/release.json");
   const cached = fs.existsSync(cacheFile) ? JSON.parse(fs.readFileSync(cacheFile, "utf8")) : null;
-  const fallback = cached ?? { tag: "", url: repo ? `https://github.com/${repo}/releases/latest` : "", size: "", date: "" };
+  const manifestRel = readProductManifestRelease(site);
+  const fallback = manifestRel ?? cached ?? { tag: "", url: repo ? `https://github.com/${repo}/releases/latest` : "", size: "", date: "" };
   if (!repo) return fallback;
   try {
+    let token = String(process.env.GH_TOKEN || process.env.GITHUB_TOKEN || "").trim();
+    if (!token) {
+      const gh = spawnSync("gh", ["auth", "token"], { encoding: "utf8", windowsHide: true, shell: process.platform === "win32" });
+      if (gh.status === 0) token = String(gh.stdout || "").trim();
+    }
+    const headers = { accept: "application/vnd.github+json", "user-agent": "P0008-Landing-Platform/2.1" };
+    if (token) headers.authorization = `Bearer ${token}`;
     const res = await fetch(`https://api.github.com/repos/${repo}/releases/latest`, {
-      headers: { accept: "application/vnd.github+json" },
+      headers,
       signal: AbortSignal.timeout(6000),
     });
-    if (!res.ok) return fallback;
+    if (!res.ok) {
+      if (manifestRel && JSON.stringify(manifestRel) !== JSON.stringify(cached)) {
+        fs.writeFileSync(cacheFile, JSON.stringify(manifestRel, null, 2) + "\n");
+      }
+      return fallback;
+    }
     const j = await res.json();
     const pattern = new RegExp(site.config.releases.asset ?? "\\.exe$", "i");
     const asset = (j.assets || []).find((a) => pattern.test(a.name));
     if (!asset) return fallback;
-    const rel = { tag: j.tag_name || "", url: asset.browser_download_url, size: `${Math.round(asset.size / 1024 / 1024)} MB`, date: (j.published_at || "").slice(0, 10) };
+    const sha256 =
+      manifestRel?.tag === j.tag_name && manifestRel?.sha256
+        ? manifestRel.sha256
+        : cached?.tag === j.tag_name && cached?.sha256
+          ? cached.sha256
+          : undefined;
+    const feedAsset = (j.assets || []).find((a) => a.name === "latest.yml");
+    const feedUrl = feedAsset?.browser_download_url || manifestRel?.feedUrl;
+    const rel = {
+      tag: j.tag_name || "",
+      url: asset.browser_download_url,
+      size: `${Math.round(asset.size / 1024 / 1024)} MB`,
+      date: (j.published_at || "").slice(0, 10),
+      ...(sha256 ? { sha256 } : {}),
+      ...(feedUrl ? { feedUrl } : {}),
+    };
     if (JSON.stringify(rel) !== JSON.stringify(cached)) fs.writeFileSync(cacheFile, JSON.stringify(rel, null, 2) + "\n");
     return rel;
   } catch {
@@ -171,6 +226,10 @@ export function pageFor(site, file, ctx, release, versions) {
       releaseUrl: release.url,
       releaseSize: release.size,
       releaseDate: release.date,
+      releaseSha256: release.sha256 || "",
+      releaseSha256Short: release.sha256 ? `${release.sha256.slice(0, 16)}…${release.sha256.slice(-8)}` : "",
+      releaseSha256Hidden: release.sha256 ? "" : "hidden",
+      releaseFeedUrl: release.feedUrl || "",
       releaseMeta: release.tag && release.size ? `${release.tag} · ${release.size}` : release.tag,
       releasesPage: config.releases?.repo ? `https://github.com/${config.releases.repo}/releases` : "",
       stepCount: String(ctx.steps.length),

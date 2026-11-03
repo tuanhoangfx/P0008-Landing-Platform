@@ -22,10 +22,10 @@ in `sites/<id>/`, never a new app. Live: `https://ldp.infi.io.vn` (index of all 
 ## Laws
 
 1. **New landing = `node scripts/new-site.mjs`**, then content. Never hand-roll a landing inside a product (`Tool/P00xx/site`, `src/features/landing`) — `scripts/audit-sites.mjs` fails `staticSite` hosting outside `sites/` and warns on product-local landings.
-2. **Hosting key per site:** `<CODE>-SITE` in `Tool/scripts/lib/lenovo-spa-products.mjs` with `companionOf`, `staticSite: true`, `productRoot: Tool/P0008-Landing-Platform/sites/<id>`, `build: ["node","../../engine/build-site.mjs","--site","<id>"]`. The product manifest carries `site { platform: "P0008", siteId, registryKey }` + `urls.site`. `Deploy P00xx` keeps meaning the product itself. When the domain root is the product's own web app, mount the site instead: `new-site.mjs --mount` → `<CODE>-INTRO` with `mountPath: "/intro/"` (see SSOT § Mounted sites; P0009 `sites/sync`).
+2. **Hosting key per site:** `<CODE>-SITE` in `Tool/scripts/lib/lenovo-spa-products.mjs` with `companionOf`, `staticSite: true`, `productRoot: Tool/P0008-Landing-Platform/sites/<id>`, `build: ["node","../../engine/build-site.mjs","--site","<id>"]`. The product manifest carries `site { platform: "P0008", siteId, registryKey }` + `urls.site`. `Deploy P00xx` keeps meaning the product itself. When the domain root is the product's own web app, mount the site instead: `new-site.mjs --mount` → `<CODE>-INTRO` with `mountPath: "/intro/"` (see SSOT § Mounted sites; P0001 `sites/sync`).
 3. **Copy lives in content, never in templates.** Every `{{c.*}}` token must resolve for every language — `audit-sites` dry-renders all pages × languages.
 4. **Browser automation (capture/record/visual checks) = P0003 agent pool, headless** (`Tool/scripts/lib/stealth-playwright-page.mjs`), own `STEALTH_AGENT_KEY` per run. Never system Chrome or Playwright's bundled Chromium.
-5. **FFmpeg = the one copy** in `Tool/P0010-Video-Lab/worker/bin` (`VIDEO_LAB_FFMPEG` overrides). edge-tts ≥ 7.3.1.
+5. **FFmpeg = the one copy** in `Tool/P0006-Video-Lab/worker/bin` (`VIDEO_LAB_FFMPEG` overrides). edge-tts ≥ 7.3.1.
 6. package.json scripts run under PowerShell 5.1 (`.npmrc script-shell`): no `&&`, call bins as `node node_modules/...`.
 7. Patch scripts: never `String.replace(str, replacementWithDollarSigns)` — `$$` collapses to `$`. Use `split/join` or the Edit tool.
 
@@ -58,7 +58,8 @@ node engine/build-site.mjs --site videolab        # → sites/videolab/dist
 node scripts/build-all.mjs                         # every site + ldp admin (build-home)
 pnpm dev                                           # admin http://127.0.0.1:3008/?screen=sections
 node scripts/audit-sites.mjs                       # SSOT gate
-node Tool/scripts/deploy-lenovo-static.mjs --code P0010-SITE   # (from E:\Dev) one site
+node Tool/scripts/deploy-lenovo-static.mjs --code P0006-SITE   # (from E:\Dev) one site
+node Tool/scripts/deploy-lenovo-static.mjs --code P0001-INTRO  # P0001 Desk Console / Folder Sync landing
 node Tool/scripts/deploy-lenovo-static.mjs --code P0008        # ldp.infi.io.vn admin
 ```
 

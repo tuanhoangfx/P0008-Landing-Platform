@@ -1,61 +1,53 @@
 WEBVTT
 
 1
-00:00:00.350 --> 00:00:05.450
-Bước 1: Mở tab Drives ở thanh điều hướng bên trái, sau đó nhấn nút New hoặc Sign in trên dòng tài khoản.
+00:00:00.250 --> 00:00:07.642
+Bước 1: Trong menu Drive Sync bên trái, mở Drives và nhấn nút New hoặc Sign in để kết nối tài khoản Google Drive.
 
 2
-00:00:05.580 --> 00:00:11.510
-Xác nhận đăng nhập Google trên trình duyệt, cổng OAuth cục bộ 53682 sẽ tự động lưu khóa kết nối an toàn.
+00:00:08.242 --> 00:00:15.922
+Sau khi xác nhận trên trình duyệt, Desk Console tự động thống kê dung lượng trống, số lượng tệp và cấu hình Proxy riêng cho từng tài khoản.
 
 3
-00:00:11.640 --> 00:00:16.400
-Ngay lập tức, hệ thống tự động thống kê dung lượng lưu trữ cùng toàn bộ số lượng thư mục và tệp tin trên Drive.
+00:00:16.522 --> 00:00:23.794
+Bước 2: Chuyển sang màn hình Jobs và nhấn nút New, chọn chế độ đồng bộ hai chiều Two-way cùng thời gian chờ Debounce 20 giây.
 
 4
-00:00:18.350 --> 00:00:23.330
-Bước 2: Chuyển sang tab Jobs và nhấn nút New ở góc trên để khởi tạo một tác vụ đồng bộ mới.
+00:00:24.394 --> 00:00:30.658
+Chọn thư mục trên máy tính và thư mục Google Drive ngay trong hộp thoại, kèm bộ lọc tự động bỏ qua tệp rác.
 
 5
-00:00:23.460 --> 00:00:29.390
-Chọn chế độ đồng bộ hai chiều Two-way, rồi chọn thư mục máy tính và thư mục Google Drive ngay trên cây thư mục xổ xuống.
+00:00:31.258 --> 00:00:39.394
+Bước 3: Dùng dải thẻ chỉ số KPI phía trên để lọc nhanh các Job Đã đồng bộ, Đang chạy hoặc Lỗi, và bật tắt theo dõi tự động.
 
 6
-00:00:29.520 --> 00:00:34.380
-Đặt thời gian chờ Debounce 20 giây để phần mềm đợi bạn lưu tệp hoàn tất trước khi bắt đầu truyền tải.
+00:00:39.994 --> 00:00:46.546
+Ở cột bên phải, theo dõi lịch sử từng lượt đồng bộ trong History và nhật ký rclone trực tiếp trong Console.
 
 7
-00:00:36.350 --> 00:00:41.450
-Bước 3: Giám sát toàn bộ tiến trình trên không gian chia đôi 7 phần 3 cùng dải 8 thẻ chỉ số KPI trực quan.
+00:00:47.146 --> 00:00:53.266
+Bước 4: Nhấp vào một dòng Job để mở hộp thoại chi tiết, chỉnh sửa cấu hình hoặc xem nhật ký thay đổi.
 
 8
-00:00:41.580 --> 00:00:47.310
-Nhấp vào từng thẻ KPI để lọc nhanh các tác vụ Đã đồng bộ, Đang chạy hoặc Lỗi, và bật tắt watcher 24 trên 7.
+00:00:53.866 --> 00:01:00.490
+Mục Folders gộp cây thư mục máy tính và Google Drive để đối chiếu từng tệp và xử lý bản xung đột bằng một cú bấm.
 
 9
-00:00:47.440 --> 00:00:52.390
-Ở cột bên phải, bạn theo dõi trực tiếp lịch sử từng phiên chạy cùng bảng Console phân loại luồng nhật ký theo thời gian thực.
+00:01:01.090 --> 00:01:09.994
+Bước 5: Màn hình Clips tự động lưu lịch sử văn bản, liên kết, hình ảnh bạn sao chép và cho phép bấm Ctrl Shift Q để dán nhanh ở mọi ứng dụng.
 
 10
-00:00:54.350 --> 00:00:59.550
-Bước 4: Nhấn vào bất kỳ dòng tác vụ nào để mở cửa sổ chi tiết Layout 3 và chuyển sang mục đối chiếu cây thư mục.
+00:01:10.594 --> 00:01:16.738
+Bước 6: Màn hình Runners quản lý các dịch vụ cục bộ kèm nút bật tắt nhanh và bảng log thời gian thực.
 
 11
-00:00:59.680 --> 00:01:05.130
-So sánh trực tiếp từng tệp giữa máy tính và Google Drive với các nhãn trạng thái Đồng bộ, Khác biệt hoặc Chỉ có ở một bên.
+00:01:17.338 --> 00:01:24.394
+Trong System, công cụ PC Optimizer giúp theo dõi tiến trình và bấm Optimize All để giải phóng RAM nền ngay lập tức.
 
 12
-00:01:05.260 --> 00:01:10.390
-Nếu phát sinh tệp xung đột do sửa đồng thời ở hai nơi, bạn có thể chọn giữ bản mong muốn chỉ với một cú nhấp chuột.
+00:01:24.994 --> 00:01:32.938
+Bước 7: Tinh chỉnh giới hạn băng thông, Proxy HTTP hoặc SOCKS5 tự chuyển về kết nối trực tiếp khi mạng gián đoạn.
 
 13
-00:01:12.350 --> 00:01:17.540
-Bước 5: Mở tab System để tinh chỉnh giới hạn băng thông, tần suất gọi API Google và số luồng truyền tải song song.
-
-14
-00:01:17.670 --> 00:01:23.150
-Thiết lập Proxy HTTP hoặc SOCKS5 kèm cơ chế tự động chuyển sang kết nối trực tiếp khi Proxy bị gián đoạn.
-
-15
-00:01:23.280 --> 00:01:28.380
-Dữ liệu luôn an toàn tuyệt đối nhờ Thùng rác Google Drive, bản sao lưu theo mốc giờ và chốt chặn xóa nhầm quá 10 phần trăm.
+00:01:33.538 --> 00:01:40.066
+Mọi tệp xóa hoặc ghi đè đều được bảo vệ an toàn trong Thùng rác Google Drive và thư mục sao lưu theo mốc giờ.

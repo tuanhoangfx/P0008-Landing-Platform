@@ -1,53 +1,57 @@
 {
   "heroShot": "mixer-done",
-  "highlights": ["install", "studio-script", "studio-voice", "mixer-settings", "mixer-results", "encode-results"],
+  "highlights": ["install", "studio-keyframe", "reup-overview", "cut-overview", "mixer-settings", "encode-results"],
   "pipeline": [
     { "chapter": "studio", "color": "#34d399" },
+    { "chapter": "reup", "color": "#f472b6" },
+    { "chapter": "cut", "color": "#10b981" },
     { "chapter": "mixer", "color": "#818cf8" },
     { "chapter": "encode", "color": "#fbbf24" }
   ],
   "vi": {
     "meta": {
-      "title": "Video Lab — Dựng, ghép và chuẩn hoá video hàng loạt trên Windows",
-      "description": "Video Lab gom Studio dựng cảnh có giọng đọc, Mixer ghép Intro–Main–Outro hàng loạt và Encode chuẩn hoá cho mọi nền tảng vào một ứng dụng Windows, tăng tốc bằng GPU.",
-      "ogTitle": "Video Lab — một cửa sổ cho cả dây chuyền video",
-      "ogDescription": "Dựng cảnh, ghép hàng loạt, chuẩn hoá — chạy ngay trên máy bạn."
+      "title": "Video Lab — Studio dựng cảnh Loop FX, AI Reup, Smart Cut, Mixer & Encode hàng loạt trên Windows",
+      "description": "Video Lab hợp nhất Studio dựng cảnh có 322 giọng đọc AI & Loop FX, tải đa nền tảng & AI Video Reup, Smart Cut 1→N, Mixer ghép Intro–Main–Outro hàng loạt và Encode chuẩn hoá GPU vào một ứng dụng Windows.",
+      "ogTitle": "Video Lab — Trọn dây chuyền sản xuất video tự động trên Windows",
+      "ogDescription": "Studio dựng cảnh Loop FX, AI Reup, Smart Cut 1→N, Mixer ghép hàng loạt, Encode chuẩn hoá GPU — chạy ngay trên máy bạn."
     },
     "hero": {
-      "pill": "Bản mới",
-      "title": "Một cửa sổ cho cả",
-      "titleEm": "dây chuyền video",
-      "lead": "Dựng cảnh từ ảnh và kịch bản, ghép Intro – Main – Outro hàng loạt, chuẩn hoá cho mọi nền tảng. Tất cả chạy ngay trên máy bạn, tăng tốc bằng GPU.",
-      "primary": "Tải cho Windows",
+      "pill": "Windows · Studio · AI Reup · Smart Cut · Mixer · Encode",
+      "title": "Một bảng điều khiển cho trọn",
+      "titleEm": "dây chuyền sản xuất video",
+      "lead": "Dựng cảnh từ hàng nghìn ảnh với hiệu ứng lặp Loop FX, tải & lồng tiếng lại video bằng AI Reup, tách clip thông minh 1→N, ghép Intro – Main – Outro hàng loạt và chuẩn hoá bằng GPU.",
+      "primary": "Tải Video Lab (.exe)",
       "secondary": "Xem hướng dẫn",
       "stepsSuffix": "bước"
     },
     "stats": [
-      { "count": 322, "label": "giọng đọc TTS" },
-      { "prefix": "1–", "count": 8, "label": "luồng FFmpeg song song" },
-      { "text": "NVENC · QSV · AMF", "label": "tự chọn bộ mã hoá GPU" },
-      { "count": 100, "suffix": "%", "label": "Mixer & Encode offline" }
+      { "count": 322, "label": "giọng đọc AI + Loop FX Ping-Pong" },
+      { "text": "AI Reup & Cut", "label": "Whisper STT · dịch · tách cảnh 1→N" },
+      { "prefix": "1–", "count": 8, "label": "luồng FFmpeg & GPU song song" },
+      { "count": 100, "suffix": "%", "label": "xử lý trực tiếp trên ổ đĩa" }
     ],
-    "pipelineHead": { "eyebrow": "Cách hoạt động", "title": "Ba màn hình.", "titleEm": "Một luồng liền mạch.", "lead": "Mỗi màn hình làm tốt một việc và chuyền kết quả cho bước sau chỉ với một cú bấm." },
+    "pipelineHead": { "eyebrow": "Cách hoạt động", "title": "Năm công cụ chuyên biệt.", "titleEm": "Một luồng liền mạch.", "lead": "Từ dựng cảnh Studio, tải & lồng tiếng AI Reup, cắt tách Smart Cut đến ghép hàng loạt Mixer và chuẩn hoá Encode — mỗi bước chuyển kết quả sang bước kế tiếp chỉ với 1 cú nhấp chuột." },
     "pipelineNodes": [
-      { "body": "Ảnh + kịch bản + giọng đọc → cảnh dựng sẵn trên timeline keyframe.", "out": "Gửi sang Mixer →" },
-      { "body": "Ghép Intro, Main, Outro theo thứ tự hoặc ngẫu nhiên, ra hàng loạt video cùng lúc.", "out": "Tự kiểm tra trước khi ghép →" },
-      { "body": "Đưa mọi clip về một profile tải lên để video ghép không đứng hình.", "out": "MP4 sẵn sàng đăng ✓" }
+      { "body": "Ảnh (.jpg/.png/.webp) + kịch bản + 322 giọng đọc + chế độ lặp chuyển cảnh Loop FX (Ping-Pong motion suốt cảnh dài 20 phút).", "out": "Gửi sang Mixer →" },
+      { "body": "Tải video TikTok/Douyin/YouTube/FB và chạy AI Video Reup: Faster-Whisper STT nhận diện lời thoại, dịch thuật, lồng tiếng AI và burn phụ đề.", "out": "Chuyển sang Cut / Mixer →" },
+      { "body": "Cắt đầu/cuối, lấy khoảng In/Out, chia đều Chunks hoặc tự động tách theo chuyển cảnh & khoảng lặng (1→N).", "out": "Đẩy thẳng vào Mixer →" },
+      { "body": "Ghép Intro, Main, Outro theo thứ tự hoặc ngẫu nhiên, chạy 1–8 luồng song song bằng Stream Copy hoặc Unified Mix.", "out": "Kiểm tra cấu hình giải mã →" },
+      { "body": "Đưa mọi clip về một profile tải lên (9:16, 16:9, 1:1, 4K) kèm Lab Pin để ghép không bao giờ đứng hình.", "out": "MP4 sẵn sàng đăng ✓" }
     ],
-    "featuresHead": { "eyebrow": "Tính năng", "title": "Làm nhanh,", "titleEm": "không đánh đổi chất lượng.", "lead": "Những thứ Video Lab tự lo để bạn chỉ việc bấm Start." },
-    "guideHead": { "eyebrow": "Hướng dẫn nhanh", "title": "Từ cài đặt đến", "titleEm": "video đầu tiên.", "lead": "Cuộn xuống để đi qua từng màn hình — ảnh chụp từ chính ứng dụng.", "more": "Xem đủ {n} bước hướng dẫn →" },
+    "featuresHead": { "eyebrow": "Tính năng", "title": "Tốc độ phần cứng,", "titleEm": "tự động hoá trọn gói.", "lead": "Mọi công đoạn dựng cảnh, Reup AI, cắt tách và ghép video hàng loạt được tối ưu sẵn trong Video Lab." },
+    "guideHead": { "eyebrow": "Hướng dẫn nhanh", "title": "Từ cài đặt đến", "titleEm": "lô video hoàn chỉnh.", "lead": "Cuộn xuống để đi qua từng màn hình — ảnh chụp thực tế từ ứng dụng.", "more": "Xem đủ {n} bước hướng dẫn →" },
     "videoHead": { "eyebrow": "Video hướng dẫn", "title": "Xem một lượt,", "titleEm": "làm theo ngay.", "lead": "Có phụ đề tiếng Việt và chia chương — bấm vào thanh thời gian để nhảy tới phần bạn cần." },
     "faqHead": { "eyebrow": "Hỏi đáp", "title": "Câu hỏi thường gặp" },
-    "cta": { "title": "Sẵn sàng dựng video đầu tiên?", "body": "Bộ cài Windows 64-bit, đã kèm FFmpeg. Ứng dụng tự cập nhật khi có bản mới.", "primary": "Tải Video Lab", "secondary": "Hướng dẫn cài đặt" },
+    "cta": { "title": "Sẵn sàng cài đặt Video Lab?", "body": "Bộ cài Windows 64-bit, đã kèm sẵn FFmpeg và Worker xử lý video. Hỗ trợ tự động cập nhật 1 chạm ngay trên thanh Header.", "primary": "Tải Video Lab", "secondary": "Hướng dẫn cài đặt" },
     "guidePage": {
-      "title": "Hướng dẫn sử dụng Video Lab — từng bước, có ảnh thật",
-      "description": "Hướng dẫn Video Lab từng bước: cài đặt, dựng cảnh trong Studio, ghép hàng loạt trong Mixer, chuẩn hoá bằng Encode.",
+      "title": "Hướng dẫn sử dụng Video Lab (Studio, AI Reup, Cut, Mixer, Encode) — từng bước, có ảnh thật",
+      "description": "Hướng dẫn Video Lab từng bước: cài đặt, dựng cảnh Loop FX trong Studio, tải & lồng tiếng AI Reup, cắt tách Smart Cut, ghép hàng loạt trong Mixer và chuẩn hoá bằng Encode.",
       "ogTitle": "Hướng dẫn sử dụng Video Lab",
       "eyebrow": "Hướng dẫn",
       "stepsSuffix": "bước",
-      "h1": "Học Video Lab",
-      "h1Em": "trong một buổi chiều.",
-      "lead": "Năm chương ngắn, mỗi chương là một màn hình. Đọc theo thứ tự hoặc nhảy thẳng tới phần bạn cần.",
+      "h1": "Làm chủ Video Lab",
+      "h1Em": "trong mười phút.",
+      "lead": "Bảy chương ngắn theo đúng thứ tự công việc: cài đặt, Studio dựng cảnh, AI Reup, Smart Cut, Mixer ghép hàng loạt, Encode chuẩn hoá và System.",
       "videoEyebrow": "Video đầy đủ",
       "videoTitle": "Xem toàn bộ trong vài phút",
       "videoLead": "",
@@ -56,70 +60,72 @@
       "stepsTitleEm": "một trang."
     },
     "downloadPage": {
-      "title": "Tải Video Lab cho Windows",
-      "description": "Tải bộ cài Video Lab mới nhất cho Windows 10/11 64-bit. Đã kèm FFmpeg, tự cập nhật.",
+      "title": "Tải Video Lab (Studio · AI Reup · Cut · Mixer · Encode) cho Windows",
+      "description": "Tải bộ cài Video Lab mới nhất cho Windows 10/11 64-bit. Đã kèm FFmpeg, tăng tốc GPU và tự động cập nhật 1 chạm.",
       "h1": "Tải Video Lab",
       "latest": "Bản mới nhất",
       "primary": "Tải bộ cài (.exe)",
       "all": "Tất cả phiên bản",
-      "note": "Bấm nút để tải. File được tải trực tiếp từ GitHub Releases.",
+      "note": "Bấm nút để tải. File được tải trực tiếp từ GitHub Releases và hỗ trợ tự động cập nhật ngay trong ứng dụng.",
       "install": [
         { "title": "Chạy file `Video-Lab-Setup-….exe`", "body": "Nếu Windows SmartScreen hiện cảnh báo, bấm *More info → Run anyway*." },
-        { "title": "Làm theo trình cài đặt", "body": "Chọn thư mục cài (mặc định là được) rồi bấm Install. Mất khoảng một phút." },
-        { "title": "Mở Video Lab", "body": "Từ Start Menu hoặc biểu tượng trên Desktop. Lần đầu mở có thể mất vài giây để khởi động worker." }
+        { "title": "Làm theo trình cài đặt", "body": "Chọn thư mục cài (mặc định là được) rồi bấm Install. Bộ cài tự tạo biểu tượng trên Desktop và Start Menu." },
+        { "title": "Mở Video Lab", "body": "Khởi động ứng dụng: thanh bên trái có đủ **Studio**, **Reup**, **Cut**, **Mixer**, **Encode** và **System** sẵn sàng làm việc." }
       ],
       "reqs": [
         { "label": "Hệ điều hành", "value": "Windows 10 / 11 · 64-bit" },
-        { "label": "Đi kèm", "value": "FFmpeg · worker xử lý video" },
-        { "label": "Tăng tốc GPU", "value": "NVIDIA · Intel · AMD" },
-        { "label": "Cập nhật", "value": "Tự động trong ứng dụng" }
+        { "label": "Đi kèm", "value": "FFmpeg · Worker AI Reup · Studio Loop FX" },
+        { "label": "Tăng tốc GPU", "value": "NVIDIA NVENC · Intel QSV · AMD AMF" },
+        { "label": "Cập nhật", "value": "1-Click Auto-Update trên thanh Header" }
       ],
-      "guideLink": "Xem hướng dẫn cài đặt có ảnh →"
+      "guideLink": "Xem hướng dẫn có ảnh →"
     },
     "rail": { "top": "Giới thiệu", "pipeline": "Cách hoạt động", "features": "Tính năng", "guide": "Hướng dẫn", "video": "Video", "faq": "Hỏi đáp", "download": "Tải về", "chapters": "Các chương", "steps": "Tất cả các bước", "chapterSteps": "Các bước", "allChapters": "← Tất cả chương" }
   },
   "en": {
     "meta": {
-      "title": "Video Lab — Build, batch-join and normalise videos on Windows",
-      "description": "Video Lab puts a narrated scene Studio, a batch Intro–Main–Outro Mixer and an upload-ready Encode into one Windows app, accelerated by your GPU.",
-      "ogTitle": "Video Lab — one window for the whole video pipeline",
-      "ogDescription": "Build scenes, batch-join, normalise — right on your own machine."
+      "title": "Video Lab — Studio Loop FX, AI Reup, Smart Cut, Batch Mixer & GPU Encode for Windows",
+      "description": "Video Lab unifies a narrated scene Studio with 322 AI voices & Loop FX, multi-platform Downloader & AI Video Reup, Smart Cut 1→N, batch Intro–Main–Outro Mixer and GPU Encode in one Windows desktop app.",
+      "ogTitle": "Video Lab — Complete automated video production pipeline on Windows",
+      "ogDescription": "Studio with Loop FX, AI Reup, Smart Cut 1→N, batch Mixer and GPU Encode — right on your own machine."
     },
     "hero": {
-      "pill": "New",
-      "title": "One window for the whole",
-      "titleEm": "video pipeline",
-      "lead": "Build scenes from images and a script, batch-join Intro – Main – Outro, and normalise for every platform. All of it runs on your own machine, accelerated by your GPU.",
-      "primary": "Download for Windows",
+      "pill": "Windows · Studio · AI Reup · Smart Cut · Mixer · Encode",
+      "title": "One desktop console for your",
+      "titleEm": "entire video pipeline",
+      "lead": "Build scenes from 1,000+ images with continuous Loop FX transitions, download & dub videos with AI Reup, split clips 1→N with Smart Cut, batch-join Intro – Main – Outro and normalise with your GPU.",
+      "primary": "Download Video Lab (.exe)",
       "secondary": "Read the guide",
       "stepsSuffix": "steps"
     },
     "stats": [
-      { "count": 322, "label": "TTS voices" },
-      { "prefix": "1–", "count": 8, "label": "parallel FFmpeg workers" },
-      { "text": "NVENC · QSV · AMF", "label": "GPU encoder picked for you" },
-      { "count": 100, "suffix": "%", "label": "offline Mixer & Encode" }
+      { "count": 322, "label": "AI voices + Ping-Pong Loop FX" },
+      { "text": "AI Reup & Cut", "label": "Whisper STT · translate · 1→N split" },
+      { "prefix": "1–", "count": 8, "label": "parallel FFmpeg & GPU workers" },
+      { "count": 100, "suffix": "%", "label": "local disk processing" }
     ],
-    "pipelineHead": { "eyebrow": "How it works", "title": "Three screens.", "titleEm": "One smooth flow.", "lead": "Each screen does one job well and hands its result to the next with a single click." },
+    "pipelineHead": { "eyebrow": "How it works", "title": "Five focused tools.", "titleEm": "One seamless flow.", "lead": "From Studio scene building, AI Reup dubbing and Smart Cut splitting to batch Mixer joining and Encode normalisation — every screen hands its output to the next in one click." },
     "pipelineNodes": [
-      { "body": "Images + script + voice → scenes laid out on a keyframe timeline.", "out": "Send to Mixer →" },
-      { "body": "Join Intro, Main and Outro in order or at random, producing a batch of videos at once.", "out": "Checks clips before joining →" },
-      { "body": "Bring every clip to one upload profile so joined videos never freeze.", "out": "MP4 ready to post ✓" }
+      { "body": "Images (.jpg/.png/.webp) + script + 322 AI voices + continuous Loop FX transitions (Ping-Pong motion across 20-minute scenes).", "out": "Send to Mixer →" },
+      { "body": "Download TikTok/Douyin/YouTube/FB videos and run AI Video Reup: Faster-Whisper STT transcription, translation, AI voiceover and subtitle burn-in.", "out": "Send to Cut / Mixer →" },
+      { "body": "Trim head/tail, extract In/Out ranges, split into equal chunks or auto-split by scene change and silence (1→N).", "out": "Push straight to Mixer →" },
+      { "body": "Join Intro, Main and Outro in order or at random across 1–8 parallel workers via Stream Copy or Unified Mix.", "out": "Pre-checks decoder profiles →" },
+      { "body": "Bring every clip to one upload profile (9:16, 16:9, 1:1, 4K) with Lab Pin reuse so joined videos never freeze.", "out": "MP4 ready to post ✓" }
     ],
-    "featuresHead": { "eyebrow": "Features", "title": "Fast,", "titleEm": "without trading off quality.", "lead": "What Video Lab takes care of, so all you do is press Start." },
-    "guideHead": { "eyebrow": "Quick guide", "title": "From install to", "titleEm": "your first video.", "lead": "Scroll to walk through each screen — every screenshot comes from the app itself.", "more": "See all {n} steps →" },
+    "featuresHead": { "eyebrow": "Features", "title": "Hardware speed,", "titleEm": "end-to-end automation.", "lead": "Everything you need for scene composition, AI video localization, smart splitting and batch mixing in one console." },
+    "guideHead": { "eyebrow": "Quick guide", "title": "From install to", "titleEm": "your first batch of videos.", "lead": "Scroll to walk through each screen — every screenshot comes from the app itself.", "more": "See all {n} steps →" },
     "videoHead": { "eyebrow": "Video tutorial", "title": "Watch once,", "titleEm": "follow along.", "lead": "Narrated in Vietnamese with chapters — click the timeline to jump to the part you need." },
     "faqHead": { "eyebrow": "FAQ", "title": "Frequently asked questions" },
-    "cta": { "title": "Ready to build your first video?", "body": "Windows 64-bit installer with FFmpeg included. The app updates itself when a new version ships.", "primary": "Download Video Lab", "secondary": "Install guide" },
+    "cta": { "title": "Ready to install Video Lab?", "body": "Windows 64-bit installer with FFmpeg and video worker included. Supports 1-click auto-updates right from the Header.", "primary": "Download Video Lab", "secondary": "Install guide" },
     "guidePage": {
-      "title": "Video Lab guide — step by step, with real screenshots",
-      "description": "Step-by-step Video Lab guide: install, build scenes in Studio, batch-join in Mixer, normalise with Encode.",
+      "title": "Video Lab guide (Studio, AI Reup, Cut, Mixer, Encode) — step by step, with real screenshots",
+      "description": "Step-by-step Video Lab guide: install, build Loop FX scenes in Studio, download & dub with AI Reup, split with Smart Cut, batch-join in Mixer and normalise with Encode.",
       "ogTitle": "Video Lab guide",
       "eyebrow": "Guide",
       "stepsSuffix": "steps",
       "h1": "Learn Video Lab",
-      "h1Em": "in one afternoon.",
-      "lead": "Five short chapters, one per screen. Read them in order or jump straight to what you need.",
+      "h1Em": "in ten minutes.",
+      "lead": "Seven short chapters in the order you'll use them: install, Studio, AI Reup, Smart Cut, Mixer, Encode and System.",
       "videoEyebrow": "Full video",
       "videoTitle": "The whole tour in a few minutes",
       "videoLead": "Narrated in Vietnamese, with chapters.",
@@ -128,25 +134,25 @@
       "stepsTitleEm": "on one page."
     },
     "downloadPage": {
-      "title": "Download Video Lab for Windows",
-      "description": "Get the latest Video Lab installer for Windows 10/11 64-bit. FFmpeg included, updates itself.",
+      "title": "Download Video Lab (Studio · AI Reup · Cut · Mixer · Encode) for Windows",
+      "description": "Get the latest Video Lab installer for Windows 10/11 64-bit. FFmpeg included, GPU-accelerated, with 1-click auto-updates.",
       "h1": "Download Video Lab",
       "latest": "Latest release",
       "primary": "Download installer (.exe)",
       "all": "All versions",
-      "note": "The file downloads straight from GitHub Releases.",
+      "note": "The file downloads straight from GitHub Releases and supports 1-click in-app auto-updates.",
       "install": [
         { "title": "Run `Video-Lab-Setup-….exe`", "body": "If Windows SmartScreen warns you, click *More info → Run anyway*." },
-        { "title": "Follow the installer", "body": "Pick a folder (the default is fine) and click Install. It takes about a minute." },
-        { "title": "Open Video Lab", "body": "From the Start Menu or the desktop icon. The first launch may take a few seconds while the worker starts." }
+        { "title": "Follow the installer", "body": "Pick a folder (the default is fine) and click Install. Desktop and Start Menu shortcuts are created automatically." },
+        { "title": "Open Video Lab", "body": "Launch the app: the left sidebar holds **Studio**, **Reup**, **Cut**, **Mixer**, **Encode** and **System** ready to go." }
       ],
       "reqs": [
         { "label": "System", "value": "Windows 10 / 11 · 64-bit" },
-        { "label": "Included", "value": "FFmpeg · video worker" },
-        { "label": "GPU acceleration", "value": "NVIDIA · Intel · AMD" },
-        { "label": "Updates", "value": "Automatic, in-app" }
+        { "label": "Included", "value": "FFmpeg · AI Reup Worker · Studio Loop FX" },
+        { "label": "GPU acceleration", "value": "NVIDIA NVENC · Intel QSV · AMD AMF" },
+        { "label": "Updates", "value": "1-Click Header Auto-Update" }
       ],
-      "guideLink": "See the illustrated install guide →"
+      "guideLink": "See the illustrated guide →"
     },
     "rail": { "top": "Overview", "pipeline": "How it works", "features": "Features", "guide": "Guide", "video": "Video", "faq": "FAQ", "download": "Download", "chapters": "Chapters", "steps": "All steps", "chapterSteps": "Steps", "allChapters": "← All chapters" }
   }

@@ -139,6 +139,8 @@ const UI = {
     version: "Phiên bản",
     footNav: "Chân trang",
     releases: "Các bản phát hành",
+    privacy: "Chính sách bảo mật",
+    terms: "Điều khoản dịch vụ",
     idx: {
       home: ["Trang chủ", (n) => `Giới thiệu ${n}`],
       guide: ["Hướng dẫn", (n) => `${n} bước có ảnh thật`],
@@ -176,6 +178,8 @@ const UI = {
     version: "Version",
     footNav: "Footer",
     releases: "All releases",
+    privacy: "Privacy Policy",
+    terms: "Terms of Service",
     idx: {
       home: ["Home", (n) => `${n} overview`],
       guide: ["Guide", (n) => `${n} steps with real screenshots`],
@@ -420,11 +424,14 @@ function searchIndex(ctx, page) {
 function siteFooter(page, ctx) {
   const lang = langOf(page);
   const t = UI[lang];
+  const hasPrivacy = fs.existsSync(path.join(siteRootForShots, "pages/privacy/index.html"));
+  const hasTerms = fs.existsSync(path.join(siteRootForShots, "pages/terms/index.html"));
+  const legalLinks = `${hasPrivacy ? `<a href="${lp(lang, "/privacy/")}">${t.privacy}</a>` : ""}${hasTerms ? `<a href="${lp(lang, "/terms/")}">${t.terms}</a>` : ""}`;
   return `${searchIndex(ctx, page)}<footer class="foot">
   <div class="foot__in">
     <div class="foot__brand"><img src="/favicon.svg" width="24" height="24" alt=""><span>${esc(siteName())}</span><small>${t.version} {{appVersion}}</small></div>
     <nav aria-label="${t.footNav}">
-      <a href="${lp(lang, "/guide/")}">${t.nav.guide}</a><a href="${lp(lang, "/download/")}">${t.download}</a><a href="{{releasesPage}}" rel="noopener">${t.releases}</a><a href="${lp(lang, "/#faq")}">${t.nav.faq}</a>
+      <a href="${lp(lang, "/guide/")}">${t.nav.guide}</a><a href="${lp(lang, "/download/")}">${t.download}</a><a href="{{releasesPage}}" rel="noopener">${t.releases}</a><a href="${lp(lang, "/#faq")}">${t.nav.faq}</a>${legalLinks}
     </nav>
     ${siteCopy("footNote", lang) ? `<p class="foot__note">${esc(siteCopy("footNote", lang))}</p>` : ""}
   </div>

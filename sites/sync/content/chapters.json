@@ -5,10 +5,10 @@
     "color": "#a78bfa",
     "title_vi": "Cài đặt",
     "kicker_vi": "Bắt đầu",
-    "summary_vi": "Cài Folder Sync cho Windows và làm quen ba màn hình Jobs, Drives, System.",
+    "summary_vi": "Cài Desk Console cho Windows và làm quen các khu vực Drive Sync (Jobs, Drives), Clips (Ctrl+Shift+Q) và System.",
     "title_en": "Install",
     "kicker_en": "Get started",
-    "summary_en": "Install Folder Sync for Windows and meet its three screens: Jobs, Drives and System."
+    "summary_en": "Install Desk Console for Windows and explore Drive Sync (Jobs, Drives), Clips (Ctrl+Shift+Q) and System."
   },
   {
     "id": "drives",
@@ -16,10 +16,10 @@
     "color": "#34d399",
     "title_vi": "Drives",
     "kicker_vi": "Kết nối Google Drive",
-    "summary_vi": "Đăng nhập một hoặc nhiều tài khoản Google Drive, xem dung lượng và số tệp của từng tài khoản.",
+    "summary_vi": "Đăng nhập một hoặc nhiều tài khoản Google Drive, xem dung lượng, gắn Proxy riêng và số tệp của từng tài khoản.",
     "title_en": "Drives",
     "kicker_en": "Connect Google Drive",
-    "summary_en": "Sign in to one or more Google Drive accounts and see each account's storage and file counts."
+    "summary_en": "Sign in to one or more Google Drive accounts, view storage quotas, assign per-account proxies and file counts."
   },
   {
     "id": "jobs",
@@ -27,10 +27,10 @@
     "color": "#38bdf8",
     "title_vi": "Tạo Job",
     "kicker_vi": "Cặp thư mục",
-    "summary_vi": "Ghép một thư mục trên máy với một thư mục Google Drive, chọn chiều đồng bộ và thời gian chờ.",
+    "summary_vi": "Ghép thư mục trên máy (hoặc chuột phải từ Windows Explorer) với thư mục Google Drive, chọn chiều đồng bộ, Proxy (Follow Drive / Direct / Custom) và thời gian chờ.",
     "title_en": "Create a job",
     "kicker_en": "Folder pairs",
-    "summary_en": "Pair a folder on your PC with a Google Drive folder, pick the sync direction and the settle time."
+    "summary_en": "Pair a folder on your PC (or right-click in Windows Explorer) with a Google Drive folder, pick the sync direction, Proxy (Follow Drive / Direct / Custom) and settle time."
   },
   {
     "id": "monitor",
@@ -38,10 +38,10 @@
     "color": "#818cf8",
     "title_vi": "Theo dõi",
     "kicker_vi": "History & Console",
-    "summary_vi": "Lọc Jobs theo trạng thái, xem lịch sử từng lượt chạy và log rclone trực tiếp.",
+    "summary_vi": "Lọc Jobs theo trạng thái KPI, xem lịch sử từng lượt chạy, đọc log rclone trực tiếp và nhận cảnh báo trên System Tray.",
     "title_en": "Monitor",
     "kicker_en": "History & Console",
-    "summary_en": "Filter jobs by state, review every run in History and read the live rclone log."
+    "summary_en": "Filter jobs by KPI state, review every run in History, read the live rclone log and receive System Tray health alerts."
   },
   {
     "id": "detail",
@@ -49,20 +49,42 @@
     "color": "#f472b6",
     "title_vi": "Đối chiếu",
     "kicker_vi": "Chi tiết Job",
-    "summary_vi": "Mở một Job để sửa cấu hình và so sánh cây thư mục máy ↔ Drive từng tệp.",
+    "summary_vi": "Mở một Job để sửa cấu hình và so sánh cây thư mục máy ↔ Drive từng tệp (Synced, Local, Drive, Diff).",
     "title_en": "Compare",
     "kicker_en": "Job detail",
-    "summary_en": "Open a job to edit its settings and compare the PC ↔ Drive folder tree file by file."
+    "summary_en": "Open a job to edit its settings and compare the PC ↔ Drive folder tree file by file (Synced, Local, Drive, Diff)."
+  },
+  {
+    "id": "clips",
+    "order": 5,
+    "color": "#f59e0b",
+    "title_vi": "Clips",
+    "kicker_vi": "Clipboard & Paste Picker",
+    "summary_vi": "Lưu lịch sử clipboard (văn bản, liên kết, hình ảnh), ghim các đoạn mẫu dùng lại và bấm Ctrl+Shift+Q để dán thẳng vào cửa sổ đang mở.",
+    "title_en": "Clips",
+    "kicker_en": "Clipboard & Paste Picker",
+    "summary_en": "Keep clipboard history (text, links, images), pin reusable samples, and press Ctrl+Shift+Q to paste straight into your active window."
+  },
+  {
+    "id": "runners",
+    "order": 6,
+    "color": "#10b981",
+    "title_vi": "Runners",
+    "kicker_vi": "Dịch vụ & Tối ưu PC",
+    "summary_vi": "Quản lý các dịch vụ cục bộ kèm log trực tiếp và giải phóng RAM nền bằng một cú bấm với PC Optimizer.",
+    "title_en": "Runners",
+    "kicker_en": "Runners & PC Optimizer",
+    "summary_en": "Control local services with live console logs and reclaim background RAM in one click with PC Optimizer."
   },
   {
     "id": "system",
-    "order": 5,
+    "order": 7,
     "color": "#fbbf24",
     "title_vi": "System",
     "kicker_vi": "Mạng & an toàn",
-    "summary_vi": "Giới hạn băng thông, proxy dự phòng, và các thư mục thùng rác / sao lưu / xung đột.",
+    "summary_vi": "Giới hạn băng thông, proxy dự phòng, thùng rác an toàn và tự động cập nhật 1 chạm trên thanh Header.",
     "title_en": "System",
     "kicker_en": "Network & safety",
-    "summary_en": "Bandwidth limits, proxy failover, and the trash / backup / conflict folders."
+    "summary_en": "Bandwidth limits, proxy failover, safe trash/backup folders and 1-click Header auto-update."
   }
 ]

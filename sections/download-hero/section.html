@@ -12,5 +12,6 @@
       <a class="btn btn--ghost btn--lg" href="{{releasesPage}}" rel="noopener">{{c.downloadPage.all}}</a>
     </div>
     <p class="muted small" data-hero-item>{{c.downloadPage.note}}</p>
+    <p class="muted small" data-hero-item {{releaseSha256Hidden}}>SHA-256: <code data-release-sha256 title="{{releaseSha256}}">{{releaseSha256Short}}</code></p>
   </div>
 </section>

@@ -1,7 +1,7 @@
 {
   "name": "p0008-landing-platform",
   "private": true,
-  "version": "2.1.3",
+  "version": "2.1.22",
   "type": "module",
   "description": "P0008 Landing Platform — one static-site engine for every product landing + guide (sites/<id>/), plus the Hub-UI admin at ldp.infi.io.vn.",
   "scripts": {
@@ -19,8 +19,8 @@
   "dependencies": {
     "@fontsource-variable/inter": "5.2.6",
     "@fontsource/be-vietnam-pro": "5.2.6",
-    "@tool-workspace/hub-identity": "file:../../packages/hub-identity",
-    "@tool-workspace/hub-ui": "file:../../packages/hub-ui",
+    "@tool-workspace/hub-identity": "workspace:@dev/hub-identity@*",
+    "@tool-workspace/hub-ui": "workspace:*",
     "gsap": "3.13.0",
     "lenis": "1.3.4",
     "lucide-react": "^0.561.0",

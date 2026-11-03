@@ -3,10 +3,10 @@
     "id": "install-open",
     "chapter": "install",
     "order": 1,
-    "title_vi": "Cài đặt và mở Folder Sync",
-    "body_vi": "Chạy bộ cài **Folder Sync Setup** (.exe) như mọi ứng dụng Windows — rclone đã nằm sẵn trong bộ cài. Mở Folder Sync: thanh bên trái có **Jobs**, **Drives** và **System**; màn Jobs liệt kê mọi cặp thư mục cùng trạng thái đồng bộ.",
-    "title_en": "Install and open Folder Sync",
-    "body_en": "Run the **Folder Sync Setup** (.exe) like any Windows app — rclone ships inside the installer. Open Folder Sync: the left sidebar holds **Jobs**, **Drives** and **System**; the Jobs screen lists every folder pair with its sync state.",
+    "title_vi": "Cài đặt và mở Desk Console (Folder Sync)",
+    "body_vi": "Chạy bộ cài **Desk Console Setup** (.exe) như mọi ứng dụng Windows — rclone đã nằm sẵn trong bộ cài. Mở Desk Console: thanh bên trái có **Drive Sync** (**Jobs**, **Drives**), **Clips**, **Runners** và **System**; màn Jobs liệt kê mọi cặp thư mục cùng trạng thái đồng bộ.",
+    "title_en": "Install and open Desk Console (Folder Sync)",
+    "body_en": "Run the **Desk Console Setup** (.exe) like any Windows app — rclone ships inside the installer. Open Desk Console: the left sidebar holds **Drive Sync** (**Jobs**, **Drives**), **Clips**, **Runners** and **System**; the Jobs screen lists every folder pair with its sync state.",
     "shot": "shots/jobs-overview.webp",
     "highlight": {
       "x": 12.4,
@@ -144,19 +144,67 @@
     }
   },
   {
+    "id": "clips-overview",
+    "chapter": "clips",
+    "order": 1,
+    "title_vi": "Lưu Clipboard & dán nhanh bằng Ctrl+Shift+Q",
+    "body_vi": "**Clips** tự động lưu lịch sử văn bản, đường dẫn, đoạn lệnh và hình ảnh bạn sao chép (`Ctrl+C`), đồng thời cho phép ghim các đoạn mẫu (**Sample**) hay dùng. Ở bất kỳ ứng dụng nào, nhấn **Ctrl+Shift+Q** để bật khung **Paste Picker** và dán thẳng vào vị trí con trỏ.",
+    "title_en": "Capture clipboard & paste with Ctrl+Shift+Q",
+    "body_en": "**Clips** automatically records copied text, links, commands and images (`Ctrl+C`), and lets you pin reusable **Samples**. Inside any app, press **Ctrl+Shift+Q** to open the **Paste Picker** and paste straight at the caret.",
+    "shot": "shots/clips-overview.webp",
+    "highlight": {
+      "x": 13,
+      "y": 22,
+      "w": 85.2,
+      "h": 29.6
+    }
+  },
+  {
+    "id": "runners-overview",
+    "chapter": "runners",
+    "order": 1,
+    "title_vi": "Quản lý dịch vụ cục bộ & log trực tiếp",
+    "body_vi": "**Runners** hiển thị trạng thái các dịch vụ và cổng cục bộ đang chạy kèm nút **Start / Stop / Restart** và bảng **History / Console** trực tiếp ở cột phải.",
+    "title_en": "Control local services & live logs",
+    "body_en": "**Runners** lists local services and ports with one-click **Start / Stop / Restart** controls and a live **History / Console** rail on the right.",
+    "shot": "shots/runners-overview.webp",
+    "highlight": {
+      "x": 13,
+      "y": 22,
+      "w": 62.2,
+      "h": 34.4
+    }
+  },
+  {
+    "id": "system-optimizer",
+    "chapter": "runners",
+    "order": 2,
+    "title_vi": "Giải phóng RAM nền với PC Optimizer",
+    "body_vi": "Trong **System → PC Optimizer**: theo dõi số tiến trình, OS Handles, GUI Objects và dung lượng RAM trống theo thời gian thực. Bấm **Optimize All** hoặc **Trim RAM** để thu hồi bộ nhớ nền (`K32EmptyWorkingSet`) ngay lập tức.",
+    "title_en": "Reclaim background RAM with PC Optimizer",
+    "body_en": "Under **System → PC Optimizer**: monitor live process counts, OS handles, GUI objects and free RAM. Click **Optimize All** or **Trim RAM** to reclaim background working-set memory (`K32EmptyWorkingSet`) on the spot.",
+    "shot": "shots/system-optimizer.webp",
+    "highlight": {
+      "x": 21,
+      "y": 5.9,
+      "w": 76.1,
+      "h": 45.9
+    }
+  },
+  {
     "id": "system-host",
     "chapter": "system",
     "order": 1,
-    "title_vi": "Kiểm tra máy chủ đồng bộ",
-    "body_vi": "**System** cho biết rclone đang dùng (đường dẫn và phiên bản), cổng giao diện `:3009` / máy chủ `:6009` và thư mục dữ liệu. Thanh trên cùng tóm tắt “Ready rclone”, chế độ mạng và số tệp trong thùng rác.",
-    "title_en": "Check the sync host",
-    "body_en": "**System** shows which rclone is in use (path and version), the UI `:3009` / host `:6009` ports and the data folder. The top bar sums it up: “Ready rclone”, the network mode and the trash count.",
+    "title_vi": "Kiểm tra máy chủ đồng bộ & thư mục dữ liệu",
+    "body_vi": "**System → Host & Data Stores** cho biết cổng máy chủ `:6010` / giao diện `:5180` và nơi lưu `clips.json`, `samples.json`, `jobs.json`, `rclone.conf`. Thanh trên cùng tóm tắt trạng thái rclone, chế độ mạng và số tệp trong thùng rác.",
+    "title_en": "Check the sync host & data stores",
+    "body_en": "**System → Host & Data Stores** shows the `:6010` host / `:5180` UI ports and the local folders holding `clips.json`, `samples.json`, `jobs.json` and `rclone.conf`. The top bar summarizes rclone readiness, network mode and trash count.",
     "shot": "shots/system-host.webp",
     "highlight": {
-      "x": 12,
-      "y": 5.2,
-      "w": 43.1,
-      "h": 48
+      "x": 21,
+      "y": 70,
+      "w": 76.1,
+      "h": 27
     }
   },
   {
@@ -169,10 +217,10 @@
     "body_en": "Under **Network QoS & Proxy**: cap **Bandwidth**, **API Rate** (requests per second to Google Drive, 8 by default), parallel **Transfers**, and set a **Global Proxy** (HTTP or SOCKS5). **Proxy Failover** falls back to a Direct connection when the proxy is unreachable. Press **Test Connection** to check.",
     "shot": "shots/system-network.webp",
     "highlight": {
-      "x": 55.6,
-      "y": 5.2,
-      "w": 43.1,
-      "h": 49.3
+      "x": 21,
+      "y": 6.2,
+      "w": 76.1,
+      "h": 17.2
     }
   },
   {
@@ -185,10 +233,10 @@
     "body_en": "Every Drive delete goes to **Google Drive Trash** (`--drive-use-trash`). Files deleted or overwritten on the PC move to a timestamped backup folder. On a conflict the newer file wins and the other is kept with a `.conflict-<stamp>` suffix. Backups older than 30 days are cleaned up automatically.",
     "shot": "shots/system-safety.webp",
     "highlight": {
-      "x": 12,
-      "y": 55.5,
-      "w": 86.7,
-      "h": 43.1
+      "x": 21,
+      "y": 6.8,
+      "w": 76.1,
+      "h": 31.1
     }
   }
 ]

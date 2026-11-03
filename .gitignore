@@ -16,3 +16,8 @@ sites/*/public/video/*.jpg
 !sites/sync/public/video/tutorial-poster.jpg
 .probe/
 .catalog/
+
+# SSOT binary & build artifact guards
+dist-desktop/
+release/
+*.tsbuildinfo

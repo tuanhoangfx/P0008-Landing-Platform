@@ -27,11 +27,15 @@ const OVERLAY_CSS = `
   .label b { display: grid; place-items: center; min-width: 38px; height: 38px; padding: 0 8px; border-radius: 10px; font-size: 16px; color: var(--c, #a78bfa); background: color-mix(in srgb, var(--c, #a78bfa) 18%, transparent); }
   .focus { position: fixed; border-radius: 12px; border: 3px solid var(--c, #a78bfa); box-shadow: 0 0 0 9999px rgba(4,5,12,.38), 0 0 30px var(--c, #a78bfa); opacity: 0; transition: all 600ms cubic-bezier(.22,1,.36,1); }
   .focus.on { opacity: 1; }
+  .sub { position: fixed; left: 50%; bottom: 30px; transform: translate(-50%, 14px); display: flex; flex-direction: column; align-items: center; gap: 4px; max-width: 1120px; padding: 12px 24px; border-radius: 14px; background: rgba(8, 10, 20, 0.86); border: 1px solid rgba(255, 255, 255, 0.16); backdrop-filter: blur(12px); color: #f8fafc; font: 600 22px/1.35 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; text-align: center; box-shadow: 0 18px 44px -10px rgba(0, 0, 0, 0.72); opacity: 0; transition: all 380ms cubic-bezier(.22,1,.36,1); }
+  .sub.on { opacity: 1; transform: translate(-50%, 0); }
+  .sub small { font: 500 15px/1.25 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; color: #cbd5e1; opacity: 0.9; }
 `;
 
 const OVERLAY_HTML = `
 <div class="focus"></div>
 <div class="label"><b></b><span></span></div>
+<div class="sub"><span></span><small></small></div>
 <div class="card"><div class="logo"><svg width="56" height="56" viewBox="0 0 64 64"><rect x="12" y="16" width="40" height="32" rx="6" fill="#818cf8"/><path d="M28 25v14l12-7z" fill="#fff"/></svg></div><div class="k"></div><h1></h1><p></p><div class="bar"></div></div>
 <div class="cur"><svg viewBox="0 0 24 24"><path d="M3 2.5 20 12l-7.2 1.6L9.3 21z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg></div>`;
 
@@ -103,6 +107,17 @@ function installOverlay([css, html]) {
       });
       f.classList.add("on");
     },
+    sub(on, { text = "", en = "" } = {}) {
+      const s = $(".sub");
+      if (!s) return;
+      if (on) {
+        s.querySelector("span").textContent = text;
+        const sm = s.querySelector("small");
+        sm.textContent = en;
+        sm.style.display = en ? "block" : "none";
+      }
+      s.classList.toggle("on", on);
+    },
   };
   return true;
 }
@@ -168,6 +183,10 @@ export function recordingCtx(page, base = {}) {
     async label(on, opts) {
       await ensureOverlay(page);
       await page.evaluate(([o, p]) => window.__vl.label(o, p), [on, opts ?? {}]);
+    },
+    async sub(on, opts) {
+      await ensureOverlay(page);
+      await page.evaluate(([o, p]) => window.__vl.sub(o, p), [on, opts ?? {}]);
     },
   };
   return ctx;

@@ -40,9 +40,8 @@ const FFMPEG = process.env.P0009_CAPTURE_FFMPEG || "E:/Dev/Tool/P0006-Video-Lab/
 
 const args = process.argv.slice(2);
 const arg = (k, d) => (args.includes(k) ? args[args.indexOf(k) + 1] : d);
-// Default = the production UI bundle the host serves (dist/ on :6009). The Vite dev UI (:3009) runs
-// dev-only hub-ui assertions; at v0.4.89 one of them unmounts the app when a Drive detail opens.
-const BASE = arg("--base", "http://127.0.0.1:6009").replace(/\/$/, "");
+// Default = the production UI bundle the host serves (dist/ on :6010).
+const BASE = arg("--base", "http://127.0.0.1:6010").replace(/\/$/, "");
 const FROM = arg("--from", null);
 const ONLY = arg("--only", "") ? new Set(arg("--only", "").split(",")) : null;
 const DPR = Number(arg("--dpr", "2"));
@@ -51,7 +50,7 @@ const HEIGHT = 1080;
 const KEEP_PNG = args.includes("--keep-png");
 const MASK_NAMES = !args.includes("--no-mask-names");
 
-process.env.STEALTH_AGENT_KEY = "p0009-guide-capture";
+process.env.STEALTH_AGENT_KEY = "p0001-guide-capture";
 
 const t0 = Date.now();
 const log = (...m) => console.log(`[capture +${((Date.now() - t0) / 1000).toFixed(1)}s]`, ...m);
@@ -87,6 +86,29 @@ const skipped = [];
 const consoleErrors = [];
 page.on("console", (m) => m.type() === "error" && consoleErrors.push(m.text().slice(0, 200)));
 page.on("dialog", (d) => d.dismiss().catch(() => {}));
+
+// Sanitize Clips API during capture so public screenshots show realistic samples & history without personal clipboard entries.
+const DEMO_CLIPS = [
+  { id: "CP0001", kind: "sample", name: "Bisync resync command", text: "rclone bisync gdrive:Studio/Projects E:\\Projects --resync --drive-use-trash", pinned: true, project: "Drive Sync", createdAt: "2026-10-24T09:15:00.000Z", updatedAt: "2026-10-26T10:20:00.000Z" },
+  { id: "CP0002", kind: "sample", name: "Default exclude rules", text: "node_modules/**, .git/**, dist/**, ~$*, *.tmp, Adobe Premiere Pro Auto-Save/**", pinned: true, project: "Drive Sync", createdAt: "2026-10-24T10:00:00.000Z", updatedAt: "2026-10-26T09:45:00.000Z" },
+  { id: "CP0003", kind: "sample", name: "SOCKS5 local proxy", text: "socks5://127.0.0.1:1080", pinned: false, project: "Network", createdAt: "2026-10-25T08:30:00.000Z", updatedAt: "2026-10-26T08:12:00.000Z" },
+  { id: "CP0004", kind: "history", name: "Folder Sync Landing URL", text: "https://sync.infi.io.vn/intro/", pinned: true, project: "Docs", createdAt: "2026-10-26T11:05:00.000Z", updatedAt: "2026-10-26T11:05:00.000Z" },
+  { id: "CP0005", kind: "history", name: "Drive OAuth loopback callback", text: "http://127.0.0.1:53682/auth", pinned: false, project: "Drives", createdAt: "2026-10-26T10:48:00.000Z", updatedAt: "2026-10-26T10:48:00.000Z" },
+  { id: "CP0006", kind: "history", name: "Media export folder path", text: "D:\\Studio\\Renders\\2026-Q4", pinned: false, project: "Studio", createdAt: "2026-10-26T10:15:00.000Z", updatedAt: "2026-10-26T10:15:00.000Z" },
+  { id: "CP0007", kind: "history", name: "Release verification check", text: "node Tool/scripts/verify-desktop-auto-update.mjs --product-root Tool/P0001-Desk-Console --release", pinned: false, project: "Release", createdAt: "2026-10-26T09:30:00.000Z", updatedAt: "2026-10-26T09:30:00.000Z" },
+  { id: "CP0008", kind: "sample", name: "Review sign-off note", text: "Verified two-way sync across Personal Drive & Studio Drive — zero conflicts.", pinned: false, project: "QA", createdAt: "2026-10-25T16:20:00.000Z", updatedAt: "2026-10-26T08:00:00.000Z" },
+];
+await page.route("**/api/clips*", async (route) => {
+  if (route.request().method() === "GET") {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ ok: true, rows: DEMO_CLIPS }),
+    });
+    return;
+  }
+  await route.continue();
+});
 
 const CAPTURE_CSS = `
   *, *::before, *::after { caret-color: transparent !important; }
@@ -183,17 +205,21 @@ async function rectOf(css, text, opts = {}) {
     { css, text: text ?? null, exact: opts.exact ?? true, within: opts.within ?? null },
   );
 }
-/** System screen panel (section) whose header starts with title. */
-async function systemSection(title) {
-  return page.evaluate((title) => {
-    const sec = [...document.querySelectorAll('[data-hub-screen="system"] section')].find((sx) =>
-      (sx.querySelector("header")?.innerText || "").trim().startsWith(title),
-    );
+/** System screen panel (section) by id or header title. */
+async function systemSection(idOrTitle) {
+  return page.evaluate((idOrTitle) => {
+    const root = document.querySelector('[data-hub-screen="system"]');
+    if (!root) return null;
+    const sec =
+      root.querySelector(`#${idOrTitle}`) ||
+      [...root.querySelectorAll("section")].find((sx) =>
+        (sx.querySelector("header")?.innerText || "").trim().includes(idOrTitle),
+      );
     if (!sec) return null;
-    sec.scrollIntoView({ block: "nearest" });
+    sec.scrollIntoView({ block: "start" });
     const r = sec.getBoundingClientRect();
     return { x: r.x, y: r.y, width: r.width, height: r.height };
-  }, title);
+  }, idOrTitle);
 }
 /** The System tab's "Design Template" card is the design-preview scaffold (internal) — keep it out of shots. */
 async function hideDesignTemplate() {
@@ -231,9 +257,18 @@ async function clickOn(css, text, opts) {
 async function waitFor(fn, arg, timeout = 15000) {
   await page.waitForFunction(fn, arg, { timeout, polling: 200 });
 }
+async function activeScreen() {
+  return page.evaluate(() => {
+    const el = document.querySelector(".desk-tab-panel--active[data-hub-screen]");
+    return el ? el.getAttribute("data-hub-screen") : "";
+  });
+}
 async function goScreen(label) {
-  await clickOn("aside nav button", label);
-  await waitFor((l) => localStorage.getItem("p0009:screen") === l.toLowerCase(), label);
+  const target = label.toLowerCase();
+  await page.evaluate((s) => {
+    window.dispatchEvent(new CustomEvent("desk:navigate", { detail: { screen: s } }));
+  }, target);
+  await waitFor((s) => !!document.querySelector(`[data-hub-screen="${s}"].desk-tab-panel--active`), target);
   await page.waitForTimeout(1200);
 }
 async function escapeAll() {
@@ -433,7 +468,7 @@ const scenes = [
     id: "jobs-kpi-filter",
     async run() {
       await escapeAll();
-      if ((await page.evaluate(() => localStorage.getItem("p0009:screen"))) !== "jobs") await goScreen("Jobs");
+      if ((await activeScreen()) !== "jobs") await goScreen("Jobs");
       const r = await clickOn(".hub-kpi-tile", "SYNCED", { exact: false, within: '[data-hub-screen="jobs"]' });
       await page.waitForTimeout(1200);
       return rectOf(".hub-kpi-tile", "SYNCED", { exact: false, within: '[data-hub-screen="jobs"]' }) ?? r;
@@ -493,48 +528,94 @@ const scenes = [
     after: closeDialog,
   },
   {
-    id: "system-host",
+    id: "clips-overview",
+    async run() {
+      await goScreen("Clips");
+      await waitFor(() => document.querySelectorAll('[data-hub-screen="clips"] table tbody tr').length > 0, null, 15000);
+      await noSpinners();
+      await page.waitForTimeout(1000);
+      return unionRect('[data-hub-screen="clips"] table thead, [data-hub-screen="clips"] table tbody tr', true);
+    },
+  },
+  {
+    id: "runners-overview",
+    async run() {
+      await goScreen("Runners");
+      await waitFor(() => document.querySelectorAll('[data-hub-screen="runners"] table tbody tr').length > 0, null, 15000);
+      await noSpinners();
+      await page.waitForTimeout(1000);
+      return page.evaluate(() => {
+        const t = document.querySelector('[data-hub-screen="runners"] table');
+        if (!t) return null;
+        let clip = t.parentElement;
+        while (clip && getComputedStyle(clip).overflowX === "visible") clip = clip.parentElement;
+        const c = (clip || t).getBoundingClientRect();
+        const rows = [t.querySelector("thead"), ...t.querySelectorAll("tbody tr")]
+          .filter((e) => e && (e.innerText || "").trim())
+          .map((e) => e.getBoundingClientRect())
+          .filter((r) => r.height > 1);
+        const top = Math.min(...rows.map((r) => r.top));
+        const bottom = Math.max(...rows.map((r) => r.bottom));
+        return { x: c.left, y: top, width: c.width, height: Math.min(bottom - top, 620) };
+      });
+    },
+  },
+  {
+    id: "system-optimizer",
     async run() {
       await goScreen("System");
       await noSpinners();
       await hideDesignTemplate();
       await page.waitForTimeout(1200);
-      return systemSection("Host");
+      return systemSection("desk-pc-optimizer");
+    },
+  },
+  {
+    id: "system-host",
+    async run() {
+      if ((await activeScreen()) !== "system") await goScreen("System");
+      await noSpinners();
+      await hideDesignTemplate();
+      await page.waitForTimeout(800);
+      return systemSection("desk-host");
     },
   },
   {
     id: "system-network",
     async run() {
-      if ((await page.evaluate(() => localStorage.getItem("p0009:screen"))) !== "system") await goScreen("System");
+      if ((await activeScreen()) !== "system") await goScreen("System");
       await hideDesignTemplate();
+      await systemSection("desk-network-qos");
+      await page.waitForTimeout(400);
       // Run the read-only latency probe so the result is on screen (no setting is saved).
       await clickOn('[data-hub-screen="system"] button', "Test Connection", { exact: false });
       await page
         .waitForFunction(() => ![...document.querySelectorAll("button")].some((b) => /Testing…/.test(b.innerText)), null, { timeout: 45000, polling: 300 })
         .catch(() => log("  ⚠ probe still running"));
       await page.waitForTimeout(1200);
-      return systemSection("Setting");
+      return systemSection("desk-network-qos");
     },
   },
   {
     id: "system-safety",
     async run() {
-      if ((await page.evaluate(() => localStorage.getItem("p0009:screen"))) !== "system") await goScreen("System");
+      if ((await activeScreen()) !== "system") await goScreen("System");
       await hideDesignTemplate();
       await page.waitForTimeout(500);
-      return systemSection("Safety");
+      return systemSection("desk-sync-safety");
     },
   },
 ];
 
 try {
   await cdp.send("Emulation.setDeviceMetricsOverride", metrics);
-  await page.goto(`${BASE}/`, { waitUntil: "domcontentloaded" });
+  await page.goto(`${BASE}/jobs`, { waitUntil: "domcontentloaded" });
   await page.evaluate(() => {
     localStorage.setItem("p0009_guided_tour_dismissed_v1", "1");
+    localStorage.setItem("p0001:nav-subnav:drive-sync", "true");
     localStorage.setItem("p0009:screen", "jobs");
   });
-  await page.goto(`${BASE}/`, { waitUntil: "domcontentloaded" });
+  await page.goto(`${BASE}/jobs`, { waitUntil: "domcontentloaded" });
   await waitFor(() => document.querySelectorAll('[data-hub-screen="jobs"] table tbody tr').length > 0, null, 30000);
   await page.waitForTimeout(2500);
   await applyMask();

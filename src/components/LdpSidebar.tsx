@@ -3,29 +3,27 @@ import { hubSessionLabels } from "@tool-workspace/hub-identity";
 import {
   HubLogButton,
   HubSidebarBrandIcon,
-  HubSidebarNavScreenButton,
+  HubSidebarNavList,
   HubSidebarShell,
   HubWorkspaceUserShell,
   useWorkspaceRoleKey,
-  type NavIconTone,
+  type NavScreenNavItem,
 } from "@tool-workspace/hub-ui";
 import { LDP_BRAND_ICON, LDP_PRODUCT } from "../lib/app-meta";
 import type { AppScreen } from "../lib/screens";
 import { LdpDisplayPrefs } from "./LdpDisplayPrefs";
 
-type NavItem = { screen: AppScreen; label: string; icon: typeof Blocks; iconTone: NavIconTone };
-
-const NAV_ITEMS: NavItem[] = [
-  { screen: "templates", label: "Templates", icon: LayoutTemplate, iconTone: "indigo" },
-  { screen: "sections", label: "Sections", icon: Blocks, iconTone: "emerald" },
-  { screen: "sites", label: "Sites", icon: Globe, iconTone: "amber" },
-  { screen: "system", label: "System", icon: Settings2, iconTone: "cyan" },
+export const NAV_STRUCTURE: readonly NavScreenNavItem<AppScreen>[] = [
+  { kind: "screen", screen: "templates", label: "Templates", icon: LayoutTemplate, iconTone: "indigo" },
+  { kind: "screen", screen: "sections", label: "Sections", icon: Blocks, iconTone: "emerald" },
+  { kind: "screen", screen: "sites", label: "Sites", icon: Globe, iconTone: "amber" },
+  { kind: "screen", screen: "system", label: "System", icon: Settings2, iconTone: "cyan" },
 ];
 
 type Props = { screen: AppScreen; onNavigate: (screen: AppScreen) => void };
 
 /**
- * Sidebar — HubSidebarShell (P0022/P0024 golden): brand · nav · footer Account · Log · Settings.
+ * Sidebar — HubSidebarShell + HubSidebarNavList (P0004/P0022/P0024 golden): brand · nav · footer Account · Log · Settings.
  * Public read-only catalog (hub-login-auth tier "exempt", same as P0022/P0024) — Account is the guest shell.
  */
 export function LdpSidebar({ screen, onNavigate }: Props) {
@@ -36,18 +34,11 @@ export function LdpSidebar({ screen, onNavigate }: Props) {
       brandLeading={<HubSidebarBrandIcon src={LDP_BRAND_ICON} alt={LDP_PRODUCT.name} />}
       brandTitle={LDP_PRODUCT.name}
       nav={
-        <>
-          {NAV_ITEMS.map(({ screen: id, label, icon, iconTone }) => (
-            <HubSidebarNavScreenButton
-              key={id}
-              label={label}
-              icon={icon}
-              iconTone={iconTone}
-              active={screen === id}
-              onClick={() => onNavigate(id)}
-            />
-          ))}
-        </>
+        <HubSidebarNavList
+          structure={NAV_STRUCTURE}
+          activeScreen={screen}
+          onNavigateScreen={onNavigate}
+        />
       }
       footer={
         <>

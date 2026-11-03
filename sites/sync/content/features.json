@@ -3,72 +3,72 @@
     "id": "two-way-mirror",
     "icon": "shuffle",
     "title_vi": "Đồng bộ hai chiều, bản sao đầy đủ",
-    "body_vi": "Chế độ **Two-way** chạy `rclone bisync`: sửa ở máy hay trên Drive đều sang bên kia, và mọi tệp nằm thật trên ổ đĩa — không phải tệp tải theo yêu cầu. Cần một chiều thì chọn **→ Remote** hoặc **→ Local**.",
+    "body_vi": "Nhóm **Drive Sync** (**Jobs** & **Drives**) chạy `rclone bisync`: sửa ở máy hay trên Google Drive đều sang bên kia, và mọi tệp nằm thật trên ổ đĩa — không phải tệp tải theo yêu cầu. Cần một chiều thì chọn **→ Remote** hoặc **→ Local**.",
     "title_en": "Two-way, full mirror",
-    "body_en": "**Two-way** runs `rclone bisync`: edits on the PC or on Drive reach the other side, and every file lives on disk — not files-on-demand. Need one direction? Pick **→ Remote** or **→ Local**.",
+    "body_en": "The **Drive Sync** group (**Jobs** & **Drives**) runs `rclone bisync`: edits on the PC or on Google Drive reach the other side, and every file lives on disk — not files-on-demand. Need one direction? Pick **→ Remote** or **→ Local**.",
     "source": "host/rclone-ops.mjs buildSyncArgs"
+  },
+  {
+    "id": "explorer-context-menu",
+    "icon": "folder",
+    "title_vi": "Chuột phải Windows Explorer là đồng bộ ngay",
+    "body_vi": "Nhấp chuột phải vào bất kỳ thư mục nào trong Windows Explorer và chọn **Sync with Desk Console** để mở thẳng hộp thoại tạo Job điền sẵn đường dẫn. Chuột phải vào tệp chọn **Copy to Desk Console Clips** để lưu nhanh vào bộ nhớ tạm.",
+    "title_en": "Right-click any folder in Windows Explorer",
+    "body_en": "Right-click any folder in Windows Explorer and choose **Sync with Desk Console** to open the New Job dialog pre-filled with that path. Right-click any file and choose **Copy to Desk Console Clips** to save it straight to your clipboard inbox.",
+    "source": "electron/lib/explorer-context-menu.cjs"
+  },
+  {
+    "id": "clips-paste-picker",
+    "icon": "copy",
+    "title_vi": "Clips & Paste Picker (Ctrl+Shift+Q)",
+    "body_vi": "Tích hợp hộp thư **Clips** lưu tự động văn bản, liên kết, mã nguồn và hình ảnh bạn sao chép. Nhấn **Ctrl+Shift+Q** (hoặc **Ctrl+`**) ở bất kỳ ứng dụng nào để bật khung **Paste Picker** và dán ngay lập tức.",
+    "title_en": "Clips & Paste Picker (Ctrl+Shift+Q)",
+    "body_en": "Built-in **Clips** inbox automatically captures copied text, links, code snippets and images. Press **Ctrl+Shift+Q** (or **Ctrl+`**) inside any app to pop up the **Paste Picker** and paste on the spot.",
+    "source": "src/features/clips/ClipsScreen.tsx · ClipPickerPage.tsx"
+  },
+  {
+    "id": "zero-loss",
+    "icon": "shield",
+    "title_vi": "Không mất tệp & Cảnh báo System Tray",
+    "body_vi": "Xoá trên Drive đi vào thùng rác Google Drive, xoá trên máy vào thư mục sao lưu theo mốc giờ. Xung đột giữ cả hai bản (`.conflict-<giờ>`) kèm thông báo Toast Windows khi phát hiện xung đột hoặc Drive sắp đầy (`< 1 GB`).",
+    "title_en": "Zero lost files & System Tray Health Guard",
+    "body_en": "Drive deletes go to Google Drive Trash; local deletes go to a timestamped backup folder. Conflicts keep both copies (`.conflict-<stamp>`) and fire native Windows Toast alerts if a conflict occurs or Drive free space drops below `1 GB`.",
+    "source": "electron/lib/sync-health-guard.cjs · host/conflict-files.mjs"
+  },
+  {
+    "id": "multi-drive-proxy",
+    "icon": "layers",
+    "title_vi": "Nhiều tài khoản Drive & Proxy 2 tầng",
+    "body_vi": "Kết nối nhiều tài khoản Google Drive, mỗi tài khoản có dung lượng và Proxy riêng. Từng Job có thể chọn **☁️ Follow Drive** (theo Proxy của Drive), **⚡ Direct** (bỏ qua Proxy) hoặc **🔌 Custom…** (Proxy HTTP/SOCKS5 riêng).",
+    "title_en": "Multi-Drive & 2-Tier Proxy Hierarchy",
+    "body_en": "Connect multiple Google Drive accounts, each with its own quota and proxy. Every job can pick **☁️ Follow Drive** (inherit Drive proxy), **⚡ Direct** (bypass proxy) or **🔌 Custom…** (dedicated HTTP/SOCKS5 proxy).",
+    "source": "src/lib/job-mode.ts describeEffectiveJobProxy"
   },
   {
     "id": "settle-watcher",
     "icon": "timeline",
     "title_vi": "Chờ bạn lưu xong rồi mới đồng bộ",
-    "body_vi": "Folder Sync theo dõi thư mục trên máy và quét thay đổi trên Drive; khi thư mục yên lặng đủ thời gian chờ (20 giây, 1 phút, 5 phút hoặc thủ công) mới chạy một lượt — không đồng bộ dở lúc đang lưu.",
+    "body_vi": "Desk Console theo dõi thư mục trên máy và quét thay đổi trên Drive; khi thư mục yên lặng đủ thời gian chờ (20 giây, 1 phút, 5 phút hoặc thủ công) mới chạy một lượt — không đồng bộ dở lúc đang lưu.",
     "title_en": "Waits until your save settles",
-    "body_en": "Folder Sync watches the local folder and polls Drive for changes; a run starts only after the folder has been quiet for the settle time (20 s, 1 min, 5 min or manual) — never halfway through a save.",
+    "body_en": "Desk Console watches the local folder and polls Drive for changes; a run starts only after the folder has been quiet for the settle time (20 s, 1 min, 5 min or manual) — never halfway through a save.",
     "source": "host/job-watch.mjs WATCH_SETTLE_MS · settleMsFromJob"
-  },
-  {
-    "id": "zero-loss",
-    "icon": "shield",
-    "title_vi": "Không mất tệp",
-    "body_vi": "Xoá trên Drive đi vào thùng rác Google Drive, xoá hoặc ghi đè trên máy vào thư mục sao lưu theo mốc giờ. Xung đột giữ cả hai bản (`.conflict-<giờ>`) và giải quyết bằng một cú bấm.",
-    "title_en": "No lost files",
-    "body_en": "Drive deletes go to Google Drive Trash; local deletes and overwrites go to a timestamped backup folder. Conflicts keep both copies (`.conflict-<stamp>`) and resolve in one click.",
-    "source": "--drive-use-trash · --backup-dir1 · --conflict-resolve newer · host/conflict-files.mjs"
   },
   {
     "id": "self-heal",
     "icon": "bolt",
-    "title_vi": "Tự gỡ kẹt",
-    "body_vi": "Tệp khoá `.lck` do một lượt chạy đã chết để lại được dọn trước khi chạy lại; nếu rclone mất danh sách đối chiếu, Folder Sync tự chạy lại một lần với `--resync`.",
-    "title_en": "Unsticks itself",
-    "body_en": "A stale `.lck` lock left by a dead run is cleared before the next pass; if rclone loses its comparison listings, Folder Sync retries once with `--resync`.",
-    "source": "host/bisync-lock.mjs · bisyncNeedsResync"
-  },
-  {
-    "id": "multi-drive",
-    "icon": "layers",
-    "title_vi": "Nhiều tài khoản Drive",
-    "body_vi": "Kết nối bao nhiêu tài khoản Google Drive cũng được; mỗi tài khoản có dung lượng, số tệp, băng thông và proxy riêng, và mỗi Job chọn tài khoản của nó.",
-    "title_en": "Many Drive accounts",
-    "body_en": "Connect as many Google Drive accounts as you need; each has its own storage, file counts, bandwidth and proxy, and every job picks its account.",
-    "source": "host/drive-oauth.mjs · drive-inventory.mjs"
-  },
-  {
-    "id": "network-qos",
-    "icon": "gauge",
-    "title_vi": "Không chiếm hết mạng",
-    "body_vi": "Giới hạn băng thông, số lệnh/giây tới Google Drive và số tệp truyền song song. Proxy HTTP/SOCKS5 tự chuyển về kết nối Direct khi proxy không tới được.",
-    "title_en": "Doesn't hog your network",
-    "body_en": "Cap bandwidth, requests per second to Google Drive and parallel transfers. An HTTP/SOCKS5 proxy falls back to a Direct connection when it can't be reached.",
-    "source": "host/network-qos.mjs"
-  },
-  {
-    "id": "junk-excludes",
-    "icon": "copy",
-    "title_vi": "Bỏ qua tệp rác sẵn",
-    "body_vi": "Danh sách loại trừ mặc định bỏ `node_modules`, `.git`, `dist`, tệp khoá Office `~$*`, tệp tạm và cache Premiere — sửa được cho từng Job.",
-    "title_en": "Skips junk out of the box",
-    "body_en": "The default exclude list skips `node_modules`, `.git`, `dist`, Office lock files `~$*`, temp files and Premiere caches — editable per job.",
-    "source": "host/job-watch.mjs DEFAULT_JOB_EXCLUDES"
+    "title_vi": "Tự gỡ kẹt & Tự động cập nhật 1 chạm",
+    "body_vi": "Tệp khoá `.lck` bị kẹt được tự động dọn và chạy lại với `--resync`. Khi có bản mới trên GitHub Releases, thanh Header hiện nút cập nhật 1 chạm mà không cần tải lại bộ cài thủ công.",
+    "title_en": "Self-healing sync & 1-Click Auto-Update",
+    "body_en": "Stale `.lck` locks are cleared automatically with `--resync` retry. When a new version lands on GitHub Releases, the header badge updates in one click without re-downloading the installer manually.",
+    "source": "electron/desktop-updater.cjs · host/bisync-lock.mjs"
   },
   {
     "id": "bundled-rclone",
     "icon": "cpu",
-    "title_vi": "Cài là chạy",
-    "body_vi": "Bộ cài Windows đã kèm `rclone.exe` — không cần cài công cụ dòng lệnh nào khác.",
-    "title_en": "Install and go",
-    "body_en": "The Windows installer bundles `rclone.exe` — no command-line tool to install separately.",
-    "source": "package.json build.extraResources resources/rclone"
+    "title_vi": "Cài là chạy + PC Optimizer",
+    "body_vi": "Bộ cài Windows đã kèm sẵn `rclone.exe` và bảng điều khiển **System / PC Optimizer** giúp giải phóng RAM trống, theo dõi CPU/Handles và kiểm soát băng thông mạng.",
+    "title_en": "Install and go + PC Optimizer",
+    "body_en": "The Windows installer bundles `rclone.exe` plus the **System / PC Optimizer** dashboard to trim working-set RAM, inspect CPU/handles and cap network bandwidth.",
+    "source": "package.json build.extraResources · host/pc-optimizer.mjs"
   }
 ]

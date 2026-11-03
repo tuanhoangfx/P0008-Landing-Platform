@@ -43,11 +43,11 @@ node Tool/P0008-Landing-Platform/scripts/audit-sites.mjs
 When `<tool>.infi.io.vn/` already serves the product's web app (its own registry entry), the site
 does not get a domain of its own: it is **mounted** under `/intro/` of that domain.
 
-| Piece | Mounted site (P0009: `sites/sync` on `sync.infi.io.vn/intro/`) |
+| Piece | Mounted site (P0001: `sites/sync` on `sync.infi.io.vn/intro/`) |
 |---|---|
 | Scaffold | `new-site.mjs … --mount` → key `<CODE>-INTRO`, `site.config.json` `"mounted": true` |
 | Registry | `<CODE>-INTRO`: same `domain` as the app entry, `mountPath: "/intro/"`, own `dir` / `remoteDist` / `nginxRoot`, `staticSite: true` |
-| nginx | `buildNginxSpaHosts` emits `location ^~ /intro/ { alias <nginxRoot>/intro/; … }` (+ nested `assets` / `shots` / `video` cache rules, `no-cache` HTML, `try_files $uri $uri/index.html $uri/ =404`, `error_page 404 /intro/404.html`) **inside the app entry's server block** — never a second `server_name`. The app entry may add `pathRedirects` (301s for paths that moved, e.g. P0009 `/guide` → `/intro/guide/`) |
+| nginx | `buildNginxSpaHosts` emits `location ^~ /intro/ { alias <nginxRoot>/intro/; … }` (+ nested `assets` / `shots` / `video` cache rules, `no-cache` HTML, `try_files $uri $uri/index.html $uri/ =404`, `error_page 404 /intro/404.html`) **inside the app entry's server block** — never a second `server_name`. The app entry may add `pathRedirects` (301s for paths that moved, e.g. P0001 `/guide` → `/intro/guide/`) |
 | Build | identical; `mounted` also ships `sitemap.xml` inside `/intro/` (root files are the app's) |
 | Tunnel / DNS | owned by the app entry — `upsert-lenovo-tunnel-host.mjs` is a no-op for a mounted key |
 | Volumes | `sync-lenovo-origin-compose-volumes.mjs --apply --recreate-nginx` (new bind mount) |
@@ -56,5 +56,5 @@ does not get a domain of its own: it is **mounted** under `/intro/` of that doma
 
 ## Migration debt
 
-- ~~P0009 Folder Sync: in-app landing (`src/features/landing`)~~ — **done 2026-10-24**: content, recaptured shots and the tutorial live in `sites/sync` (`P0009-INTRO`, mounted at `sync.infi.io.vn/intro/`); `P0009-SITE` keeps building the app at the domain root and 301s `/guide`, `/landing` to `/intro/`. P0009 v0.4.90 has no landing code.
+- ~~P0009 Folder Sync: in-app landing (`src/features/landing`)~~ — **done 2026-10-24 (consolidated into P0001 Desk Console 2026-10-26)**: content, recaptured shots and the tutorial live in `sites/sync` (`P0001-INTRO`, mounted at `sync.infi.io.vn/intro/`); `P0001-SITE` keeps building the app at the domain root and 301s `/guide`, `/landing` to `/intro/`.
 - `:8808` landing-order sidecar (task `P0008LandingOrder` on Lenovo) retired 2026-10-24 with the P0014 `/ldp01` landing — task, process and bundle removed.

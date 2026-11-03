@@ -431,9 +431,9 @@ function langMenu() {
 }
 
 /** Refresh every download button/label with the newest GitHub release. */
-const RELEASE_CACHE = "site:release";
 /** owner/repo of the GitHub Releases feed, from <meta name="site:release-repo"> (render.mjs langHead). */
 const RELEASE_REPO = document.querySelector('meta[name="site:release-repo"]')?.content ?? "";
+const RELEASE_CACHE = `site:release:${RELEASE_REPO}`;
 const RELEASE_TTL_MS = 30 * 60 * 1000;
 
 /** GitHub allows 60 unauthenticated calls/hour per IP — one per browser per half hour is plenty. */

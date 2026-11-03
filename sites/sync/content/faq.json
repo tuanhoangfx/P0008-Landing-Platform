@@ -1,38 +1,38 @@
 [
   {
     "q": "Sửa cùng một tệp trên máy và trên Drive thì sao?",
-    "a": "Lượt đồng bộ hai chiều giữ bản **mới hơn** làm tệp chính; bản còn lại được giữ nguyên với đuôi `.conflict-<giờ>`. Mở chi tiết Job để chọn giữ bản nào — bản bị bỏ vào thùng rác của Folder Sync, không mất.",
+    "a": "Lượt đồng bộ hai chiều giữ bản **mới hơn** làm tệp chính; bản còn lại được giữ nguyên với đuôi `.conflict-<giờ>` và gửi cảnh báo trên System Tray / Windows Toast. Mở chi tiết Job để chọn giữ bản nào — bản bị bỏ vào thùng rác của Desk Console, không mất.",
     "q_en": "What if I edit the same file on the PC and on Drive?",
-    "a_en": "The two-way run keeps the **newer** copy as the main file; the other is kept with a `.conflict-<stamp>` suffix. Open the job detail to choose which one to keep — the discarded copy goes to Folder Sync's trash, not away."
+    "a_en": "The two-way run keeps the **newer** copy as the main file; the other is kept with a `.conflict-<stamp>` suffix and triggers a System Tray / Windows Toast alert. Open the job detail to choose which one to keep — the discarded copy goes to Desk Console's trash, not away."
   },
   {
-    "q": "Lỡ xoá cả thư mục trên máy, Drive có bị xoá theo không?",
-    "a": "Lượt chạy sẽ xoá theo — nhưng trên Drive tệp vào **thùng rác Google Drive** (khôi phục được), còn tệp xoá trên máy vào thư mục sao lưu theo mốc giờ. Ngoài ra rclone bisync tự dừng khi một lượt định xoá quá nhiều tệp cùng lúc.",
-    "q_en": "If I delete a whole folder on my PC, does Drive lose it too?",
-    "a_en": "The run mirrors the delete — but on Drive the files land in **Google Drive Trash** (recoverable), and local deletes go to a timestamped backup folder. rclone bisync also stops on its own when a run would delete too many files at once."
+    "q": "Cơ chế Proxy 2 tầng (Follow Drive / Direct / Custom) hoạt động thế nào?",
+    "a": "Mỗi tài khoản Google Drive trong **Drives** có thể gắn Proxy riêng. Khi tạo hoặc sửa Job trong **Jobs**, mục **Proxy** mặc định là **☁️ Follow Drive** (đi theo Proxy của tài khoản Drive đó). Bạn cũng có thể chọn **⚡ Direct** để ép riêng Job này chạy thẳng mạng gốc tốc độ tối đa, hoặc **🔌 Custom…** để gắn Proxy HTTP/SOCKS5 riêng cho Job.",
+    "q_en": "How does the 2-tier Proxy (Follow Drive / Direct / Custom) work?",
+    "a_en": "Each Google Drive account in **Drives** can have its own proxy. In **Jobs**, the **Proxy** setting defaults to **☁️ Follow Drive** (inherits that Drive account's network setting). You can also pick **⚡ Direct** to bypass the proxy for that job, or **🔌 Custom…** to assign a dedicated HTTP/SOCKS5 proxy."
   },
   {
-    "q": "Vì sao lưu tệp xong phải đợi 20 giây mới đồng bộ?",
-    "a": "Word, Excel, Photoshop hay trình soạn code ghi tệp tạm liên tục trong lúc lưu. Đợi thư mục yên lặng 20 giây giúp chỉ chạy một lượt gọn khi bạn đã lưu xong. Có thể đổi sang 1 phút, 5 phút hoặc Manual trong từng Job.",
-    "q_en": "Why does it wait 20 seconds after I save?",
-    "a_en": "Word, Excel, Photoshop and code editors write temp files rapidly while saving. Waiting for 20 quiet seconds means one clean run once you're done. Change it to 1 minute, 5 minutes or Manual per job."
+    "q": "Làm sao để đồng bộ nhanh một thư mục từ Windows Explorer hoặc dùng Clips?",
+    "a": "Sau khi cài đặt, bạn chỉ cần nhấp **chuột phải vào bất kỳ thư mục nào** trong Windows Explorer và chọn **Sync with Desk Console** để mở ngay hộp thoại tạo Job đã điền sẵn đường dẫn. Để mở hộp thư bộ nhớ tạm **Clips & Paste Picker**, nhấn **Ctrl+Shift+Q** (hoặc **Ctrl+`**) ở bất kỳ đâu.",
+    "q_en": "How do I quickly sync a folder from Windows Explorer or open Clips?",
+    "a_en": "Once installed, **right-click any folder** in Windows Explorer and choose **Sync with Desk Console** to open the New Job modal pre-filled with that folder. To open the **Clips & Paste Picker** anywhere, press **Ctrl+Shift+Q** (or **Ctrl+`**)."
   },
   {
-    "q": "Có cần tự cài rclone không?",
-    "a": "Không. Bộ cài **Folder Sync Setup** đã kèm `rclone.exe` và máy chủ đồng bộ cục bộ — cài xong là dùng được trên Windows 10/11 64-bit.",
-    "q_en": "Do I need to install rclone myself?",
-    "a_en": "No. **Folder Sync Setup** bundles `rclone.exe` and the local sync host — install it and go, on Windows 10/11 64-bit."
+    "q": "Có cần tự cài rclone hay tải lại bộ cài khi có bản mới không?",
+    "a": "Không. Bộ cài **Desk Console Setup** đã kèm sẵn `rclone.exe` bên trong. Khi có phiên bản mới trên GitHub Releases, nút phiên bản trên thanh **Header** của ứng dụng sẽ báo có bản cập nhật để bạn bấm nâng cấp tự động chỉ với 1 cú nhấp chuột.",
+    "q_en": "Do I need to install rclone or re-download installers for updates?",
+    "a_en": "No. **Desk Console Setup** bundles `rclone.exe` out of the box. Whenever a new version is published on GitHub Releases, the version chip in the app **Header** lets you download and restart to update in one click."
   },
   {
     "q": "Tệp có được lưu thật trên ổ đĩa không?",
-    "a": "Có. Folder Sync giữ **bản sao đầy đủ** trên ổ đĩa — không phải kiểu tệp “tải khi mở” của Google Drive for desktop. Mở tệp không cần mạng.",
+    "a": "Có. Desk Console giữ **bản sao đầy đủ** trên ổ đĩa — không phải kiểu tệp “tải khi mở” của Google Drive for desktop. Mở tệp không cần mạng.",
     "q_en": "Are files really stored on my disk?",
-    "a_en": "Yes. Folder Sync keeps a **full mirror** on disk — not the files-on-demand style of Google Drive for desktop. Opening a file needs no network."
+    "a_en": "Yes. Desk Console keeps a **full mirror** on disk — not the files-on-demand style of Google Drive for desktop. Opening a file needs no network."
   },
   {
     "q": "Đăng nhập Google Drive có an toàn không?",
-    "a": "Bạn đăng nhập trên trang của Google trong trình duyệt; Google trả token về cổng cục bộ `127.0.0.1:53682` trên chính máy bạn, và token được lưu trong `rclone.conf` trên máy. Folder Sync không gửi token đi đâu khác.",
+    "a": "Bạn đăng nhập trên trang của Google trong trình duyệt; Google trả token về cổng cục bộ `127.0.0.1:53682` trên chính máy bạn, và token được lưu trong `rclone.conf` trên máy. Desk Console không gửi token đi đâu khác.",
     "q_en": "Is the Google Drive sign-in safe?",
-    "a_en": "You sign in on Google's own page in your browser; Google returns the token to the local callback `127.0.0.1:53682` on your machine, and it is stored in `rclone.conf` locally. Folder Sync sends it nowhere else."
+    "a_en": "You sign in on Google's own page in your browser; Google returns the token to the local callback `127.0.0.1:53682` on your machine, and it is stored in `rclone.conf` locally. Desk Console sends it nowhere else."
   }
 ]

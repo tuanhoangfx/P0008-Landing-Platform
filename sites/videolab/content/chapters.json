@@ -5,53 +5,75 @@
     "color": "#a78bfa",
     "title_vi": "Cài đặt",
     "kicker_vi": "Bắt đầu",
-    "summary_vi": "Tải bộ cài Windows, mở Video Lab và làm quen bố cục 3 màn hình chính.",
+    "summary_vi": "Tải bộ cài Windows, mở Video Lab và làm quen 6 khu vực làm việc: Studio, Reup, Cut, Mixer, Encode và System.",
     "title_en": "Install",
-    "summary_en": "Download the Windows installer, open Video Lab and learn the three-screen layout.",
-    "kicker_en": "Get started"
+    "kicker_en": "Get started",
+    "summary_en": "Download the Windows installer, open Video Lab and explore the 6 workspaces: Studio, Reup, Cut, Mixer, Encode and System."
   },
   {
     "id": "studio",
     "order": 1,
     "color": "#34d399",
     "title_vi": "Studio",
-    "kicker_vi": "Dựng cảnh",
-    "summary_vi": "Biến ảnh và kịch bản thành video có giọng đọc: thư viện ảnh, giọng TTS, nhạc nền và timeline keyframe.",
+    "kicker_vi": "Dựng cảnh & Loop FX",
+    "summary_vi": "Biến hàng nghìn ảnh (.jpg/.png/.webp) và kịch bản thành video có 322 giọng đọc AI, chế độ lặp hiệu ứng chuyển cảnh Loop FX (Ping-Pong motion suốt cảnh dài 20 phút) và phụ đề CapCut.",
     "title_en": "Studio",
-    "summary_en": "Turn images and a script into a narrated video: image library, TTS voices, background music and a keyframe timeline.",
-    "kicker_en": "Build scenes"
+    "kicker_en": "Build scenes & Loop FX",
+    "summary_en": "Turn 1,000+ images (.jpg/.png/.webp) and a script into narrated videos with 322 AI voices, continuous Loop FX (Ping-Pong motion across 20-minute scenes) and CapCut subtitles."
+  },
+  {
+    "id": "reup",
+    "order": 2,
+    "color": "#f472b6",
+    "title_vi": "Reup",
+    "kicker_vi": "Tải đa nền tảng & AI Reup",
+    "summary_vi": "Tải video từ TikTok, Douyin, YouTube, Facebook và tự động AI Video Reup: nhận diện giọng nói Faster-Whisper STT, dịch đa ngôn ngữ, lồng tiếng AI và che/đốt phụ đề mới.",
+    "title_en": "Reup",
+    "kicker_en": "Downloader & AI Reup",
+    "summary_en": "Download from TikTok, Douyin, YouTube or Facebook and run AI Video Reup: Faster-Whisper STT, translation, AI voiceover and subtitle mask/burn-in."
+  },
+  {
+    "id": "cut",
+    "order": 3,
+    "color": "#10b981",
+    "title_vi": "Cut",
+    "kicker_vi": "Smart Cut & Split 1→N",
+    "summary_vi": "Cắt bỏ đầu/cuối (Trim Head/Tail), trích đoạn (Range In/Out), chia đều thành nhiều phần (Split Chunks) hoặc tự động tách cảnh & khoảng lặng (Auto-Split Scene/Silence).",
+    "title_en": "Cut",
+    "kicker_en": "Smart Cut & Split 1→N",
+    "summary_en": "Trim head/tail, extract ranges, split into equal chunks or auto-split by scene change and silence — then send straight to Mixer or Encode."
   },
   {
     "id": "mixer",
-    "order": 2,
+    "order": 4,
     "color": "#818cf8",
     "title_vi": "Mixer",
     "kicker_vi": "Ghép hàng loạt",
-    "summary_vi": "Ghép Intro + Main + Outro thành hàng loạt video hoàn chỉnh, chạy song song nhiều luồng FFmpeg.",
+    "summary_vi": "Ghép Intro + Main + Outro thành hàng loạt video hoàn chỉnh theo thứ tự hoặc ngẫu nhiên, chạy song song 1–8 luồng FFmpeg.",
     "title_en": "Mixer",
-    "summary_en": "Batch-join Intro + Main + Outro into finished videos, with several FFmpeg workers in parallel.",
-    "kicker_en": "Batch join"
+    "kicker_en": "Batch join",
+    "summary_en": "Batch-join Intro + Main + Outro into finished videos in order or at random, with 1–8 FFmpeg workers in parallel."
   },
   {
     "id": "encode",
-    "order": 3,
+    "order": 5,
     "color": "#fbbf24",
     "title_vi": "Encode",
     "kicker_vi": "Chuẩn hoá",
-    "summary_vi": "Đưa mọi clip về cùng một profile tải lên — dọc, ngang, vuông hay 4K — để ghép không lỗi hình.",
+    "summary_vi": "Đưa mọi clip về cùng một profile tải lên — dọc 9:16, ngang 16:9, vuông 1:1 hay 4K — kèm Lab Pin để ghép không bao giờ đứng hình.",
     "title_en": "Encode",
-    "summary_en": "Normalise every clip to one upload profile — vertical, landscape, square or 4K — so joins never glitch.",
-    "kicker_en": "Normalise"
+    "kicker_en": "Normalise",
+    "summary_en": "Normalise every clip to one upload profile — vertical 9:16, landscape 16:9, square 1:1 or 4K — with Lab Pin reuse so joins never glitch."
   },
   {
     "id": "system",
-    "order": 4,
+    "order": 6,
     "color": "#38bdf8",
     "title_vi": "Hệ thống",
-    "kicker_vi": "Kiểm tra",
-    "summary_vi": "Xem trạng thái worker, FFmpeg và bộ mã hoá phần cứng khi cần chẩn đoán.",
+    "kicker_vi": "Kiểm tra & Cập nhật",
+    "summary_vi": "Xem trạng thái worker (:8029), FFmpeg, bộ mã hoá phần cứng GPU (NVENC/QSV/AMF) và cập nhật tự động 1 chạm trên Header.",
     "title_en": "System",
-    "summary_en": "Check the worker, FFmpeg and hardware encoder status when something needs diagnosing.",
-    "kicker_en": "Check"
+    "kicker_en": "Diagnostics & Update",
+    "summary_en": "Inspect the worker (:8029), FFmpeg, hardware GPU encoder status (NVENC/QSV/AMF) and 1-click Header auto-update."
   }
 ]
