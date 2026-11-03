@@ -1,0 +1,32 @@
+{
+  "$schema": "../../engine/site.schema.json",
+  "id": "livestream",
+  "name": "Auto Livestream 24/7",
+  "product": "P0009",
+  "registryKey": "P0009-SITE",
+  "template": "product-guide",
+  "origin": "https://livestream.infi28.com",
+  "base": "/intro/",
+  "langs": [
+    "vi",
+    "en"
+  ],
+  "devPort": 3111,
+  "appVersionFrom": "Tool/P0009-Auto-Livestream/package.json",
+  "releases": {
+    "repo": "tuanhoangfx/P0009-Auto-Livestream",
+    "asset": "Setup.*\\.exe$"
+  },
+  "copy": {
+    "vi": {
+      "heroAlt": "Auto Livestream 24/7 — phát trực tiếp YouTube đa kênh liên tục từ máy tính hoặc Google Drive",
+      "footNote": "Auto Livestream 24/7 chạy trực tiếp trên máy tính của bạn với FFmpeg đi kèm, hỗ trợ phát lặp 24/7 nhiều kênh YouTube cùng lúc từ tệp video cục bộ hoặc Google Drive.",
+      "downloadNote": "Bộ cài Windows 64-bit, kèm sẵn FFmpeg & tự động cập nhật qua GitHub Releases"
+    },
+    "en": {
+      "heroAlt": "Auto Livestream 24/7 — continuous multi-channel YouTube livestreaming from local files or Google Drive",
+      "footNote": "Auto Livestream 24/7 runs on your PC with bundled FFmpeg, streaming 24/7 across multiple YouTube channels from local videos or Google Drive.",
+      "downloadNote": "Windows 64-bit installer, bundled FFmpeg & GitHub Releases auto-update included"
+    }
+  }
+}

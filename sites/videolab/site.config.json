@@ -2,10 +2,10 @@
   "$schema": "../../engine/site.schema.json",
   "id": "videolab",
   "name": "Video Lab",
-  "product": "P0010",
-  "registryKey": "P0010-SITE",
+  "product": "P0006",
+  "registryKey": "P0006-SITE",
   "template": "product-guide",
-  "origin": "https://videolab.infi.io.vn",
+  "origin": "https://videolab.infi28.com",
   "base": "/intro/",
   "langs": [
     "vi",
@@ -16,21 +16,21 @@
     "download"
   ],
   "devPort": 3108,
-  "appVersionFrom": "Tool/P0010-Video-Lab/package.json",
+  "appVersionFrom": "Tool/P0006-Video-Lab/package.json",
   "releases": {
     "repo": "tuanhoangfx/Video-Lab-Releases",
     "asset": "Setup.*\\.exe$"
   },
   "copy": {
     "vi": {
-      "heroAlt": "Video Lab — màn hình Mixer",
-      "footNote": "Mixer và Encode chạy hoàn toàn trên máy của bạn — video không rời khỏi ổ đĩa.",
-      "downloadNote": "Bộ cài Windows 64-bit"
+      "heroAlt": "Video Lab — Studio dựng cảnh, AI Reup, Smart Cut, Mixer & Encode",
+      "footNote": "Studio, AI Reup, Smart Cut, Mixer và Encode chạy trực tiếp trên máy của bạn với bộ mã hoá GPU phần cứng — dữ liệu video nằm trọn trên ổ đĩa.",
+      "downloadNote": "Bộ cài Windows 64-bit, kèm sẵn FFmpeg & tự động cập nhật 1 chạm"
     },
     "en": {
-      "heroAlt": "Video Lab — Mixer screen",
-      "footNote": "Mixer and Encode run entirely on your machine — your videos never leave the disk.",
-      "downloadNote": "Windows 64-bit installer"
+      "heroAlt": "Video Lab — Studio, AI Reup, Smart Cut, Mixer & Encode",
+      "footNote": "Studio, AI Reup, Smart Cut, Mixer and Encode run directly on your machine with hardware GPU encoding — your media stays on disk.",
+      "downloadNote": "Windows 64-bit installer, FFmpeg & 1-click auto-update included"
     }
   }
 }

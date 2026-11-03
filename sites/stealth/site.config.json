@@ -1,0 +1,32 @@
+{
+  "$schema": "../../engine/site.schema.json",
+  "id": "stealth",
+  "name": "Stealth Browser Console",
+  "product": "P0003",
+  "registryKey": "P0003-SITE",
+  "template": "product-guide",
+  "origin": "https://stealth.infi28.com",
+  "base": "/intro/",
+  "langs": [
+    "vi",
+    "en"
+  ],
+  "devPort": 3110,
+  "appVersionFrom": "Tool/P0003-Stealth-Browser-Console/package.json",
+  "releases": {
+    "repo": "tuanhoangfx/Stealth-Browser-Console",
+    "asset": "Setup.*\\.exe$"
+  },
+  "copy": {
+    "vi": {
+      "heroAlt": "Stealth Browser Console — quản lý hồ sơ CloakBrowser & tự động hóa cục bộ",
+      "footNote": "Stealth Browser Console vận hành trực tiếp trên máy tính của bạn với nhân CloakBrowser độc lập, tách biệt hoàn toàn vân tay trình duyệt, cookie, proxy và kịch bản tự động hóa.",
+      "downloadNote": "Bộ cài Windows 64-bit, kèm sẵn tiện ích Cookie Bridge (E0001), Browser Operator (E0002) & tự động cập nhật"
+    },
+    "en": {
+      "heroAlt": "Stealth Browser Console — CloakBrowser antidetect profiles & local automation",
+      "footNote": "Stealth Browser Console runs locally on your PC with an isolated CloakBrowser engine, separating browser fingerprints, cookies, proxies, and workflow scripts.",
+      "downloadNote": "Windows 64-bit installer, bundled Cookie Bridge (E0001), Browser Operator (E0002) & auto-update included"
+    }
+  }
+}
